@@ -90,8 +90,14 @@ async def chatbot_endpoint(request: QueryRequest):
     if "뉴스" in user_query:
         keyword = user_query.replace("뉴스", "").strip()
         news_results = search_news(keyword)
-        formatted_results = format_news_results(news_results)
-        return {"response": formatted_results}
+        # 제목, 링크 반환하도록 형식 변경
+        if isinstance(news_results, list):  # 뉴스 결과가 올바르게 반환되었는지 확인
+            response_text = "\n\n".join(
+                [f"제목: {news['headline']}\n링크: {news['url']}" for news in news_results]
+            )
+            return {"response": response_text}
+        else:
+            return {"response": "뉴스를 불러오는 데 문제가 발생했습니다."}
     return {"response": generate_response(user_query)}
 
 

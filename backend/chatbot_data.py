@@ -35,7 +35,14 @@ def search_news(query, display=5, sort='sim'):
     response = requests.get(url, headers=headers, params=params)
     
     if response.status_code == 200:
-        return response.json()
+        # 최신 뉴스 3개만 반환하도록 수정
+        news_results = response.json()
+        # 최신 뉴스 3개의 헤드라인과 URL만 반환
+        return [
+            {"headline": item["title"].replace("<b>", "").replace("</b>", ""),
+             "url": item["originallink"] or item["link"]}
+            for item in news_results.get("items", [])[:3]
+        ]
     else:
         return {"error": response.status_code, "message": response.text}
 

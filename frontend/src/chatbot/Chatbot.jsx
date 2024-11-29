@@ -47,6 +47,32 @@ const Chatbot = () => {
     setInputValue(""); 
   };
 
+  const renderMessageContent = (message) => {
+    if (message.sender === "bot" && message.text.includes("제목:")) {
+      // 뉴스 데이터를 파싱하여 렌더링
+      const newsItems = message.text.split("\n\n"); // 뉴스 항목 구분
+      return (
+        <div>
+          {newsItems.map((item, index) => {
+            const [titleLine, linkLine] = item.split("\n");
+            const title = titleLine.replace("제목: ", "").trim();
+            const link = linkLine.replace("링크: ", "").trim();
+            return (
+              <div key={index} className="news-item">
+                <strong>최신뉴스 {index + 1}:</strong> <br />
+                <strong className="news-title">{title}</strong> <br />
+                <a href={link} target="_blank" rel="noopener noreferrer" className="news-link">
+                  {link}
+                </a>
+                <br />
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+    return <span>{message.text}</span>;
+  };
 
   return (
     <div className="chatbot-container">
@@ -70,7 +96,7 @@ const Chatbot = () => {
                 key={index}
                 className={`chatbot-message ${message.sender === "user" ? "user" : "bot"}`}
               >
-                {message.text}
+                {renderMessageContent(message)}
               </div>
             ))}
           </div>
