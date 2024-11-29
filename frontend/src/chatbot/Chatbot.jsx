@@ -6,7 +6,18 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]); 
   const [inputValue, setInputValue] = useState(""); 
 
-  const toggleChatbot = () => setIsOpen(!isOpen); 
+  const toggleChatbot = () => {
+    setIsOpen(!isOpen);
+
+    // 챗봇이 열릴 때 초기 메시지 설정
+    if (!isOpen) {
+      setMessages([
+        ...messages,
+        { sender: "bot", text: "안녕하세요!👋 POLITRACKER 챗봇입니다. 궁금한 점을 물어보세요☺️" },
+        { sender: "bot", text: "예: '종로구 뉴스', '곽상언 관련 법안' 등을 입력해보세요." }
+      ]);
+    }
+  }; 
 
   const handleSend = async () => {
     console.log("API URL:", `${process.env.REACT_APP_BACKEND_URL}/chatbot`);
