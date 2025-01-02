@@ -14,10 +14,10 @@ const QuestionScreen = ({ onComplete }) => {
     
   const questions = [
     {
-      question: "1. 부엉이 마을의 농부들이 '우리는 먹을 것이 부족해요!'라며 호소하고 있어요. 당신이 부엉이 왕이라면 어떻게 하고 싶으신가요?",
+      question: "1. 부엉이 마을의 농부들이 '우리는 먹을 것이 부족해요!'라며 호소하고 있어요. 당신이라면 어떻게 하고 싶으신가요?",
       answers: [
-        "농부들에게 더 많은 지원을 제공하고 농작물 생산을 늘릴 수 있도록 돕고 싶어요.",
-        "농부들이 스스로 해결할 수 있도록 더 열심히 일할 여건을 마련해주고 싶어요."
+        "부엉이 마을의 농부들이 더 나은 삶을 살 수 있도록, 임금을 올려야 한다고 생각해요.",
+        "부엉이 마을의 농부들은 더 열심히 일하고, 자립적으로 생계를 꾸려나가야 한다고 생각해요."
       ],
     },
     {
@@ -132,14 +132,6 @@ const QuestionScreen = ({ onComplete }) => {
         socialConservative: 0
     });
     const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
-
-    const backgroundStyle = {
-      backgroundImage: `url('/images/background1.jpg')`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      height: "100vh",
-    };
     const handleNext = () => {
       if (selectedAnswer === null) {
           alert("선지를 선택해주세요!");
@@ -231,7 +223,7 @@ const QuestionScreen = ({ onComplete }) => {
     };
 
     return (
-      <div style={backgroundStyle}>
+      <div>
         <div className="question-header">
           <div className="logo-container">
             <img src={logo} alt="PoliTracker Logo" onClick={handleHomeClick} className="poliLogo" />

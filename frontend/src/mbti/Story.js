@@ -8,7 +8,6 @@ const Story = () => {
   const storyLines = [
     "안녕하세요, 저는 트래커스꾸 부엉이에요 부엉",
     "뭐 부엉이는 말을 안한다고요? 부엉 부엉 누가 그래부엉!!",
-    "하여간 우리 부엉이들도 말을 할때가 있었다 이말입니다",
     "여러분의 도움이 필요해서 제가 타임의 깃털을 타고 여러분을 만나러 미래로 왔어요. 제 이야기를 한번만 들어주실래부엉?",
     "옛날 옛적, 푸른 숲과 맑은 강으로 둘러싸인 부엉이 마을이 있었어요.",
     "부엉이 마을은 지혜롭고 평화로운 부엉이들이 모여 사는 곳으로, 모두가 협력하며 행복하게 살고 있었답니다.",
@@ -54,7 +53,7 @@ const Story = () => {
             className="poliLogo"
           />
         </div>
-        <div className="menu">
+        <div className="story-menu">
           <button onClick={handleHomeClick}>Home</button>
         </div>
       </div>
@@ -64,6 +63,7 @@ const Story = () => {
             alt="부엉이"
             className="owl-image"
           />
+        <div class="story-content-wrapper">
         <div className="story-content">
  
           <div className="story-text">
@@ -74,6 +74,7 @@ const Story = () => {
           {currentLine < storyLines.length - 1 ? "다음" : "시작하기"}
         </button>
       </div>
+    </div>
     </div>
   );
 };
