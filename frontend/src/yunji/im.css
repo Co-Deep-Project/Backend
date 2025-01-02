@@ -129,11 +129,6 @@
     border: none; /* 패널 경계 제거 */
   }
   
-  /* 스크롤 제거 */
-  .right-panel {
-    overflow-y: hidden; /* 스크롤 비활성화 */
-    overflow: hidden; /* 가로와 세로 스크롤 모두 제거 */
-  }
   
   /* Ellipse34 */
   
@@ -258,8 +253,3 @@
   border: none; /* 패널 경계 제거 */
 }
 
-/* 스크롤 제거 */
-.right-panel {
-  overflow-y: hidden; /* 스크롤 비활성화 */
-  overflow: hidden; /* 가로와 세로 스크롤 모두 제거 */
-}
