@@ -24,6 +24,7 @@ const Chatbot = () => {
       try {
         const response = await fetch("https://chatbot-server-seoin2744-945239b11b47.herokuapp.com/", {
           method: "POST",
+          mode: 'no-cors',
           headers: {
             "Content-Type": "application/json", // 반드시 JSON 형식으로 설정
           },
