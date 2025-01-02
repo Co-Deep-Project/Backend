@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./seoin_style.css";
+import { Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Seoin = () => {
   const navigate = useNavigate();
@@ -22,8 +31,10 @@ const Seoin = () => {
   const fetchVotesFromServer = async () => {
     setVotesLoading(true);
     try {
+      console.log("Fetching votes from:", `${process.env.REACT_APP_BACKEND_URL}/api/vote_data?member_name=${memberName}`);  // URL 확인
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/vote_data?member_name=${memberName}`);
       const data = await response.json();
+      //console.log("Received vote data:", data); 
       setVotes(data);
       if (activeTab === "votes") {
         setDisplayData(data.slice(0, ITEMS_PER_PAGE));
@@ -39,7 +50,7 @@ const Seoin = () => {
     setBillsLoading(true);
     try {
         console.log(`Fetching bills for ${memberName}`); 
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/bills?member_name=${memberName}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/bills_combined?member_name=${memberName}`);
         const data = await response.json();
 
         // 최신순 정렬
@@ -54,7 +65,101 @@ const Seoin = () => {
     setBillsLoading(false);
 };
 
+// 그래프 추가
+const groupByCommittee = (bills) => {
+  const committeeCount = {};
+  bills.forEach((bill) => {
+    // 공동발의 법안만 처리
+    if (bill.type === "공동발의") {
+      const committee = bill.committee || "미분류";
+      committeeCount[committee] = (committeeCount[committee] || 0) + 1;
+    }
+  });
   
+  const sortedCommittees = Object.entries(committeeCount).sort(
+    (a, b) => b[1] - a[1]
+  );
+
+  return Object.fromEntries(sortedCommittees);
+};
+
+const prepareChartData = (committeeCount) => {
+  const labels = Object.keys(committeeCount);
+  const data = Object.values(committeeCount);
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: "소관위원회별 공동발의 법안 분포",
+        data,
+        backgroundColor: [
+          "#cfc2e9",
+          "#b6a9d4",
+          "#8a81a9",
+          "#67646c",
+          "#3b383e",
+          "#9c9c9c",
+          "#d3d3d3",
+          "#ececec",
+          "#7f7f7f",
+          "#5a5a5a",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
+};
+
+const CommitteePieChart = ({ bills }) => {
+  // useMemo를 사용하여 bills가 변경될 때만 데이터를 다시 계산
+  const committeeCount = useMemo(() => groupByCommittee(bills), [bills]);
+  const chartData = useMemo(() => prepareChartData(committeeCount), [committeeCount]);
+
+  const [shouldAnimate, setShouldAnimate] = useState(true);
+
+  useEffect(() => {
+    setShouldAnimate(true);
+    return () => setShouldAnimate(false);
+  }, [bills]);
+
+  const options = {
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+        labels: {
+          boxWidth: 20,
+          generateLabels: (chart) => {
+            const data = chart.data;
+            const total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
+
+            return data.labels.map((label, index) => {
+              const value = data.datasets[0].data[index];
+              const percentage = ((value / total) * 100).toFixed(1);
+              return {
+                text: `${label} (${percentage}%)`,
+                fillStyle: data.datasets[0].backgroundColor[index],
+                hidden: !chart.isDatasetVisible(0),
+              };
+            });
+          },
+        },
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: shouldAnimate ? 800 : 0  
+    }
+  };
+
+  return (
+    <div style={{ width: "500px", height: "400px", margin: "0 auto" }}>
+      <Pie data={chartData} options={options} />
+    </div>
+  );
+};
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -145,6 +250,13 @@ const Seoin = () => {
       </div>
 
       <main className="main-layout">
+      {activeTab === "bills" && (
+        <div className="chart-container">
+          <h2>소관위원회별 공동발의 법안 분포</h2>
+          <CommitteePieChart bills={bills} />
+        </div>
+      )}
+
         <div className="tab-container">
           <button
             className={`tab-button ${activeTab === "votes" ? "active" : ""}`}
@@ -167,7 +279,12 @@ const Seoin = () => {
                 <span className="legend-item legend-against">반대</span>
                 <span className="legend-item legend-abstain">기권</span>
               </div>)
-          }
+          } {activeTab === "bills" && (
+            <div className="legend-container">
+              <span className="legend-item legend-approve">대표발의 의안</span>
+              <span className="legend-item legend-against">공동발의 의안</span>
+            </div>
+          )}
           {isLoading ? (
             <p>데이터를 불러오는 중...</p>
           ) : displayData.length === 0 ? (
@@ -206,13 +323,15 @@ const Seoin = () => {
                       <p><span className="bold">• 의안 번호 : </span> {vote.BILL_NO}</p>
                       <p><span className="bold">• 의결일자 : </span> {vote.VOTE_DATE}</p>
                       <p><span className="bold">• 소관위원회 : </span> {vote.CURR_COMMITTEE}</p>
-                      <p><span className="bold">• 제안이유 및 주요내용 : </span></p>
+                      <p><span className="bold">• 제안이유 및 주요내용 요약: </span></p>
                       <br />
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: vote.DETAILS
-                            .replace(/\n{2,3}/g, '\n') // 2~3개의 줄바꿈 -> 1개로 변경
-                            .replace(/\n/g, '<br/>'), // 남은 줄바꿈을 <br/>로 변환
+                          __html: vote.DETAILS.summary
+                            ? vote.DETAILS.summary
+                                .replace(/\n{2,3}/g, '\n')
+                                .replace(/\n/g, '<br/>')
+                            : "내용이 없습니다."
                         }}
                       ></p>
 
@@ -225,11 +344,16 @@ const Seoin = () => {
             displayData.map((bill, index) => {
               const displayNumber = bills.length - index; 
               return (
-                <div key={index} className="bill-card">
+                <div
+                key={index}
+                className={`bill-card ${
+                  bill.type === "대표발의" ? "approve" : "against"
+                }`}
+                >
                   <div className="bill-header">
                     <span>{displayNumber}</span>
                     <a 
-                      href={bill.bill_url} 
+                      href={bill.bill_link} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="tooltip-link"
@@ -245,16 +369,18 @@ const Seoin = () => {
                     <div className="bill-details">
                       <p><span className="bold">• 제안일자 : </span> {bill.propose_date}</p>
                       <p><span className="bold">• 제안자 : </span> {bill.proposer}</p>
-                      <p><span className="bold">• 공동발의자 : </span> {bill.co_proposer}</p>
-                      <p><span className="bold">• 의안 번호 : </span> {bill.bill_no}</p>
+                      {/* <p><span className="bold">• 공동발의자 : </span> {bill.co_proposer}</p>
+                      <p><span className="bold">• 의안 번호 : </span> {bill.bill_no}</p> */}
                       <p><span className="bold">• 소관위원회 : </span> {bill.committee}</p>
-                      <p><span className="bold">• 제안이유 및 주요내용 : </span></p>
+                      <p><span className="bold">• 제안이유 및 주요내용 요약: </span></p>
                       <br />
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: bill.DETAILS
-                            .replace(/\n{2,3}/g, '\n') // 2~3개의 줄바꿈 -> 1개로 변경
-                            .replace(/\n/g, '<br/>'), // 남은 줄바꿈을 <br/>로 변환
+                          __html: (bill.DETAILS?.summary || bill.SUMMARY)  // 두 가지 경우 모두 처리
+                            ? (bill.DETAILS?.summary || bill.SUMMARY)
+                                .replace(/\n{2,3}/g, '\n')
+                                .replace(/\n/g, '<br/>')
+                            : "요약 정보를 불러오는 중 오류가 발생했습니다."
                         }}
                       ></p>
                     </div>
