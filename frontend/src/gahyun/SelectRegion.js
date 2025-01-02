@@ -15,6 +15,8 @@ const SelectRegion = () => {
     useEffect(() => {
         const script = document.createElement("script");
         script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false`;
+        console.log("Kakao API Script Source:", script.src); // 로그로 확인
+        
         script.async = true;
 
         script.onload = () => {
