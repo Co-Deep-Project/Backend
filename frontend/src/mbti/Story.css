@@ -1,0 +1,73 @@
+.story-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh; /* 화면 전체 높이 */
+    background: #f9f9f9; /* 배경색 */
+    padding: 20px;
+  }
+  
+  .logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .poliLogo {
+    width: 150px;
+    cursor: pointer;
+  }
+  
+  .story-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .story-image {
+    width: 100%;
+    max-width: 400px; /* 이미지 최대 크기 */
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .story-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .story-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: #8455b3;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .story-button:hover {
+    background: #6b3d96;
+    transform: translateY(-3px);
+  }
+  
+  .story-button:active {
+    transform: scale(0.95);
+  }
+  
