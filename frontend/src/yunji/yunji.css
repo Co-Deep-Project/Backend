@@ -211,10 +211,11 @@
 }
 
 /* 프로필 카드 스타일 */
-.card-profile {
+.ku-card-profile {
   width: 700px;
   padding: 20px;
   height: auto;
+  margin-top: 60px;
   border-radius: 10px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

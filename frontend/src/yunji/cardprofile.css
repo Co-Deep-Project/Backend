@@ -11,6 +11,7 @@
   align-items: center;
   font-family: 'Arial', sans-serif;
   margin: 0 auto; /* 중앙 정렬 */
+  margin-top: 20px;
 }
 
 .profile-container {
