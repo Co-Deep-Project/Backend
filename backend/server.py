@@ -115,16 +115,25 @@ client = AsyncClient(api_key=os.getenv("OPENAI_API_KEY"))
 async def summarize_bill_details(content):
     """GPT를 사용해 법안 내용을 요약"""
     try:
-        response = await client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "법안의 내용을 간단명료하게 300자 이내로 요약해주세요. 핵심 내용만 3-4줄로 정리해주세요."},
-                {"role": "user", "content": content}
-            ],
-            temperature=0.7,
-            # max_tokens=  # 토큰 수 제한으로 비용과 시간 절약
-        )
-        return response.choices[0].message.content
+        for attempt in range(3):  # 최대 3번 시도
+            try:
+                response = await client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": "법안의 내용을 간단명료하게 300자 이내로 요약해주세요. 핵심 내용만 3-4줄로 정리해주세요."},
+                        {"role": "user", "content": content}
+                    ],
+                    temperature=0.7,
+                    #max_tokens=300  # 토큰 제한 추가
+                )
+                return response.choices[0].message.content
+            except Exception as e:
+                if "rate_limit_exceeded" in str(e):
+                    # rate limit에 걸렸을 때 대기 시간 추가
+                    await asyncio.sleep(2 ** attempt)  
+                    continue
+                raise e
+        return "요약 생성 중 rate limit 오류가 발생했습니다."
     except Exception as e:
         print(f"Error in summarization: {e}")
         return "요약 생성 중 오류가 발생했습니다."
