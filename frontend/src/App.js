@@ -9,7 +9,7 @@ import Chatbot from "./chatbot/Chatbot";
 import ResultScreen from "./mbti/ResultScreen";
 import StartScreen from "./mbti/StartScreen";
 import QuestionScreen from "./mbti/QuestionScreen";
-import Stroy from "./mbti/Story";
+import Story from "./mbti/Story";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
     element: <SelectRegion />, // SelectRegion 컴포넌트 연결
   },
   {
-    path: "/mbti", // 새로운 경로 추가
-    element: <Mbti />, // SelectRegion 컴포넌트 연결
+    path: "/mbti", 
+    element: <Mbti />,
   },
   {
     path: "/chatbot",
