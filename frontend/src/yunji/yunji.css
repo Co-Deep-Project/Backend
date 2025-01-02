@@ -55,13 +55,13 @@
   border-radius: 5px;
   transition: background-color 0.3s; 
 }
-.footer {
+.yunji-footer {
   text-align: center;
   margin-top: 40px;
   line-height: 1.35;
 }
 
-.footer p {
+.yunji-footer p {
   font-size: 13px;
 }
 .menu button:hover {
@@ -71,20 +71,20 @@
 /* 메인 콘텐츠 레이아웃 */
 .main-content {
   display: flex;
-  flex-direction: row;
-  height: 100%; /* 부모 높이에 맞춤 */
-  overflow: hidden; /* 스크롤 제거 */
-  width: 100%; /* 전체 화면 너비 사용 */
+  flex-wrap: wrap; /* 화면이 좁아질 경우 요소를 줄바꿈 */
+  align-items: stretch; /* 요소 높이를 동일하게 맞춤 */
+  justify-content: space-between; /* 요소 간 간격 조정 */
+  width: 100%;
+  height: 100vh; /* 부모 요소 크기 조정 */
+  box-sizing: border-box;
 }
 
 /* LeftPanel과 RightPanel 스타일 */
 .left-panel,
 .right-panel {
-  flex: 1; /* 동일한 비율로 크기 조정 */
-  padding: 20px;
-  overflow: auto; /* 내용이 넘칠 경우 스크롤 */
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
-  min-width: 0; /* Flexbox 축소를 방해하지 않도록 설정 */
+  flex: 1 1 50%; /* 화면의 절반을 차지하도록 설정 */
+  max-width: 50%; /* 최대 너비를 50%로 제한 */
+  height: 100%; /* 부모 요소에 맞춤 */
 }
 
 /* 정책 카드 스타일 */
@@ -119,17 +119,7 @@
 .btn:hover {
   background-color: #e0e0e0;
 }
-.complete {
-  background-color: #00D355;
-}
 
-.inProgress {
-  background-color: #ECFF21;
-}
-
-.notStarted {
-  background-color: #FF0000;
-}
 
 .policy-list {
   padding: 10px 20px;
@@ -212,9 +202,10 @@
 
 /* 프로필 카드 스타일 */
 .ku-card-profile {
-  width: 700px;
+  max-width: 100%;
   padding: 20px;
   height: auto;
+  overflow-x: hidden;
   margin-top: 60px;
   border-radius: 10px;
   background: white;
@@ -343,10 +334,10 @@
   padding: 20px;
   overflow: auto; /* 내용이 넘칠 경우 스크롤 표시 */
   box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  display: block;
 }
 /* 반응형 설정 */
-/* 반응형 설정 */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .main-content {
     flex-direction: column; /* 모바일에서는 상하 배치 */
   }
@@ -356,7 +347,6 @@
     min-width: 100%; /* 화면 크기에서 동일한 너비로 확장 */
     flex: none; /* 모바일에서 크기 고정 */
   }
-
 
   .header {
     flex-direction: row;
@@ -432,4 +422,5 @@
   .timeline-text {
     font-size: 0.8em;
   }
+  
 }
