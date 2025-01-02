@@ -1,73 +1,51 @@
-.story-container {
+.story-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100vh; /* 화면 전체 높이 */
-    background: #f9f9f9; /* 배경색 */
-    padding: 20px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center; /* 중앙 정렬 */
+    position: absolute; /* 절대 위치로 배치 */
+    bottom: 40px; /* 화면 맨 아래에서 약간 위로 */
+    left: 50%; /* 수평 중앙 정렬 */
+    transform: translateX(-50%); /* 정확히 가운데로 이동 */
+    padding: 10px 20px; /* 내부 여백 */
+    background: rgba(255, 255, 255, 0.8); /* 반투명 배경 */
+    border-radius: 10px;
+    max-width: 80%; /* 최대 너비 설정 */
+   
   }
   
-  .logo-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-  }
-  
-  .menu {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  .poliLogo {
-    width: 150px;
-    cursor: pointer;
-  }
-  
-  .story-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .story-image {
-    width: 100%;
-    max-width: 400px; /* 이미지 최대 크기 */
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  .owl-image {
+    position: absolute; /* 부엉이를 이야기 위에 띄우기 */
+    top: 20%; /* 화면 위에서 30% 아래로 위치 */
+    left: 50%; /* 수평 중앙 정렬 */
+    transform: translateX(-50%); /* 정확한 중앙 위치로 이동 */
+    width: 300px; /* 이미지 크기 */
+    height: auto; /* 비율 유지 */
+    z-index: 10; /* 이야기 내용보다 위에 표시 */
+    pointer-events: none; /* 클릭 방지 */
   }
   
   .story-text {
-    font-size: 1.5rem;
-    line-height: 1.6;
+    font-size: 1.2rem; /* 텍스트 크기 줄이기 */
     color: #333;
-    margin-bottom: 20px;
+    line-height: 1.5;
+    word-break: keep-all;
   }
   
-  .story-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
+  .story-next-button {
+    margin-top: 10px; /* 버튼 위 간격 */
+    padding: 10px 20px;
+    font-size: 1rem; /* 버튼 크기 줄이기 */
     color: white;
-    background: #8455b3;
+    background: #a56bdf;
     border: none;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease-in-out;
   }
   
-  .story-button:hover {
-    background: #6b3d96;
+  .story-next-button:hover {
+    background: #8455b3;
     transform: translateY(-3px);
-  }
-  
-  .story-button:active {
-    transform: scale(0.95);
   }
   

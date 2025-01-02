@@ -14,17 +14,17 @@ const QuestionScreen = ({ onComplete }) => {
     
   const questions = [
     {
-      question: "1. 어느 농민이 '나의 생계가 너무 어려워요'라고 말했어요. 이를 들은 왕은 어떻게 해야 할까요?",
+      question: "1. 부엉이 마을의 농부들이 '우리는 먹을 것이 부족해요!'라며 호소하고 있어요. 당신이 부엉이 왕이라면 어떻게 하고 싶으신가요?",
       answers: [
-        "농민들이 더 나은 삶을 살 수 있도록, 임금을 올려야 한다고 생각해요.",
-        "농민들은 더 열심히 일하고, 자립적으로 생계를 꾸려나가야 한다고 생각해요."
+        "농부들에게 더 많은 지원을 제공하고 농작물 생산을 늘릴 수 있도록 돕고 싶어요.",
+        "농부들이 스스로 해결할 수 있도록 더 열심히 일할 여건을 마련해주고 싶어요."
       ],
     },
     {
-      question: "2. 사람들이 집을 사고 싶어하지만, 땅값이 너무 비싸요. 이에 대해 왕은 어떻게 해야 할까요?",
+      question: "2. 토끼 마을에서는 땅값이 너무 비싸서 집을 구하지 못하는 이웃들이 늘어나고 있어요. 당신이라면 어떻게 이 문제를 해결하고 싶으신가요?",
       answers: [
-        "왕이 땅값을 낮추기 위해 노력하고, 백성들이 집을 쉽게 얻을 수 있도록 해야 한다고 생각해요.",
-        "왕은 땅값에 간섭하지 않고, 자연스럽게 시장에 맡겨야 한다고 생각해요."
+        "지도자로서 토끼 마을의 규칙을 조정해 땅값을 낮추고, 모두가 집을 가질 수 있도록 돕고 싶어요.",
+        "땅 주인들이 더 많은 이웃을 받아들이기 위해 어떻게 해야할지 스스로 깨달을 수 있도록 기다려주고 필요한 도움과 조언만 살짝 곁에서 전해준다."
       ],
     },
     {
@@ -133,7 +133,13 @@ const QuestionScreen = ({ onComplete }) => {
     });
     const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
 
-    
+    const backgroundStyle = {
+      backgroundImage: `url('/images/background1.jpg')`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      height: "100vh",
+    };
     const handleNext = () => {
       if (selectedAnswer === null) {
           alert("선지를 선택해주세요!");
@@ -225,7 +231,7 @@ const QuestionScreen = ({ onComplete }) => {
     };
 
     return (
-      <>
+      <div style={backgroundStyle}>
         <div className="question-header">
           <div className="logo-container">
             <img src={logo} alt="PoliTracker Logo" onClick={handleHomeClick} className="poliLogo" />
@@ -284,7 +290,7 @@ const QuestionScreen = ({ onComplete }) => {
             trackerskku@g.skku.edu
           </p>
         </footer>
-      </>
+      </div>
     );
 };
 
