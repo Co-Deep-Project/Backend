@@ -2,7 +2,7 @@ import React from 'react';
 import './cardprofile.css';
 
 const CardProfile = () => (
-    <div className="card-profile">
+    <div className="ku-card-profile">
       <div className="profile-container">
         <div>
           <h1 className = "profile-name">정문헌</h1>
