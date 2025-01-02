@@ -118,7 +118,7 @@ async def summarize_bill_details(content):
         for attempt in range(3):  # 최대 3번 시도
             try:
                 response = await client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4o-mini",
                     messages=[
                         {"role": "system", "content": "법안의 내용을 간단명료하게 300자 이내로 요약해주세요. 핵심 내용만 3-4줄로 정리해주세요."},
                         {"role": "user", "content": content}
