@@ -9,7 +9,7 @@ const StartScreen = () => {
   const navigate = useNavigate(); // 컴포넌트 내부에서 useNavigate 호출
 
   const onNext = () => {
-    navigate('/question'); 
+    navigate('/story'); 
   }
 
   const handleHomeClick = () => {

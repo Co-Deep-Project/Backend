@@ -9,6 +9,7 @@ import Chatbot from "./chatbot/Chatbot";
 import ResultScreen from "./mbti/ResultScreen";
 import StartScreen from "./mbti/StartScreen";
 import QuestionScreen from "./mbti/QuestionScreen";
+import Stroy from "./mbti/Story";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/question",
     element: <QuestionScreen />
+  },
+  {
+    path: "/story",
+    element: <Story />
   }
 ]);
 
