@@ -23,7 +23,7 @@ const QuestionScreen = ({ onComplete }) => {
     
     const questions = [
       {
-          question: "1. 부엉이 마을의 농부들이 '우리는 먹을 것이 부족해요!'라며 호소하고 있어요. 당신이라면 어떻게 하고 싶으신가요?",
+          question: "1. 부엉이 마을의 농부들이 '생계가 너무 어려워요요'라며 호소하고 있어요. 당신이라면 어떻게 하고 싶으신가요?",
           answers: [
               { text: "부엉이 마을의 농부들이 더 나은 삶을 살 수 있도록, 임금을 올려야 한다고 생각해요.", scoreType: "economicProgressive" },
               { text: "부엉이 마을의 농부들은 더 열심히 일하고, 자립적으로 생계를 꾸려나가야 한다고 생각해요.", scoreType: "economicConservative" },

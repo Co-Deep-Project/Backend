@@ -46,6 +46,9 @@ const ResultScreen = () => {
   let description = [
     
   ];
+  console.log("Image Path:", image);
+console.log("Character Description:", description);
+
   if (
     (totalProgressive === 7 && totalConservative === 8) || 
     (totalProgressive === 8 && totalConservative === 7)
