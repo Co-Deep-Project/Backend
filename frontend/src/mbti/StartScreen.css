@@ -9,7 +9,23 @@
   font-family: "Noto Sans KR", sans-serif;
   text-align: center;
 }
-
+.poliLogo {
+  height: 40px;
+  position: fixed;
+  left: 3vw;
+  top: 20px;
+  cursor: pointer;
+}
+.home-button {
+  border: 1px solid black;
+  padding: 10px;
+  top: 25px;
+  background: white;
+  cursor: pointer;
+  position: fixed;
+  right: 3vw;
+  height: 40px;
+}
 
 /* 메인 텍스트 */
 .main-heading {

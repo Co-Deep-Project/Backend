@@ -3,7 +3,6 @@ import "./StartScreen.css"; // 시작 화면 스타일링
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { useNavigate } from "react-router-dom";
-import logo from '../assets/polilogo.png';
 
 const StartScreen = () => {
   const navigate = useNavigate(); // 컴포넌트 내부에서 useNavigate 호출
@@ -22,7 +21,7 @@ const StartScreen = () => {
   return (
     <div className="start-header">
       <div className="logo-container">
-          <img src={logo} alt="PoliTracker Logo" onClick = {handleHomeClick} className="poliLogo" />
+          <img src="/images/logo.png" alt="PoliTracker" onClick = {handleHomeClick} className="logo" />
       </div>
       <div className="menu">
           <button onClick={handleHomeClick}>Home</button>
