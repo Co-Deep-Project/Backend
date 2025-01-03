@@ -47,12 +47,14 @@
 }
 
 .menu button {
-  border: 1px solid black; 
-  padding: 10px 15px; 
-  background-color: white;
-  cursor: pointer; 
-  font-size: 14px; 
-  border-radius: 5px;
+  border: 1px solid black;
+  padding: 10px;
+  top: 25px;
+  background: white;
+  cursor: pointer;
+  position: fixed;
+  right: 3vw;
+  height: 40px;
   transition: background-color 0.3s; 
 }
 .yunji-footer {

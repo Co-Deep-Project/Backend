@@ -148,9 +148,11 @@
 
 
 .poliLogo {
-  width: 250px;
-  height: auto;
-  max-width: 100%; /* 화면 너비 초과 방지 */
+  height: 40px;
+  position: fixed;
+  left: 3vw;
+  top: 20px;
+  cursor: pointer;
 }
 
 

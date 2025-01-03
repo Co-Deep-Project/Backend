@@ -35,24 +35,28 @@ const Story = () => {
 
   const backgroundStyle = {
     backgroundImage: `url('/images/background1.jpg')`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    height: "100vh",
-  };
+    backgroundSize: "cover", // 배경 이미지를 화면에 꽉 차게 설정
+    backgroundPosition: "center", // 중앙 정렬
+    backgroundRepeat: "no-repeat", // 반복 방지
+    width: "100vw", // 화면 너비 100%
+    height: "100vh", // 화면 높이 100%
+};
+
+  
 
   return (
     <div style={backgroundStyle}>
+      <div className = "story-screen">
       <div className="story-header">
         <div className="logo-container">
           <img
             src="/images/logo.png"
             alt="PoliTracker Logo"
             onClick={handleHomeClick}
-            className="poliLogo"
+            className="logo"
           />
         </div>
-        <div className="story-menu">
+        <div className="menu">
           <button onClick={handleHomeClick}>Home</button>
         </div>
       </div>
@@ -73,6 +77,7 @@ const Story = () => {
           {currentLine < storyLines.length - 1 ? "다음" : "시작하기"}
         </button>
       </div>
+    </div>
     </div>
     </div>
   );
