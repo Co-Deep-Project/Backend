@@ -22,7 +22,7 @@ const Chatbot = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch("https://chatbot-server-seoin2744-945239b11b47.herokuapp.com/", {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND2_URL}/search_news`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json", // 반드시 JSON 형식으로 설정
@@ -59,32 +59,28 @@ const Chatbot = () => {
   // 챗봇 메시지 전송
   const handleSend = async () => {
     if (inputValue.trim() === "") return;
-  
+    
+    // 이미 전송 중이면 중복 전송 방지
     if (isSending) return;
-  
+
     try {
-      setIsSending(true);
-  
+      setIsSending(true); // 전송 시작
+      
       const userMessage = { sender: "user", text: inputValue };
       setMessages((prev) => [...prev, userMessage]);
-  
-      const currentInput = inputValue;
-      setInputValue("");
-  
-      const response = await fetch("/api/chatbot", {
+      
+      const currentInput = inputValue; // 현재 입력값 저장
+      setInputValue(""); // 입력 초기화를 먼저 수행
+      
+      const response = await fetch(`${process.env.REACT_APP_BACKEND2_URL}/chatbot`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: currentInput }),
       });
       
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
       const data = await response.json();
       const chatbotResponse = data.response;
-  
+      
       if (currentInput.includes("뉴스")) {
         const newsItems = parseChatbotNews(chatbotResponse);
         const botMessage = { sender: "bot", newsItems };
@@ -101,10 +97,9 @@ const Chatbot = () => {
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
-      setIsSending(false);
+      setIsSending(false); // 전송 완료
     }
   };
-  
 
   return (
     <div className="chatbot-container">

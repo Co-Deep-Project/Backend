@@ -63,7 +63,7 @@ const Story = () => {
             alt="부엉이"
             className="owl-image"
           />
-        <div class="story-content-wrapper">
+        <div className="story-content-wrapper">
         <div className="story-content">
  
           <div className="story-text">
