@@ -23,7 +23,7 @@ const QuestionScreen = ({ onComplete }) => {
     
     const questions = [
       {
-          question: "1. 부엉이 마을의 농부들이 '생계가 너무 어려워요요'라며 호소하고 있어요. 당신이라면 어떻게 하고 싶으신가요?",
+          question: "1. 부엉이 마을의 농부들이 '생계가 너무 어려워요'라며 호소하고 있어요. 당신이라면 어떻게 하고 싶으신가요?",
           answers: [
               { text: "부엉이 마을의 농부들이 더 나은 삶을 살 수 있도록, 임금을 올려야 한다고 생각해요.", scoreType: "economicProgressive" },
               { text: "부엉이 마을의 농부들은 더 열심히 일하고, 자립적으로 생계를 꾸려나가야 한다고 생각해요.", scoreType: "economicConservative" },
@@ -37,28 +37,28 @@ const QuestionScreen = ({ onComplete }) => {
           ]
       },
       {
-          question: "3. 돈이 많은 부엉이들과 가난한 부엉이들 사이의 격차가 점점 커지고 있습니다. 이때 지도자는 어떻게 해야 할까요?",
+          question: "3. 돈이 많은 부엉이들과 가난한 부엉이들 사이의 격차가 점점 커지고 있습니다. 이때 당신이라면 어떻게 하고 싶으신가요?",
           answers: [
               { text: "지도자가 돈이 더 많은 부엉이들에게 더 많은 세금을 거둬 가난한 부엉이들을 돕는 데 사용해야 한다고 생각해요.", scoreType: "economicProgressive" },
               { text: "부엉이들 간의 금전 차이는 자연스러운 것이며, 지도자가 이를 따로 조정할 필요는 없다고 생각해요.", scoreType: "economicConservative" },
           ]
       },
       {
-          question: "4. 많은 부엉이들이 일거리를 찾지 못해 힘들어하고 있습니다. 이에 대해 지도자는 어떻게 해야 할까요?",
+          question: "4. 많은 부엉이들이 일거리를 찾지 못해 힘들어하고 있습니다. 당신이라면 어떻게 하고 싶으신가요?",
           answers: [
               { text: "지도자가 직접 나서서 농업이나 토목 사업 등을 시작해 부엉이들에게 일할 기회를 만들어야 한다고 생각해요.", scoreType: "economicProgressive" },
               { text: "지도자는 부엉이들이 스스로 생업을 찾아 해결하도록 두고, 필요한 최소한의 여건만 마련해야 한다고 생각해요.", scoreType: "economicConservative" },
           ]
       },
       {
-          question: "5. 부엉이 마을에는 깃털 장수가 있어요. 인간 세상으로 따지면 상인이 되겠네요. 지도자는 깃털 장수들을 도와야 할까요?",
+          question: "5. 부엉이 마을에는 깃털 장수가 있어요. 인간 세상으로 따지면 상인이 되겠네요. 당신이라면 깃털 장수들을 도우실 것인가요?",
           answers: [
               { text: "지도자는 깃털 장수들의 거래가 공정하게 이루어지도록 관리하고, 국가의 이익을 위해 깃털 장수들이 번성할 수 있도록 도와야 해요.", scoreType: "economicProgressive" },
               { text: "지도자는 깃털 장수들의 일에 간섭하지 말고, 깃털 장수들이 자유롭게 무역을 하고 활동할 수 있도록 해야 돼요.", scoreType: "economicConservative" },
           ]
       },
       {
-          question: "6. 부엉이 마을, 토끼 마을, 호랑이 마을이 사실 원래 하나의 동물 마을이었다는 사실을 알고 있으셨나요? 이 세 나라는 나뉜 후에 서로 사이가 좋지 않아 대립하고 있습니다. 이를 해결하기 위해 지도자는 어떻게 해야 할까요?",
+          question: "6. 부엉이 마을, 토끼 마을, 호랑이 마을이 사실 원래 하나의 동물 마을이었다는 사실을 알고 있으셨나요? 이들은 세 나라로 나뉜 후에 서로 사이가 좋지 않아 대립하고 있습니다. 이를 해결하기 위해 당신이라면 어떻게 하실 것인가요?",
           answers: [
               { text: "세 마을들을 하나로 통일하여 동물들이 전처럼 평화롭게 살 수 있도록 노력해야 해요.", scoreType: "diplomaticProgressive" },
               { text: "각 마을들은 독립적으로 존재해야 하며, 통일을 위해 힘쓸 필요는 없다고 생각해요.", scoreType: "diplomaticConservative" },
@@ -72,7 +72,7 @@ const QuestionScreen = ({ onComplete }) => {
           ]
       },
       {
-          question: "8. 최근 부엉이 마을의 산림이 자주 훼손되고 있습니다. 왕은 이를 어떻게 해결할 수 있을까요?",
+          question: "8. 최근 부엉이 마을의 산림이 자주 훼손되고 있습니다. 당신은 이를 어떻게 해결하실 것인가요?",
           answers: [
               { text: "산림 보호는 매우 중요하기 때문에, 이를 위한 강력한 정책을 지금 당장 시행해야 해요.", scoreType: "diplomaticProgressive" },
               { text: "지나친 규제는 부엉이 주민들에게 부담을 줄 수 있으므로, 너무 엄격한 규제는 피해야 해요.", scoreType: "diplomaticConservative" },
@@ -93,21 +93,21 @@ const QuestionScreen = ({ onComplete }) => {
           ]
       },
       {
-          question: "11. 부엉이 마을은 도시 부엉이들과 시골 부엉이들로 이루어져 있습니다. 시골 부엉이들은 도시 부엉이들에 비해 공부할 수 있는 기회가 많이 없어요. 지도자는 이때 어떻게 해야할까요?",
+          question: "11. 부엉이 마을은 도시 부엉이들과 시골 부엉이들로 이루어져 있습니다. 시골 부엉이들은 도시 부엉이들에 비해 공부할 수 있는 기회가 많이 없어요. 당신이라면 이때 어떻게 하실 것인가요?",
           answers: [
               { text: "시골 부엉이들도 도시 부엉이들과 똑같이 배워야 합니다. 그러므로 지도자는 시골 부엉이들에게 더 많은 교육 기회를 제공해야 해요.", scoreType: "socialProgressive" },
-              { text: "시골 부엉이들도 도움이 필요하지만, 그렇다고 시골 부엉이들에게 추가로 기회를 주는 것은 역차별이 될 수 있습니다.", scoreType: "socialConservative" },
+              { text: "시골 부엉이들도 도움이 필요하지만, 그렇다고 시골 부엉이들에게 추가로 기회를 주는 것은 역차별이 될 수 있으므로 더 많은 혜택을 주는 것은 옳지 않습니다.", scoreType: "socialConservative" },
           ]
       },
       {
-          question: "12. 엄중한 범죄를 저지른 부엉이에게 목숨을 빼앗는 처벌을 내려도 될까요?",
+          question: "12. 엄중한 범죄를 저지른 부엉이에게 사형이라는 형벌을 내려도 될까요?",
           answers: [
               { text: "아니요. 범죄를 저지른 부엉이를 교화할 수 있는 처벌이 필요해요.", scoreType: "socialProgressive" },
               { text: "네. 범죄를 막기 위해서는 엄격한 처벌이 필요해요.", scoreType: "socialConservative" },
           ]
       },
       {
-          question: "13. 엄마 부엉이가 아기 부엉이를 낳을지 말지 스스로 결정할 수 있어야 할까요?",
+          question: "13. 살다보니 엄마 부엉이가 원치않게 임신을 할때가 있던데, 이럴때 낙태를 허용해야할까요?",
           answers: [
               { text: "네! 엄마 부엉이가 선택할 수 있어야 해요.", scoreType: "socialProgressive" },
               { text: "아기 부엉이도 소중한 생명이기 때문에 낙태는 안 돼요.", scoreType: "socialConservative" },
