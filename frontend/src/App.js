@@ -10,6 +10,7 @@ import ResultScreen from "./mbti/ResultScreen";
 import StartScreen from "./mbti/StartScreen";
 import QuestionScreen from "./mbti/QuestionScreen";
 import Story from "./mbti/Story";
+import ResultTransitionScreen from "./mbti/ResultTransitionScreen";
 
 const router = createBrowserRouter([
   {
@@ -51,11 +52,17 @@ const router = createBrowserRouter([
   {
     path: "/story",
     element: <Story />
-  }
-]);
+  },
+  {
+  path: "/result-transition",
+  element: <ResultTransitionScreen /> }
+])
+
 
 function App() {
   return <RouterProvider router={router} />;
 }
 
 export default App;
+
+

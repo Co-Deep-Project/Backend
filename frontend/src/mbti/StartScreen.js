@@ -19,12 +19,14 @@ const StartScreen = () => {
   };
 
   return (
+    <div>
     <div className="start-header">
       <div className="logo-container">
           <img src="/images/logo.png" alt="PoliTracker" onClick = {handleHomeClick} className="logo" />
       </div>
       <div className="menu">
           <button onClick={handleHomeClick}>Home</button>
+      </div>
       </div>
       <div className="start-screen">
         <div className="content">

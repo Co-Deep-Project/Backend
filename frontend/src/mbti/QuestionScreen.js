@@ -177,7 +177,7 @@ const QuestionScreen = ({ onComplete }) => {
       } else {
         if (window.confirm("테스트가 끝났습니다. 결과를 보러 가시겠습니까?")) {// 마지막 질문: 상태 저장 후 결과로 이동
           localStorage.setItem("results", JSON.stringify(updatedScores));
-          navigate('/result');
+          navigate('/result-transition');
       }
     }
       setSelectedAnswer(null); // 선택 초기화
@@ -233,7 +233,7 @@ useEffect(() => {
       <div>
         <div className="question-header">
           <div className="logo-container">
-            <img src={logo} alt="PoliTracker Logo" onClick={handleHomeClick} className="poliLogo" />
+            <img src="/images/logo.png" alt="PoliTracker" onClick={handleHomeClick} className="logo" />
           </div>
           <div className="menu">
             <button onClick={handleHomeClick} className = "home-button">Home</button>
