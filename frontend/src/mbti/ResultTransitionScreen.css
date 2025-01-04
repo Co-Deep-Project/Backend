@@ -1,0 +1,48 @@
+.result-transition-screen {
+    display: flex;
+    flex-direction: column; /* 위아래 정렬 */
+    align-items: center; /* 중앙 정렬 */
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #fef3c7, #f3e8ff); /* 부드러운 배경 */
+    padding: 1rem; /* 전체 여백 축소 */
+    gap: 1rem; /* 요소 간 간격 균일하게 조정 */
+  }
+  
+  .thank-owl-image {
+    width: 180px; /* 부엉이 이미지 크기 약간 축소 */
+    height: auto;
+    margin-bottom: 0.8rem; /* 아래 텍스트와 간격 */
+  }
+  
+  .thank-you-text {
+    font-size: 2.5rem; /* 텍스트 크기 약간 축소 */
+    font-weight: bold;
+    color: #6b21a8; /* 텍스트 색상 */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    margin-bottom: 0.8rem; /* 아래 간격 축소 */
+  }
+  
+  .transition-content {
+    font-size: 1.1rem; /* 본문 텍스트 크기 약간 축소 */
+    line-height: 1.6; /* 줄 간격 축소 */
+    color: #4a4a4a; /* 텍스트 색상 */
+    margin-bottom: 1rem; /* 버튼과 간격 */
+  }
+  
+  .continue-button {
+    background-color: #6b21a8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .continue-button:hover {
+    background-color: #4c1d95;
+  }
+  
