@@ -1,48 +1,57 @@
 .result-transition-screen {
     display: flex;
-    flex-direction: column; /* 위아래 정렬 */
-    align-items: center; /* 중앙 정렬 */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #fef3c7, #f3e8ff); /* 부드러운 배경 */
-    padding: 1rem; /* 전체 여백 축소 */
-    gap: 1rem; /* 요소 간 간격 균일하게 조정 */
+    padding: 2rem;
+  }
+  
+  .content-box {
+    background-color: rgba(255, 255, 255, 0.9); /* 반투명 흰색 박스 */
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 효과 */
+    max-width: 700px;
+    width: 90%; /* 반응형 크기 */
+    text-align: center;
   }
   
   .thank-owl-image {
-    width: 180px; /* 부엉이 이미지 크기 약간 축소 */
+    width: 200px; /* 부엉이 이미지 크기 */
     height: auto;
-    margin-bottom: 0.8rem; /* 아래 텍스트와 간격 */
+    margin-bottom: 1rem;
   }
   
   .thank-you-text {
-    font-size: 2.5rem; /* 텍스트 크기 약간 축소 */
+    font-size: 3rem; /* 텍스트 크기 키움 */
     font-weight: bold;
-    color: #6b21a8; /* 텍스트 색상 */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-    margin-bottom: 0.8rem; /* 아래 간격 축소 */
+    color: #4a148c; /* 진한 보라색 */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* 그림자 효과로 텍스트 부각 */
+    margin-bottom: 1rem;
   }
   
   .transition-content {
-    font-size: 1.1rem; /* 본문 텍스트 크기 약간 축소 */
-    line-height: 1.6; /* 줄 간격 축소 */
-    color: #4a4a4a; /* 텍스트 색상 */
-    margin-bottom: 1rem; /* 버튼과 간격 */
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333; /* 본문 텍스트 색상 */
+    margin-bottom: 2rem;
   }
   
   .continue-button {
-    background-color: #6b21a8;
-    color: white;
+    background-color: #cfc2e9; /* 요청된 보라색 배경 */
+    color: black; /* 텍스트는 검정색 */
+    padding: 12px 24px;
+    font-size: 1.2rem;
     border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease; /* 호버 애니메이션 */
   }
   
   .continue-button:hover {
-    background-color: #4c1d95;
+    background-color: #8455b3; /* 요청된 호버 보라색 */
+    transform: translateY(-3px); /* 약간 위로 이동 효과 */
   }
   
