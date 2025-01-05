@@ -19,7 +19,7 @@ const ResultTransitionScreen = () => {
   };
 
   return (
-    <div style={backgroundStyle}>
+    <div style={backgroundStyle} className = "total">
       {/* 콘텐츠 박스 */}
       <div className="result-transition-screen">
         <div className="content-box">

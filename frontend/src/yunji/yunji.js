@@ -35,22 +35,22 @@ const Yunji = () => {
 
   return (
     <div className="app">
-      <div className="yunji-header">
-        <div className="logo-container">
-          <img src={logo} alt="PoliTracker Logo" className="poliLogo" onClick={handleHomeClick}/>
+            <header id="tracking-header">
+        <img
+          id="logo"
+          src="/images/logo.png"
+          alt="PoliTracker"
+          onClick={() => navigate("/")}
+        />
+        <div id="button-container">
+          <button id="region-button" onClick={() => navigate("/select-region")}>
+            구
+          </button>
+          <button id="home-button" onClick={() => navigate("/")}>
+            Home
+          </button>
         </div>
-        <div className="menu">
-            <button
-                  id="region-button"
-                  onClick={() => {
-                    navigate("/select-region", { replace: true });
-                  }}
-            >
-            구 다시 선택하기</button> {/* onClick 이벤트 추가 */}
-          <button onClick={handlePoliticianClick}>정치인</button> {/* onClick 이벤트 추가 */}
-          <button onClick={handleHomeClick}>Home</button> {/* onClick 이벤트 추가 */}
-        </div>
-      </div>
+      </header>
       
       <div className={`main-content ${isMobileView ? "stacked" : "side-by-side"}`}>
         <LeftPanel handleButtonClick={handleButtonClick} />
