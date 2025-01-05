@@ -11,7 +11,14 @@ const shuffleArray = (array) => {
     }
     return shuffled;
   };
-
+  const backgroundStyle = {
+    backgroundImage: `url('/images/onepage.jpg')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    width: "100vw",
+    height: "100vh",
+  };
 
 const QuestionScreen = ({ onComplete }) => {
     const navigate = useNavigate();
@@ -221,7 +228,7 @@ const QuestionScreen = ({ onComplete }) => {
         </div>
       </div>
 
-      <div className={`question-box ${isFlipping ? "flipping" : ""}`}>
+      <div  style={backgroundStyle} className={`question-box ${isFlipping ? "flipping" : ""}`}>
         <div className="page">
           <div className="front">
             <div className="progress-wrapper">
