@@ -6,9 +6,8 @@
 }
 
 .question-box {
-  margin-top: 20px !important;
-  width: 100%;
-  max-width: 600px;
+  
+  min-height: 100vh;
   background: #f8f8f8;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,9 +15,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* 내용이 상단에서 시작되도록 조정 */
   margin: 0 auto;
   overflow: auto;
+  overflow-x: hidden;
+ 
+    background-size: cover;
+    background-position: top; /* 배경 이미지의 윗부분 고정 */
+    background-repeat: no-repeat;
+    height: 100vh; /* 화면 높이를 가득 채우도록 설정 */
+    padding-top: 120px;
+}
+
+.question-box {
+  margin-top: 20px !important;
+  max-width: 600px;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  perspective: 1500px; /* 3D 효과 */
+  width: 100%;
+  height: 100vh; /* 화면 전체를 채움 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* 진행률 바, 질문, 버튼을 균등하게 분배 */
+  padding: 5vh 2vw; /* 뷰포트 기반의 패딩 추가 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
 
 .home-button {
@@ -33,46 +56,48 @@
 }
 
 
-/* 진행률 */
+/* 진행률 바 */
 .progress-wrapper {
+  position: sticky; /* 스크롤해도 화면 최상단에 고정 */
+  top: 0; /* 화면 상단 고정 위치 */
   width: 100%; 
-  margin-bottom: 20px; 
+  z-index: 1000; /* 다른 요소 위에 표시 */
+  padding: 10px 20px; /* 내부 여백 */
+
 }
 
-
-
-.progress-text {
-  font-size: 1rem;
-  font-weight: bold;
-  color: black;
-  text-align: center;
-}
-
-.status-bar {
-  width: 100%;
-  height: 15px;
-  background-color: #292929;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.status-bar-fill {
-  width: 0%; /* 초기 상태 */
-  height: 100%;
-  background: linear-gradient(90deg, #c084fc, #8455b3);
-  transition: width 0.5s ease-in-out;
-  box-shadow: 0 0 10px rgba(192, 132, 252, 0.6), 0 0 20px rgba(132, 85, 179, 0.4);
-}
-
+/* 질문 박스 */
 .qBox {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
+  background-color: white;
+  padding: 3vh 4vw; /* 뷰포트 기반 패딩 */
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  margin-bottom: 15px;
-  margin-top: 10px;
+  width: 100%; /* 너비를 화면에 맞춤 */
+  max-width: 600px; /* 최대 너비 제한 */
+  box-sizing: border-box;
+  margin: 2vh auto; /* 위아래 간격 추가 */
+}
+
+.qBox h2 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem); /* 화면 크기에 따라 조정 */
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: black;
+  word-break: keep-all;
+}
+
+
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .qBox {
+    margin-top: 50px; /* 모바일에서 간격 조정 */
+  }
+  .question-box {
+    padding-top: 100px; /* 모바일에서 상단 여백 조정 */
+  }
 }
 
 .qBox h2 {
@@ -84,6 +109,58 @@
   word-break:keep-all;
 }
 
+/* 배경 이미지와 내용이 확대 시 화면에 맞도록 조정 */
+@media (max-width: 768px) {
+  .question-box {
+    height: auto; /* 화면 크기에 따라 높이 자동 조정 */
+    padding-bottom: 20px;
+  }
+
+  .qBox {
+    margin-top: 70px; /* 작은 화면에서도 진행률 바와 간격 유지 */
+  }
+}
+
+.status-bar {
+  width: 100%;
+  height: 12px;
+  background-color: #292929;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.status-bar-fill {
+  width: 0%; /* 동적으로 업데이트 */
+  height: 100%;
+  background: linear-gradient(90deg, #c084fc, #8455b3);
+  transition: width 0.5s ease-in-out;
+}
+
+
+.progress-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+
+
+.page {
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: bottom left; /* 왼쪽 아래를 기준으로 넘김 */
+  transition: transform 0.8s ease-in-out; /* 부드러운 애니메이션 */
+  backface-visibility: hidden; /* 뒷면 숨기기 */
+}
+
+.flipping .page {
+  transform: rotateY(-180deg); /* 앞으로 넘어가는 애니메이션 */
+}
+.front {
+  backface-visibility: hidden; /* 뒷면 숨기기 */
+}
 /*버튼 */
 .answerBox {
   display: flex;
