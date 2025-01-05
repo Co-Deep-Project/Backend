@@ -33,37 +33,38 @@ html, body {
 }
 
 .story-content-wrapper {
-    display: flex; /* story-content와 버튼을 가로로 배치 */
-    flex-direction: row; /* 기본값이므로 생략 가능 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    position: absolute; /* 절대 위치로 배치 */
-    bottom: 40px; /* 화면 맨 아래에서 약간 위로 */
-    left: 50%; /* 수평 중앙 정렬 */
-    transform: translateX(-50%); /* 정확히 가운데로 이동 */
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* 아래쪽 정렬 */
+  align-items: center;
+  position: absolute;
+  bottom: 40px; /* 부엉이와의 간격 확보 */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  z-index: 10; /* 부엉이보다 아래에 위치 */
+}
 
-  .story-content {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    max-width: 80%;
-  }
-  
+.story-content {
+  background: rgba(255, 255, 255, 0.9); /* 반투명 배경 */
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
+  position: relative; /* 내부 요소에 영향을 주지 않음 */
+}
   .owl-image {
     position: absolute; /* 부엉이를 이야기 위에 띄우기 */
+    top: 10%; /* 화면 상단에서 떨어진 위치 (적절히 조정 가능) */
     left: 50%; /* 수평 중앙 정렬 */
-    transform: translateX(-50%); /* 정확한 중앙 위치로 이동 */
-    width: 300px; /* 이미지 크기 약간 줄임 */
+    transform: translateX(-50%); /* 정확히 중앙에 배치 */
+    width: 300px; /* 이미지 크기 */
     height: auto; /* 비율 유지 */
-    z-index: 10; /* 이야기 내용보다 위에 표시 */
+    z-index: 100; /* 가장 위에 표시되도록 설정 */
     pointer-events: none; /* 클릭 방지 */
   }
-  
+
   @media (max-width: 768px) {
     /* 작은 화면에서 부엉이 위치 조정 */
     .owl-image {
@@ -72,30 +73,26 @@ html, body {
     }
   }
   .story-text {
-    font-size: 1.2rem; /* 텍스트 크기 줄이기 */
-    color: #333;
+    font-size: 1.2rem;
     line-height: 1.5;
     word-break: keep-all;
-    font-weight: bold;
+    margin: 0;
   }
   
   .story-next-button {
-    margin-left: 20px; /* story-content와 버튼 사이 간격 */
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 1rem;
-    color: white;
     background: #a56bdf;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 강제 */
-    text-align: center; /* 텍스트 중앙 정렬 */
   }
   
   .story-next-button:hover {
     background: #8455b3;
-    transform: translateY(-3px);
   }
   .story-menu {
     display: flex;
