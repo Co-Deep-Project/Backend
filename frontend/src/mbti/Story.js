@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "./Story.css"; // 추가 CSS
+import "./Story.css";
 import { useNavigate } from "react-router-dom";
 
 const Story = () => {
   const navigate = useNavigate();
-
   const storyLines = [
     "안녕하세요, 저는 트래커스꾸 부엉이에요 부엉",
     "뭐 부엉이는 말을 안한다고요? 부엉 부엉 누가 그래부엉!!",
@@ -18,12 +17,18 @@ const Story = () => {
   ];
 
   const [currentLine, setCurrentLine] = useState(0);
+  const [showBookAnimation, setShowBookAnimation] = useState(false); // 책 애니메이션 상태
 
   const handleNext = () => {
     if (currentLine < storyLines.length - 1) {
       setCurrentLine(currentLine + 1);
     } else {
-      navigate("/question"); // 모든 문장이 끝나면 질문 화면으로 이동
+      // "시작하기" 버튼 클릭 시 책 애니메이션 시작
+      setShowBookAnimation(true);
+      // 애니메이션 종료 후 QuestionScreen으로 이동
+      setTimeout(() => {
+        navigate("/question");
+      }, 2000); // 애니메이션 지속 시간 (2초)
     }
   };
 
@@ -35,50 +40,50 @@ const Story = () => {
 
   const backgroundStyle = {
     backgroundImage: `url('/images/background1.jpg')`,
-    backgroundSize: "cover", // 배경 이미지를 화면에 꽉 차게 설정
-    backgroundPosition: "center", // 중앙 정렬
-    backgroundRepeat: "no-repeat", // 반복 방지
-    width: "100vw", // 화면 너비 100%
-    height: "100vh", // 화면 높이 100%
-};
-
-  
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    width: "100vw",
+    height: "100vh",
+  };
 
   return (
     <div style={backgroundStyle}>
-      <div className = "story-screen">
-      <div className="story-header">
-        <div className="logo-container">
-          <img
-            src="/images/logo.png"
-            alt="PoliTracker Logo"
-            onClick={handleHomeClick}
-            className="logo"
-          />
+      {showBookAnimation ? (
+        // 책 애니메이션
+        <div className="book-animation">
+          <img src="/images/book.png" alt="책 애니메이션" className="book" />
         </div>
-        <div className="menu">
-          <button onClick={handleHomeClick}>Home</button>
-        </div>
-      </div>
-      <div className="story-screen">
-      <img
-            src="/images/character.jpg"
-            alt="부엉이"
-            className="owl-image"
-          />
-        <div className="story-content-wrapper">
-        <div className="story-content">
- 
-          <div className="story-text">
-            <p>{storyLines[currentLine]}</p>
+      ) : (
+        // 기본 화면
+        <div className="story-screen">
+          <div className="story-header">
+            <div className="logo-container">
+              <img
+                src="/images/logo.png"
+                alt="PoliTracker Logo"
+                onClick={handleHomeClick}
+                className="logo"
+              />
+            </div>
+            <div className="menu">
+              <button onClick={handleHomeClick}>Home</button>
+            </div>
+          </div>
+          <img src="/images/character.jpg" alt="부엉이" className="owl-image" />
+          <div className="story-content-wrapper">
+            
+            <div className="story-content">
+              <div className="story-text">
+                <p>{storyLines[currentLine]}</p>
+              </div>
+              <button onClick={handleNext} className="story-next-button">
+                {currentLine < storyLines.length - 1 ? "다음" : "시작하기"}
+              </button>
+            </div>
           </div>
         </div>
-        <button onClick={handleNext} className="story-next-button">
-          {currentLine < storyLines.length - 1 ? "다음" : "시작하기"}
-        </button>
-      </div>
-    </div>
-    </div>
+      )}
     </div>
   );
 };

@@ -56,15 +56,21 @@ html, body {
   
   .owl-image {
     position: absolute; /* 부엉이를 이야기 위에 띄우기 */
-    top: 20%; /* 화면 위에서 30% 아래로 위치 */
     left: 50%; /* 수평 중앙 정렬 */
     transform: translateX(-50%); /* 정확한 중앙 위치로 이동 */
-    width: 300px; /* 이미지 크기 */
+    width: 300px; /* 이미지 크기 약간 줄임 */
     height: auto; /* 비율 유지 */
     z-index: 10; /* 이야기 내용보다 위에 표시 */
     pointer-events: none; /* 클릭 방지 */
   }
   
+  @media (max-width: 768px) {
+    /* 작은 화면에서 부엉이 위치 조정 */
+    .owl-image {
+      top: 10%; /* 더 위로 조정 */
+      width: 200px; /* 이미지 크기 조정 */
+    }
+  }
   .story-text {
     font-size: 1.2rem; /* 텍스트 크기 줄이기 */
     color: #333;
@@ -118,3 +124,33 @@ html, body {
     transition: background-color 0.3s; 
   }
   
+/* 책 애니메이션 */
+.book-animation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: bookExpand 2s ease-in-out forwards; /* 2초 동안 애니메이션 실행 */
+  z-index: 1000; /* 최상단 */
+}
+
+@keyframes bookExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2) rotate(0deg); /* 약간 확대 */
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(10) rotate(0deg); /* 화면을 완전히 채움 */
+    opacity: 0; /* 서서히 사라짐 */
+  }
+}
+
+.book {
+  width: 200px; /* 책 크기 */
+  height: auto;
+}
+

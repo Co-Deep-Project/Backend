@@ -4,19 +4,20 @@ import logo from '../assets/polilogo.png';
 import { useNavigate } from 'react-router-dom';
 
 const shuffleArray = (array) => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
+    }
+    return shuffled;
+  };
+
 
 const QuestionScreen = ({ onComplete }) => {
     const navigate = useNavigate();
     const handleHomeClick = () => {
       if (window.confirm("진행 중인 작업이 저장되지 않습니다. 그래도 나가시겠습니까?")) {
-        navigate('/'); // 사용자가 '확인'을 클릭하면 홈 페이지로 이동
+        navigate("/"); // 사용자가 '확인'을 클릭하면 홈 페이지로 이동
       }
       // 사용자가 '취소'를 클릭하면 현재 페이지에 머무름
     };
@@ -133,166 +134,153 @@ const QuestionScreen = ({ onComplete }) => {
   const totalQuestions = questions.length;
   const [shuffledQuestions] = useState(
     questions.map((q) => ({
-        ...q,
-        answers: shuffleArray(q.answers),
+      ...q,
+      answers: shuffleArray(q.answers),
     }))
-);
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [scores, setScores] = useState({
-        economicProgressive: 0,
-        economicConservative: 0,
-        diplomaticProgressive: 0,
-        diplomaticConservative: 0,
-        socialProgressive: 0,
-        socialConservative: 0
-    });
-    const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
+  );
 
-    const handleNext = () => {
-      if (selectedAnswer === null) {
-          alert("선지를 선택해주세요!");
-          return;
-      }
-  
-      const currentQ = shuffledQuestions[currentQuestion];
-      const selectedScoreType = currentQ.answers[selectedAnswer].scoreType;
-  
-      // 선택값 반영
-      const updatedScores = {
-          ...scores,
-          [selectedScoreType]: scores[selectedScoreType] + 1,
-      };
-  
-      setScores(updatedScores); // 점수 상태 업데이트
-      setAnswers((prevAnswers) => {
-          const updatedAnswers = [...prevAnswers];
-          updatedAnswers[currentQuestion] = selectedAnswer;
-          return updatedAnswers;
-      });
-  
-      if (currentQuestion < totalQuestions - 1) {
-          // 다음 질문으로 이동
-          setCurrentQuestion(currentQuestion + 1);
-      } else {
-        if (window.confirm("테스트가 끝났습니다. 결과를 보러 가시겠습니까?")) {// 마지막 질문: 상태 저장 후 결과로 이동
-          localStorage.setItem("results", JSON.stringify(updatedScores));
-          navigate('/result-transition');
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [scores, setScores] = useState({
+    economicProgressive: 0,
+    economicConservative: 0,
+    diplomaticProgressive: 0,
+    diplomaticConservative: 0,
+    socialProgressive: 0,
+    socialConservative: 0,
+  });
+  const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
+  const [isFlipping, setIsFlipping] = useState(false);
+
+  const handleNext = () => {
+    if (selectedAnswer === null) {
+      alert("선지를 선택해주세요!");
+      return;
+    }
+
+    const currentQ = shuffledQuestions[currentQuestion];
+    const selectedScoreType = currentQ.answers[selectedAnswer].scoreType;
+
+    // 선택값 반영
+    const updatedScores = {
+      ...scores,
+      [selectedScoreType]: scores[selectedScoreType] + 1,
+    };
+
+    setScores(updatedScores); // 점수 상태 업데이트
+    setAnswers((prevAnswers) => {
+      const updatedAnswers = [...prevAnswers];
+      updatedAnswers[currentQuestion] = selectedAnswer;
+      return updatedAnswers;
+    });
+
+    if (currentQuestion < totalQuestions - 1) {
+      setIsFlipping(true); // 애니메이션 시작
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+        setIsFlipping(false); // 애니메이션 종료
+      }, 800); // 애니메이션 지속 시간
+    } else {
+      if (window.confirm("테스트가 끝났습니다. 결과를 보러 가시겠습니까?")) {
+        localStorage.setItem("results", JSON.stringify(updatedScores));
+        navigate("/result-transition");
       }
     }
-      setSelectedAnswer(null); // 선택 초기화
+    setSelectedAnswer(null); // 선택 초기화
   };
-  
-  
-  
-  
+
   const handlePrevious = () => {
     if (currentQuestion > 0) {
-        const prevAnswer = answers[currentQuestion - 1];
-
-        if (prevAnswer !== null) {
-            // 이전 질문의 점수 유형 계산
-            const prevQ = shuffledQuestions[currentQuestion - 1];
-            const prevScoreType = prevQ.answers[prevAnswer].scoreType;
-
-            // 점수 차감
-            setScores((prevScores) => ({
-                ...prevScores,
-                [prevScoreType]: prevScores[prevScoreType] - 1,
-            }));
-        }
-
-        // 이전 질문 선택값 초기화
-        setAnswers((prevAnswers) => {
-            const updatedAnswers = [...prevAnswers];
-            updatedAnswers[currentQuestion - 1] = null;
-            return updatedAnswers;
-        });
-
-        setSelectedAnswer(null);
+      setIsFlipping(true); // 애니메이션 시작
+      setTimeout(() => {
         setCurrentQuestion(currentQuestion - 1);
+        setIsFlipping(false); // 애니메이션 종료
+      }, 800); // 애니메이션 지속 시간
     }
-};
-useEffect(() => {
-  console.log("현재 점수 상태:", scores);
-}, [scores]);
+  };
 
+  const handleAnswerClick = (index) => {
+    setSelectedAnswer(index);
+  };
 
-    const handleAnswerClick = (index) => {
-        setSelectedAnswer(index);
-    };
-
-    const handleGoToResults = () => {
-        console.log("Result before saving:", scores);
-        localStorage.setItem('results', JSON.stringify(scores));
-        onComplete && onComplete(); // onComplete이 함수로 정의되어 있을 때만 호출
-        navigate('/result'); // 결과 페이지로 이동
-    };
-
-    return (
-      <div>
-        <div className="question-header">
-          <div className="logo-container">
-            <img src="/images/logo.png" alt="PoliTracker" onClick={handleHomeClick} className="logo" />
-          </div>
-          <div className="menu">
-            <button onClick={handleHomeClick} className = "home-button">Home</button>
-          </div>
+  return (
+    <div>
+      <div className="question-header">
+        <div className="logo-container">
+          <img
+            src="/images/logo.png"
+            alt="PoliTracker"
+            onClick={handleHomeClick}
+            className="logo"
+          />
         </div>
-    
-        <div className="question-box">
-          <>
+        <div className="menu">
+          <button onClick={handleHomeClick} className="home-button">
+            Home
+          </button>
+        </div>
+      </div>
+
+      <div className={`question-box ${isFlipping ? "flipping" : ""}`}>
+        <div className="page">
+          <div className="front">
             <div className="progress-wrapper">
-              <p className="progress-text">{currentQuestion + 1} / {totalQuestions}</p>
+              <p className="progress-text">
+                {currentQuestion + 1} / {totalQuestions}
+              </p>
               <div className="status-bar">
                 <div
                   className="status-bar-fill"
-                  style={{ width: `${((currentQuestion + 1) / totalQuestions) * 100}%` }}
+                  style={{
+                    width: `${((currentQuestion + 1) / totalQuestions) * 100}%`,
+                  }}
                 ></div>
               </div>
             </div>
             <div className="qBox">
-              <h2>{questions[currentQuestion].question}</h2>
+              <h2>{shuffledQuestions[currentQuestion].question}</h2>
             </div>
             <div className="answerBox">
-                {shuffledQuestions[currentQuestion].answers.map((answer, index) => (
-                    <button
-                        key={index}
-                        className={`answer-button ${selectedAnswer === index ? "selected" : ""}`}
-                        onClick={() => handleAnswerClick(index)}
-                    >
-                        {answer.text}
-                    </button>
-                ))}
+              {shuffledQuestions[currentQuestion].answers.map((answer, index) => (
+                <button
+                  key={index}
+                  className={`answer-button ${
+                    selectedAnswer === index ? "selected" : ""
+                  }`}
+                  onClick={() => handleAnswerClick(index)}
+                >
+                  {answer.text}
+                </button>
+              ))}
             </div>
-
-
-            <div className="button-container">
-              <button
-                className="prev-button"
-                onClick={handlePrevious}
-                disabled={currentQuestion === 0} // 1번에서는 항상 비활성화
-              >
-                이전
-              </button>
-              <button className="next-button" onClick={handleNext}>
-                다음
-              </button>
-            </div>
-          </>
+          </div>
         </div>
-    
-        <footer className="footer">
-          <p>
-            성균관대학교 트래커스꾸
-            <br />
-            서울특별시 종로구 성균관로 25-2
-            <br />
-            trackerskku@g.skku.edu
-          </p>
-        </footer>
       </div>
-    );
+
+      <div className="button-container">
+        <button
+          className="prev-button"
+          onClick={handlePrevious}
+          disabled={currentQuestion === 0}
+        >
+          이전
+        </button>
+        <button className="next-button" onClick={handleNext}>
+          다음
+        </button>
+      </div>
+
+      <footer className="footer">
+        <p>
+          성균관대학교 트래커스꾸
+          <br />
+          서울특별시 종로구 성균관로 25-2
+          <br />
+          trackerskku@g.skku.edu
+        </p>
+      </footer>
+    </div>
+  );
 };
 
 export default QuestionScreen;
