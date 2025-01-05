@@ -3,7 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import './RightPanel.css';
 
 const RightPanel = () => {
-  const [activeGroup, setActiveGroup] = useState(''); // 드롭다운 선택 상태 추가
+  const [activeGroup, setActiveGroup] = useState('인류문화의 본');
+
 
   // 데이터 설정: 이행률 범위별 정책 개수
 const humanityCultureProgress = [
@@ -58,12 +59,11 @@ const harmonyInclusionProgress = [
     <div className="right-panel">
       <h3>정책 이행률 평가</h3>
       <select onChange={handleSelectChange} value={activeGroup} className="dropdown">
-        <option value="">선택하세요</option>
-        <option value="인류문화의 본">인류문화의 본</option>
-        <option value="세계문화의 본">세계문화의 본</option>
-        <option value="미래혁신의 본">미래혁신의 본</option>
-        <option value="화합포용의 본">화합포용의 본</option>
-      </select>
+  <option value="인류문화의 본">인류문화의 본</option>
+  <option value="세계문화의 본">세계문화의 본</option>
+  <option value="미래혁신의 본">미래혁신의 본</option>
+  <option value="화합포용의 본">화합포용의 본</option>
+</select>
 
       {/* 선택된 그룹에 따라 히스토그램 표시 */}
       {activeGroup && (
