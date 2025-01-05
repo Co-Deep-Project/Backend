@@ -3,12 +3,14 @@ import sys
 import requests
 import openai
 import html
-import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from openai import Client
+from fuzzywuzzy import fuzz
 from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+
 
 
 load_dotenv()
@@ -19,9 +21,9 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://backend-three-theta-46.vercel.app/"],  
+    allow_origins=["https://backend-three-theta-46.vercel.app", "http://localhost:3000"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -39,13 +41,10 @@ openai.api_key = OPENAI_API_KEY
 # 글로벌 컨텍스트
 session_context = {}
 
-def search_news(query, display=4, sort='sim'):
+def search_news(query, display=50, sort='sim'):
     """
-    네이버 뉴스 검색 API를 호출하여 뉴스 데이터를 검색합니다.
-    :param query: 검색 키워드
-    :param display: 검색 결과 수
-    :param sort: 정렬 기준 ('sim' 또는 'date')
-    :return: 뉴스 검색 결과 JSON
+    네이버 뉴스 검색 API를 호출하여 뉴스 데이터를 검색하고
+    제목 유사도를 비교하여 중복된 뉴스를 필터링합니다.
     """
     url = "https://openapi.naver.com/v1/search/news.json"
     headers = {
@@ -53,12 +52,35 @@ def search_news(query, display=4, sort='sim'):
         "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
     }
     params = {"query": query, "display": display, "sort": sort}
-    response = requests.get(url, headers=headers, params=params)
-    
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return {"error": response.status_code, "message": response.text}
+
+    try:
+        response = requests.get(url, headers=headers, params=params, timeout=10)
+        response.raise_for_status()
+
+        news_items = response.json().get("items", [])
+        
+        # 키워드 필터링: 제목 또는 내용에 키워드 포함 여부 확인
+        filtered_news = [
+            item for item in news_items
+            if query.lower() in item["title"].lower() or query.lower() in item.get("description", "").lower()
+        ]
+
+        # 유사도 비교를 통해 중복 뉴스 제거
+        unique_news = []
+        for item in filtered_news:
+            title = html.unescape(item["title"]).replace("<b>", "").replace("</b>", "")
+            if not any(fuzz.ratio(title, existing["headline"]) > 30 for existing in unique_news):
+                unique_news.append({
+                    "headline": title,
+                    "url": item["originallink"] or item["link"]
+                })
+
+        return unique_news[:4]  # 최대 4개 반환
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error during news search: {e}")
+        return []
+
 
 def format_news_results(news_results):
     """
@@ -120,6 +142,24 @@ async def handle_query(user_query):
 
     else:
         return generate_response(user_query)
+    
+
+
+
+@app.get("/")
+def root():
+    return {"message": "Hello from chatbot server!"}
+
+@app.options("/{rest_of_path:path}")
+async def preflight_handler():
+    return JSONResponse(status_code=200)
+
+@app.options("/search_news")
+async def options_search_news():
+    """
+    OPTIONS preflight 요청을 처리하는 엔드포인트
+    """
+    return JSONResponse(content={}, status_code=200)
 
 
 @app.post("/search_news")
@@ -127,17 +167,17 @@ async def search_news_endpoint(request: QueryRequest):
     keyword = request.query.replace("뉴스", "").strip()
     news_results = search_news(keyword)
     
-    if "error" in news_results:
-        raise HTTPException(status_code=500, detail=news_results["message"])
+    if not news_results:
+        raise HTTPException(status_code=404, detail="No news found")
     
-    formatted_results = []
-    for item in news_results.get("items", []):
-        formatted_results.append({
-            "title": html.unescape(item["title"]).replace("<b>", "").replace("</b>", ""),
-            "description": html.unescape(item["description"]).replace("<b>", "").replace("</b>", ""),
-            "link": item["originallink"]
-        })
-    return {"response": formatted_results}
+    # formatted_results = []
+    # for item in news_results.get("items", []):
+    #     formatted_results.append({
+    #         "title": html.unescape(item["title"]).replace("<b>", "").replace("</b>", ""),
+    #         "description": html.unescape(item["description"]).replace("<b>", "").replace("</b>", ""),
+    #         "link": item["originallink"]
+    #     })
+    return {"response": news_results}
 
 @app.post("/ask_gpt")
 async def ask_gpt_endpoint(request: QueryRequest):
