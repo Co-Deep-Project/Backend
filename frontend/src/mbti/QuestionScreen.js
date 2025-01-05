@@ -17,7 +17,7 @@ const shuffleArray = (array) => {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     width: "100vw",
-    height: "100vh",
+    height: "70vh",
   };
 
 const QuestionScreen = ({ onComplete }) => {
@@ -262,7 +262,7 @@ const QuestionScreen = ({ onComplete }) => {
             </div>
           </div>
         </div>
-      </div>
+      
 
       <div className="button-container">
         <button
@@ -276,7 +276,7 @@ const QuestionScreen = ({ onComplete }) => {
           다음
         </button>
       </div>
-
+      </div>
       <footer className="footer">
         <p>
           성균관대학교 트래커스꾸
@@ -287,6 +287,7 @@ const QuestionScreen = ({ onComplete }) => {
         </p>
       </footer>
     </div>
+   
   );
 };
 
