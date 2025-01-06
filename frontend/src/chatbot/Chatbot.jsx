@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Chatbot.css";
+import { useNavigate } from 'react-router-dom';
 
 const Chatbot = () => {
   // 챗봇 초기 안내 멘트
+    const navigate = useNavigate();
   const initialMessages = [
     { 
       sender: "bot", 
@@ -115,6 +117,20 @@ const Chatbot = () => {
   return (
     <div className="chatbot-container">
       {/* 뉴스 섹션 */}
+      <header id="tracking-header">
+        <img
+          id="logo"
+          src="/images/logo.png"
+          alt="PoliTracker"
+          onClick={() => navigate("/")}
+        />
+        <div id="button-container">
+          <button id="home-button" onClick={() => navigate("/")}>
+            Home
+          </button>
+        </div>
+      </header>
+
       <div className="news-container">
       <div className="news-header-container">
           <h1 className="news-header">최신 뉴스</h1>

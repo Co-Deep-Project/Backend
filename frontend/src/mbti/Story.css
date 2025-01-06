@@ -53,17 +53,20 @@ html, body {
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
   position: relative; /* 내부 요소에 영향을 주지 않음 */
+  width: 700px;
 }
-  .owl-image {
-    position: absolute; /* 부엉이를 이야기 위에 띄우기 */
-    top: 10%; /* 화면 상단에서 떨어진 위치 (적절히 조정 가능) */
-    left: 50%; /* 수평 중앙 정렬 */
-    transform: translateX(-50%); /* 정확히 중앙에 배치 */
-    width: 300px; /* 이미지 크기 */
-    height: auto; /* 비율 유지 */
-    z-index: 100; /* 가장 위에 표시되도록 설정 */
-    pointer-events: none; /* 클릭 방지 */
-  }
+
+.owl-image {
+  position: absolute; /* 부엉이를 이야기 위에 띄우기 */
+  top: 10%; /* 화면 상단에서 떨어진 위치 (적절히 조정 가능) */
+  left: 50%; /* 수평 중앙 정렬 */
+  transform: translateX(-50%); /* 정확히 중앙에 배치 */
+  width: 300px; /* 이미지 크기 */
+  height: auto; /* 비율 유지 */
+  z-index: 100; /* 가장 위에 표시되도록 설정 */
+  pointer-events: none; /* 클릭 방지 */
+  margin-top: 65px;
+}
 
   @media (max-width: 768px) {
     /* 작은 화면에서 부엉이 위치 조정 */

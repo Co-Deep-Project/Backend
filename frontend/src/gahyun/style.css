@@ -1,4 +1,8 @@
 /* 전체 배경 */
+.body {
+  overflow-x: hidden;
+}
+
 .desktop {
   position: relative;
   width: 100vw;

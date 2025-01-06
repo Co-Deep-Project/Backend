@@ -13,6 +13,11 @@
   margin: 0 auto; /* 중앙 정렬 */
   margin-top: 20px;
 }
+.ku-card-profile {
+  margin-top: 100px;
+  margin-right: 50px;
+}
+
 
 .profile-container {
   width: 100%;

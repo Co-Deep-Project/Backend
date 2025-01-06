@@ -10,7 +10,3 @@
   position: relative;
   overflow: auto;
 }
-
-  .body {
-    overflow-y: auto;
-  }
