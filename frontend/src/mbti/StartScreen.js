@@ -25,7 +25,7 @@ const StartScreen = () => {
           <img src="/images/logo.png" alt="PoliTracker" onClick = {handleHomeClick} className="logo" />
       </div>
       <div className="menu">
-          <button onClick={handleHomeClick}>Home</button>
+          <button id="home-button" onClick={handleHomeClick}>Home</button>
       </div>
       </div>
       <div className="start-screen">

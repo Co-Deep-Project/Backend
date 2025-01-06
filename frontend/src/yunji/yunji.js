@@ -35,7 +35,7 @@ const Yunji = () => {
 
   return (
     <div className="app">
-            <header id="tracking-header">
+      <header id="tracking-header">
         <img
           id="logo"
           src="/images/logo.png"
