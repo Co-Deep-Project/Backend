@@ -32,6 +32,8 @@
     cursor: pointer;
     position: fixed;
     right: 3vw;
+    font-size: 14px; 
+    transition: background-color 0.3s; 
 }
 
 .textbox {
