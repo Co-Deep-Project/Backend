@@ -75,8 +75,8 @@ const QuestionScreen = ({ onComplete }) => {
       {
           question: "7. 지도자인 당신 주위에서 군사력이 강한 호랑이 나라와 군사 동맹을 맺어야 한다는 의견이 많아요. 이에 대해 당신이라면 어떻게 하실 것인가요?",
           answers: [
-              { text: "동맹을 유지하되, 부엉이 마을이 불리한 조건을 받지 않도록 신중히 접근해야 해요.", scoreType: "diplomaticProgressive" },
-              { text: "호랑이 마을과의 동맹을 강화하고, 협력을 통해 나라를 더 안전하게 만들어야 해요.", scoreType: "diplomaticConservative" },
+              { text: "호랑이 마을과의 동맹을 강화하고, 협력을 통해 나라를 더 안전하게 만들어야 해요.", scoreType: "diplomaticProgressive" },
+              { text: "동맹을 유지하되, 부엉이 마을이 불리한 조건을 받지 않도록 신중히 접근해야 해요.", scoreType: "diplomaticConservative" },
           ]
       },
       {
