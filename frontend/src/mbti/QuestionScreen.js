@@ -183,16 +183,18 @@ const QuestionScreen = ({ onComplete }) => {
       return updatedAnswers;
     });
 
-    setTimeout(() => {
-      if (currentQuestion < totalQuestions - 1) {
+    if (currentQuestion < totalQuestions - 1) {
+      setAnimationState("flipping-out");
+      setTimeout(() => {
         setCurrentQuestion(currentQuestion + 1);
-        setAnimationState("flipping-in");
-      } else {
-        navigate("/result-transition");
-      }
-      setSelectedAnswer(null);
-    }, 800); // 애니메이션 지속 시간
+        setAnimationState("");  // 애니메이션 상태 초기화
+      }, 800); // 애니메이션 지속 시간과 일치
+    } else {
+      navigate("/result-transition"); // 모든 질문 완료
+    }
+    setSelectedAnswer(null);
   };
+
 
   const handlePrevious = () => {
     if (currentQuestion > 0) {
@@ -226,7 +228,7 @@ const QuestionScreen = ({ onComplete }) => {
         </div>
       </div>
 
-      <div  style={backgroundStyle} className={`question-box ${animationState}`} onAnimationEnd={() => setAnimationState("")}>
+      <div  style={backgroundStyle} className={`question-box ${animationState}`}>
         <div className="page">
           <div className="front">
             <div className="progress-wrapper">
