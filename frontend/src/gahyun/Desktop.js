@@ -49,15 +49,14 @@ const Desktop = () => {
     <div className="desktop">
       {/* header section */}
       <div className="landing-page">
-        <div className="navigation-bar">
-          <div className="POLITRACKER">
-            <img
-              src={logo}
-              alt="POLITRACKER 로고"
-              style={{ width: "160px", height: "auto" }}
-            />
-          </div>
-        </div>
+      <header id="tracking-header">
+          <img
+          id="logo"
+          src="/images/logo.png"
+          alt="PoliTracker"
+          onClick={() => navigate("/")}
+        />
+        </header>
 
         <header className="desktop-header">
           <p id="animated-text" className="p"></p> {/* 애니메이션 텍스트 위치 */}

@@ -11,12 +11,16 @@
   box-sizing: border-box;
   overflow-y: hidden; /* 기본적으로 스크롤 숨김 */
   margin-top: 45px;
+  margin-top: 70px;
+  margin-right: 50px;
+  margin-left: 10px;
 
 }
 
 .right-panel h3{
   font-size: 1.7rem;
   margin-bottom: 20px;
+
 }
 .panel-title {
   font-size: 1.2em;

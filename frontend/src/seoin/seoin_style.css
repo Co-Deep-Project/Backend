@@ -112,6 +112,9 @@ a {
 #logo {
   height: 50px;
   cursor: pointer;
+  position: fixed;
+  left: 3vw;
+  top: 20px;
 }
 
 #button-container {
