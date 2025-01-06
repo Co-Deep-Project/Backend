@@ -159,11 +159,13 @@ const QuestionScreen = ({ onComplete }) => {
   const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
   const [isFlipping, setIsFlipping] = useState(false);
 
+  const [animationState, setAnimationState] = useState("");
   const handleNext = () => {
     if (selectedAnswer === null) {
       alert("선지를 선택해주세요!");
       return;
     }
+    setAnimationState("flipping-out"); // 애니메이션 상태 설정
 
     const currentQ = shuffledQuestions[currentQuestion];
     const selectedScoreType = currentQ.answers[selectedAnswer].scoreType;
@@ -181,19 +183,15 @@ const QuestionScreen = ({ onComplete }) => {
       return updatedAnswers;
     });
 
-    if (currentQuestion < totalQuestions - 1) {
-      setIsFlipping(true); // 애니메이션 시작
-      setTimeout(() => {
+    setTimeout(() => {
+      if (currentQuestion < totalQuestions - 1) {
         setCurrentQuestion(currentQuestion + 1);
-        setIsFlipping(false); // 애니메이션 종료
-      }, 800); // 애니메이션 지속 시간
-    } else {
-      if (window.confirm("테스트가 끝났습니다. 결과를 보러 가시겠습니까?")) {
-        localStorage.setItem("results", JSON.stringify(updatedScores));
+        setAnimationState("flipping-in");
+      } else {
         navigate("/result-transition");
       }
-    }
-    setSelectedAnswer(null); // 선택 초기화
+      setSelectedAnswer(null);
+    }, 800); // 애니메이션 지속 시간
   };
 
   const handlePrevious = () => {
@@ -228,7 +226,7 @@ const QuestionScreen = ({ onComplete }) => {
         </div>
       </div>
 
-      <div  style={backgroundStyle} className={`question-box ${isFlipping ? "flipping" : ""}`}>
+      <div  style={backgroundStyle} className={`question-box ${animationState}`} onAnimationEnd={() => setAnimationState("")}>
         <div className="page">
           <div className="front">
             <div className="progress-wrapper">

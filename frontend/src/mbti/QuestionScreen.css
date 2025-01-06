@@ -150,14 +150,28 @@
   width: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transform-origin: bottom left; /* 왼쪽 아래를 기준으로 넘김 */
-  transition: transform 0.8s ease-in-out; /* 부드러운 애니메이션 */
-  backface-visibility: hidden; /* 뒷면 숨기기 */
+  transform-origin: left center;
 }
 
-.flipping .page {
-  transform: rotateY(-180deg); /* 앞으로 넘어가는 애니메이션 */
+/* 현재 페이지가 앞으로 나오듯 날아가는 효과 */
+.flipping-out .page {
+  animation: flipOut 0.8s forwards;
 }
+
+@keyframes flipOut {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(-180deg);
+    opacity: 0;
+  }
+}
+
+
+
+
 .front {
   backface-visibility: hidden; /* 뒷면 숨기기 */
 }
