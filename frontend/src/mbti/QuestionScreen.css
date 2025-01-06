@@ -29,7 +29,7 @@
 
 .question-box {
   margin-top: 20px !important;
-  max-width: 600px;
+  max-width: 800px;
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -39,7 +39,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* 진행률 바, 질문, 버튼을 균등하게 분배 */
   padding: 5vh 2vw; /* 뷰포트 기반의 패딩 추가 */
   box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
@@ -74,18 +73,19 @@
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   width: 100%; /* 너비를 화면에 맞춤 */
-  max-width: 600px; /* 최대 너비 제한 */
+  max-width: 800px; /* 최대 너비 제한 */
   box-sizing: border-box;
   margin: 2vh auto; /* 위아래 간격 추가 */
+  max-height: 50vh; /* 질문 박스 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+
 }
 
 .qBox h2 {
-  font-size: clamp(1.2rem, 2vw, 1.5rem); /* 화면 크기에 따라 조정 */
-  line-height: 1.6;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: black;
+  line-height: 1.8; /* 줄 간격 추가 */
+  font-size: clamp(1.2rem, 2vw, 1.5rem); /* 유동적인 크기 */
   word-break: keep-all;
+  text-align: left; /* 왼쪽 정렬로 가독성 증가 */
 }
 
 
@@ -178,6 +178,9 @@
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
   word-break: keep-all;
+  font-size: clamp(1rem, 1.5vw, 1.2rem); /* 유동적 크기 */
+  padding: 10px 20px;
+  margin: 10px 0; /* 위아래 간격 추가 */
 }
 
 .answer-button:hover {
@@ -197,12 +200,13 @@
 
 .button-container {
   display: flex;
-  justify-content: space-between; /* 버튼 좌우로 배치 */
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto 0 auto; /* 위쪽에 20px의 간격 추가 */
-  gap: 15px; /* 버튼 사이의 간격 */
-  padding-top: 15px; /* 버튼과 컨텐츠 사이 간격 */
+  justify-content: space-between; /* 좌우 정렬 */
+  gap: 15px; /* 버튼 간의 간격 */
+  margin-top: 20px; /* answerBox와의 간격 */
+  width: 100%; /* 부모 요소의 너비에 맞춤 */
+  max-width: 600px; /* 버튼이 너무 길어지지 않도록 제한 */
+  align-self: center; /* 가운데 정렬 */
+  position: relative; /* answerBox 바로 아래에 위치 */
 }
 
 
@@ -215,6 +219,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 30px;
 }
 
 .logo-container {
@@ -242,6 +247,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  margin-top: 30px;
 }
 .prev-button:hover {
   background-color: #9c84c6;
