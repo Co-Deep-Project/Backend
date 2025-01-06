@@ -147,14 +147,19 @@ console.log("Character Description:", description);
 
   return (
     <div>
-    <div className="header">
-    <div className="logo-container">
-      <img src={logo} alt="PoliTracker Logo" onClick={handleHomeClick} className = "poliLogo" />
-    </div>
-    <div className="menu">
-      <button onClick={handleHomeClick}>Home</button>
-    </div>
-  </div>
+    <header id="tracking-header">
+        <img
+          id="logo"
+          src="/images/logo.png"
+          alt="PoliTracker"
+          onClick={() => navigate("/")}
+        />
+        <div id="button-container">
+          <button id="home-button" onClick={() => navigate("/")}>
+            Home
+          </button>
+        </div>
+      </header>
   
   <div className="result-screen">
     <h1>당신의 역사적 인물은 {character}입니다</h1>

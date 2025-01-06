@@ -222,7 +222,7 @@ const QuestionScreen = ({ onComplete }) => {
           />
         </div>
         <div className="menu">
-          <button onClick={handleHomeClick} className="home-button">
+          <button id="home-button" onClick={handleHomeClick}>
             Home
           </button>
         </div>

@@ -68,7 +68,7 @@ const Story = () => {
               />
             </div>
             <div className="menu">
-              <button onClick={handleHomeClick}>Home</button>
+              <button id="home-button" onClick={handleHomeClick}>Home</button>
             </div>
           </div>
           <img src="/images/character.jpg" alt="부엉이" className="owl-image" />

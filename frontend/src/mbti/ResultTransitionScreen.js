@@ -20,6 +20,19 @@ const ResultTransitionScreen = () => {
 
   return (
     <div style={backgroundStyle} className = "total">
+      <header id="tracking-header">
+        <img
+          id="logo"
+          src="/images/logo.png"
+          alt="PoliTracker"
+          onClick={() => navigate("/")}
+        />
+        <div id="button-container">
+          <button id="home-button" onClick={() => navigate("/")}>
+            Home
+          </button>
+        </div>
+      </header>
       {/* 콘텐츠 박스 */}
       <div className="result-transition-screen">
         <div className="content-box">
