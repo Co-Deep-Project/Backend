@@ -6,3 +6,70 @@
     width: 100%;
     font-family: Arial, sans-serif;
 }
+
+.constituency-name {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+.politician-profile {
+    background-color: #fcfcfc;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: auto;
+    width: 400px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* 마우스 포인터 변경 */
+    transition: transform 0.2s ease;
+}
+
+.politician-profile:hover {
+    transform: scale(1.02); /* 호버 시 살짝 확대 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+.politician-profile h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.politician-profile p {
+    margin: 5px 0;
+}
+
+
+.politician-profile ul {
+    list-style: none; /* 기본 리스트 스타일 제거 */
+    padding-left: 0; /* 왼쪽 여백 제거 */
+    padding-left: 20px;
+}
+
+
+.politician-profile li {
+    margin-bottom: 5px;
+}
+
+
+/* Modal Box 스타일 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
