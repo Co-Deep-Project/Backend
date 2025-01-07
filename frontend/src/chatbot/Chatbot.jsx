@@ -19,8 +19,22 @@ const Chatbot = () => {
   const [inputValue, setInputValue] = useState(""); // 채팅 입력 상태
   const [news, setNews] = useState([]); // 뉴스 데이터 상태
   const [selectedDistrict, setSelectedDistrict] = useState("종로구");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNewsUrl, setSelectedNewsUrl] = useState("");
 
   const toggleChatbot = () => setIsOpen(!isOpen); // 챗봇 열기/닫기
+
+  // 모달 열기
+  const openModal = (url) => {
+    setSelectedNewsUrl(url);
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    setSelectedNewsUrl("");
+    setIsModalOpen(false);
+  };
 
   const fetchNews = async (district) => {
     try {
@@ -130,17 +144,15 @@ const Chatbot = () => {
           </button>
         </div>
       </header>
-
+  
       <div className="news-container">
-      <div className="news-header-container">
+        <div className="news-header-container">
           <h1 className="news-header">최신 뉴스</h1>
-          {/* 드롭다운 메뉴 */}
           <select
             value={selectedDistrict}
-            onChange={(e) => setSelectedDistrict(e.target.value)} // 선택된 구 업데이트
+            onChange={(e) => setSelectedDistrict(e.target.value)}
             className="district-dropdown"
           >
-            {/* 서울 25개 구 옵션 */}
             {[
               "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구",
               "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
@@ -153,32 +165,35 @@ const Chatbot = () => {
             ))}
           </select>
         </div>
-  <div className="news-cards">
-    {news.map((item) => (
-      <div key={item.id} className="news-card">
-        <h2 className="news-title">{item.title}</h2>
-        <p className="news-description">{item.description}</p>
-        <a 
-          href={item.link} 
-          className="news-button" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          더 보기
-        </a>
+        <div className="news-cards">
+          {news.map((item) => (
+            <div key={item.id} className="news-card">
+              <h2 className="news-title">{item.title}</h2>
+              <p className="news-description">{item.description}</p>
+              <button className="news-button" onClick={() => openModal(item.link)}>
+                더 보기
+              </button>
+            </div>
+          ))}
+        </div>
+        {isModalOpen && (
+          <div className="modal-overlay" onClick={closeModal}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close-button" onClick={closeModal}>
+              </button>
+              <iframe src={selectedNewsUrl} className="modal-iframe" title="뉴스 보기"></iframe>
+            </div>
+          </div>
+        )}
       </div>
-    ))}
-  </div>
-</div>
-
-
+  
       {/* 챗봇 버튼 */}
       {!isOpen && (
         <div className="chatbot-button" onClick={toggleChatbot}>
           💬
         </div>
       )}
-
+  
       {/* 챗봇 창 */}
       {isOpen && (
         <div className="chatbot-window">
@@ -190,15 +205,14 @@ const Chatbot = () => {
           </div>
           <div className="chatbot-messages">
             {messages.map((message, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`chatbot-message ${message.sender === "user" ? "user" : "bot"}`}
               >
                 {message.newsItems ? (
-                  // 뉴스 데이터가 있을 경우 박스 형태로 렌더링
                   <div className="chatbot-news-cards">
                     {message.newsItems.map((news, i) => (
-                      <div key={i} className="chatbot-news-card">
+                      <div key={news.link} className="chatbot-news-card">
                         <h2 className="chatbot-news-title">{news.title}</h2>
                         <a
                           href={news.link}
@@ -212,7 +226,6 @@ const Chatbot = () => {
                     ))}
                   </div>
                 ) : (
-                  // 일반 메시지 렌더링
                   <div>{message.text}</div>
                 )}
               </div>
@@ -226,9 +239,7 @@ const Chatbot = () => {
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.repeat) {
                   e.preventDefault();
-                  const currentInput = inputValue; // 현재 입력 값 저장
-                  setInputValue(""); // 입력 창 초기화
-                  handleSend(currentInput); // 현재 입력 값을 handleSend로 전달
+                  handleSend();
                 }
               }}
               placeholder="메시지를 입력하세요..."
@@ -242,6 +253,6 @@ const Chatbot = () => {
       )}
     </div>
   );
-};
+}
 
 export default Chatbot;
