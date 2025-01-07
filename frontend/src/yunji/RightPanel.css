@@ -70,11 +70,20 @@
 
 /* 작은 화면에서는 스크롤이 생기도록 */
 @media (max-width: 767px) {
+  .recharts-responsive-container{
+    margin-right: 40px;
+  }
   .right-panel {
     height: auto; /* 모바일에서 높이 자동 조정 */
     overflow-y: auto; /* 스크롤 활성화 */
+    padding: 10px;
+    margin: 0;
+    align-items: center;
   }
 
+  .dropdown {
+    margin-bottom: 5px; /* Reduce margin to compact layout */
+  }
   .chart-container {
     height: auto; /* 차트 높이를 자동으로 조정 */
     margin-top: 10px; /* 차트 상단 여백 추가 */

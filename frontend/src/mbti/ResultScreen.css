@@ -153,6 +153,47 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 이미지 그림자 */
   margin-bottom: 20px;
 }
+/* 모바일에서 이미지와 설명 컨테이너 겹침 방지 */
+.result-image, .description-container, .result-description {
+  width: 100%; /* 이미지와 설명의 너비를 화면 너비에 맞춤 */
+  max-width: 600px; /* 최대 너비 설정 */
+  margin: 20px auto; /* 상하 마진 추가 및 자동으로 중앙 정렬 */
+}
+
+.result-header h1 {
+  font-size: 1.5rem; /* 모바일에서의 폰트 사이즈 조정 */
+}
+
+.description-container, .result-description {
+  padding: 15px; /* 모바일에서 내부 패딩 줄임 */
+  font-size: 0.9rem; /* 모바일에서 글자 크기 줄임 */
+  line-height: 1.4; /* 줄 간격 조정 */
+}
+
+.restart-button, .finishBtn {
+  padding: 12px 24px; /* 버튼 패딩 조정 */
+  font-size: 1rem; /* 버튼 글자 크기 조정 */
+}
+
+.footer p {
+  font-size: 0.8rem; /* 푸터 폰트 크기 조정 */
+}
+
+@media (max-width: 767px) {
+  .result-header, .result-image, .description-container, .result-description, .restart-button, .finishBtn {
+    max-width: 90%; /* 모든 주요 컨테이너를 화면의 90% 너비로 조정 */
+  }
+
+  .result-header h1 {
+    font-size: 1.2rem; /* 더 작은 화면에서 헤더 폰트 크기 조정 */
+  }
+
+  .description-container, .result-description {
+    padding: 10px; /* 내부 패딩 더 줄임 */
+    font-size: 0.8rem; /* 글자 크기 더 줄임 */
+  }
+}
+
 @media (max-width: 767px) {
   .result-header h1 {
     font-size: 1.5rem; /* 모바일에서 더 작은 폰트 크기 */

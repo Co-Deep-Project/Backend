@@ -60,7 +60,7 @@ html, body {
 
 .owl-image {
   position: absolute; /* 부엉이를 이야기 위에 띄우기 */
-  top: 10%; /* 화면 상단에서 떨어진 위치 (적절히 조정 가능) */
+  top: 2%; /* 화면 상단에서 떨어진 위치 (적절히 조정 가능) */
   left: 50%; /* 수평 중앙 정렬 */
   transform: translateX(-50%); /* 정확히 중앙에 배치 */
   width: 300px; /* 이미지 크기 */

@@ -1,4 +1,4 @@
-.card-profile {
+.ku-card-profile {
   width: 700px;
   padding: 20px;
   padding-top: 50px;
@@ -76,18 +76,22 @@
 }
 
   @media (max-width: 767px) {
-    .card-profile {
-      max-width: 90%;
-      padding: 10px;
+    .ku-card-profile {
+      max-width: 100%;  /* Adjusts the maximum width to full available width */
+      width: 100%;      /* Ensures the element uses full width */
+      padding: 10px;    /* Adjust padding to ensure content does not touch the screen edges */
+      margin: 10px 0;   /* Optional: Adjusts margin to give some space around the card */
+      box-sizing: border-box; 
+      margin-top: 70px;
     }
   
     .profile-details {
-      font-size: 14px; /* 폰트 크기 축소 */
-      line-height: 1.2; /* 줄 간격 축소 */
+      font-size: 14px;
+      line-height: 1.4;
     }
   
     .profile-image {
-      width: 120px; /* 이미지 크기 축소 */
+      width: 120px;
       height: 160px;
     }
   
