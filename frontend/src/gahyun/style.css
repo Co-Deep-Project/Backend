@@ -253,5 +253,32 @@
     width: 100%; /* 'Learn more' 링크 너비를 카드 너비에 맞게 조정 */
     justify-content: center; /* 버튼을 카드 중앙에 위치 */
   }
+  .arrow {
+    width: 24px;  /* 화살표 크기를 통일 */
+    height: 24px;
+  }
+  .label-5, .label-6 {
+    font-size: 16px;  /* 텍스트 크기 통일 */
+    color: #333;  /* 색상 통일 */
+    font-weight: bold;
+  }
+  .label-4{
+    color:white;
+    font-size: 16px;
+    font-weight:bold;
+  }
+    .element-trackerskku-g {
+      position: fixed; /* 위치를 고정 */
+      bottom: 0; /* 화면의 가장 아래 */
+      left: 0; /* 왼쪽 정렬 */
+      right: 0; /* 오른쪽 정렬 */
+      width: 100%; /* 전체 너비 사용 */
+      color: #333; /* 텍스트 색상 설정, 필요에 따라 조정 */
+      text-align: center; /* 텍스트 중앙 정렬 */
+      padding: 10px 0; /* 상하 패딩 설정 */
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* 상단에 그림자 효과 추가 */
+      z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index 설정 */
+    }
+  
 }
 

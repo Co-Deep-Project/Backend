@@ -87,7 +87,7 @@ const Desktop = () => {
             </div>
             <br></br>
             <div className="link" onClick={navigateToMbti} style={{ cursor: "pointer" }}>
-              <div className="icon">
+              <div className="arrow-wrapper">
                 <img className="arrow" src={arrow1} alt="Arrow" />
               </div>
               <div className="label-4">Learn more</div>
@@ -109,7 +109,7 @@ const Desktop = () => {
               <br></br>
               <div className="link" onClick={navigateToSelectRegion} style={{ cursor: "pointer" }}>
                 <div className="arrow-wrapper">
-                  <img className="arrow" src={arrow1} alt="Arrow 1" />
+                  <img className="arrow" src={arrow1} alt="Arrow" />
                 </div>
                 <div className="label-5">Learn more</div>
               </div>
@@ -138,7 +138,7 @@ const Desktop = () => {
       </div>
 
       <br />
-      <p className="element-trackerskku-g">
+      <p className="footer">
         성균관대학교 트래커스꾸
         <br />
         서울특별시 종로구 성균관로 25-2
