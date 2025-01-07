@@ -164,7 +164,7 @@
   font-size: 1.5rem; /* 모바일에서의 폰트 사이즈 조정 */
 }
 .result-title {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 .description-container, .result-description {
   padding: 15px; /* 모바일에서 내부 패딩 줄임 */
