@@ -114,6 +114,7 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 40px;
   justify-content: space-between;
   padding: 2vh 2vw; /* 카드 내부 패딩도 상대적인 단위로 설정 */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
@@ -160,8 +161,8 @@
   align-items: center; /* 세로 정렬을 중앙으로 맞춤 */
   gap: 20px; /* 아이콘과 텍스트 사이의 간격 */
   flex-direction: row;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 3px;
+  margin-bottom: 30px;
   margin-left: 3px;
 }
 
@@ -171,22 +172,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  border-radius: 50%;
-}
 
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.arrow {
+  margin-bottom: 20px;
+}
 .label-4 {
   color: #ffffff;
   font-size: clamp(13px, 1.5vw, 16px);
   font-weight: bold;
   transition: color 0.2s ease; /* 부드러운 색상 전환 효과 */
+  margin-bottom: 40px;
 }
+
 
 .label-5 {
   font-size: clamp(13px, 1.5vw, 16px);
   font-weight: bold;
   color: #1a1a1a;
   transition: color 0.2s ease; /* 부드러운 색상 전환 효과 */
+  margin-bottom: 40px;
 }
 
 .label-6 {
@@ -194,6 +201,7 @@
   font-weight: bold;
   color: #1a1a1a;
   transition: color 0.3s ease; 
+  margin-bottom: 40px;
 }
 
 .label-4:hover, .label-5:hover{
@@ -236,5 +244,8 @@
   }
   .heading-subheading .div {
     word-break: keep-all;
+  }
+  .label-4{
+    margin-bottom: 20px;
   }
 }
