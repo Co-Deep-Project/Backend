@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Yunji from "./yunji/yunji";
-import SelectRegion from "./gahyun/SelectRegion"; // 새로운 페이지 임포트
+import SelectRegion from "./gahyun/SelectRegion"; 
 import Mbti from "./mbti/Mbti";
 import Seoin from "./seoin/Seoin";
 import Home from "./Home";
@@ -11,6 +11,7 @@ import StartScreen from "./mbti/StartScreen";
 import QuestionScreen from "./mbti/QuestionScreen";
 import Story from "./mbti/Story";
 import ResultTransitionScreen from "./mbti/ResultTransitionScreen";
+import Politician from "./politician/Politician";
 
 const router = createBrowserRouter([
   {
@@ -26,8 +27,12 @@ const router = createBrowserRouter([
     element: <Seoin />,
   },
   {
-    path: "/select-region", // 새로운 경로 추가
-    element: <SelectRegion />, // SelectRegion 컴포넌트 연결
+    path: "/select-region",
+    element: <SelectRegion />, 
+  },
+  {
+    path: "/politician", 
+    element: <Politician />, 
   },
   {
     path: "/mbti", 

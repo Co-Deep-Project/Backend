@@ -114,7 +114,12 @@ const SelectRegion = () => {
 
                         // 버튼 클릭 이벤트 추가
                         content.querySelector("#mayor-btn").addEventListener("click", () => navigate("/yunji"));
-                        content.querySelector("#representative-btn").addEventListener("click", () => navigate("/seoin"));
+                        content.querySelector("#representative-btn").addEventListener("click", () => {
+                            const districtName = dong.properties.SIG_KOR_NM; // 구 이름 가져오기
+                            navigate("/politician", {
+                                state: { district: districtName }, // 구 이름 전달
+                            });
+                        });
                     });
                 };
 
