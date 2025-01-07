@@ -370,6 +370,7 @@
     background-color: white;
     box-shadow: none; /* 그림자 제거 */
     z-index: 1002;
+    top: 250px !important;
   }
 
   .chatbot-window.mobile-modal-open {
@@ -482,5 +483,34 @@
   .send-button {
     position: relative;
     z-index: 1004; /* 가장 높은 z-index */
+  }
+}
+/* 모바일 스타일 수정 */
+/* 모바일 스타일 수정 */
+@media screen and (max-width: 768px) {
+  .chatbot-window {
+    width: 100%;
+    height: 50vh; /* 챗봇 창이 화면의 절반을 차지하도록 */
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto; /* 넘치는 콘텐츠를 스크롤 가능하도록 */
+    box-shadow: none;
+  }
+
+  .chatbot-messages {
+    height: calc(50vh - 120px); /* 전체 높이에서 헤더와 입력창 제외 */
+    overflow-y: auto; /* 메시지가 많을 때 스크롤 가능 */
+  }
+
+  .chatbot-input-container {
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 }

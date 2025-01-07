@@ -35,13 +35,14 @@ const Chatbot = () => {
   // 모바일 체크
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
+      const isMobileViewport = window.innerWidth <= 768;
+      setIsMobile(isMobileViewport);
       setPosition({
-        x: mobile ? 0 : window.innerWidth - 420,
-        y: mobile ? window.innerHeight - 100 : window.innerHeight - 590
+        x: isMobileViewport ? 0 : window.innerWidth - 420,
+        y: isMobileViewport ? window.innerHeight - 100 : window.innerHeight - 590,
       });
     };
+    
     
     window.addEventListener("resize", handleResize);
     handleResize(); // 초기 실행
