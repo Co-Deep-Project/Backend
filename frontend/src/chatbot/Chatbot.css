@@ -466,7 +466,9 @@
   .chatbot-messages {
     background-color: white;
     height: calc(30vh - 120px);
+    overflow-y: auto; /* 스크롤 활성화 */
   }
+
 
   .chatbot-input-container {
     background-color: white;
