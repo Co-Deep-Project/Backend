@@ -149,3 +149,8 @@
     transform: translate(-10px, -10px);
   }
 }
+@media (max-width: 767px) {
+  .start-title {
+    word-break: keep-all;
+  }
+}

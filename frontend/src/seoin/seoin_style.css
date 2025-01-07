@@ -436,6 +436,7 @@ a {
     width: auto;
     padding: 8px;
     font-size: 14px;
+    word-break: keep-all;
   }
 
   .header {

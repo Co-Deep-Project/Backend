@@ -132,3 +132,10 @@
 .back-button:hover {
     background-color: #393363;
 }
+
+
+@media (max-width: 767px) {
+.textbox h1 {
+    word-break: keep-all;
+}
+}
