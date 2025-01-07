@@ -27,6 +27,7 @@ const Politician = () => {
                 </div>
             </header>
             <h1>{districtName} 국회의원 조회</h1>
+            <button onClick={() => navigate("/seoin")}>곽상언 페이지</button>
         </div>
     );
 };
