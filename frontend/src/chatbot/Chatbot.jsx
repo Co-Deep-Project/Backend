@@ -29,7 +29,8 @@ const Chatbot = () => {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const chatbotRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [showTooltip, setShowTooltip] = useState(false);
+  //const [showTooltip, setShowTooltip] = useState(false);
+  const [isFullscreenModal, setIsFullscreenModal] = useState(false);
 
   // 모바일 체크
   useEffect(() => {
@@ -95,12 +96,16 @@ const Chatbot = () => {
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
+    if (isOpen) {
+      setIsFullscreenModal(false); // 챗봇이 열릴 때 전체 모달 해제
+    }
   };
 
   // 모달 열기
   const openModal = (url) => {
     setSelectedNewsUrl(url);
     setIsModalOpen(true);
+    setIsFullscreenModal(true);
   };
 
   // 모달 닫기
@@ -109,6 +114,7 @@ const Chatbot = () => {
     if (e && e.target.className === 'modal-close-button') {
       setSelectedNewsUrl("");
       setIsModalOpen(false);
+      setIsFullscreenModal(false);
     }
   };
 
@@ -324,7 +330,7 @@ const Chatbot = () => {
       {/* 모달은 한 번만 렌더링 */}
       {isModalOpen && (
         <div 
-          className={`modal-overlay ${isMobile ? 'mobile-modal' : ''}`}
+          className={`modal-overlay ${isMobile ? (isFullscreenModal ? 'mobile-fullscreen' : 'mobile-modal') : ''}`}
           onClick={(e) => {
             // overlay를 클릭했을 때도 모달이 닫히지 않도록 수정
             e.stopPropagation();

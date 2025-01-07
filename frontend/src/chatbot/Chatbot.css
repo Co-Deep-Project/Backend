@@ -375,7 +375,24 @@
   }
 
   .modal-overlay.mobile-modal {
-    background-color: transparent; /* 배경색 투명하게 변경 */
+    background-color: rgba(0, 0, 0, 0.5); /* 배경색 투명하게 변경 */
+  }
+
+  .modal-overlay.mobile-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 처리 */
+    z-index: 1001;
+  }
+
+  .modal-overlay.mobile-fullscreen .modal-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 20px;
   }
 
   .modal-overlay.mobile-modal .modal-content {
@@ -408,12 +425,25 @@
   }
 
   .chatbot-button {
-    z-index: 1003; /* 챗봇 버튼은 가장 위에 */
+    position: fixed;
+    bottom: 5vh;  /* 기본 위치 설정 */
+    right: 20px;
+    z-index: 99999;  /* 가장 높은 z-index로 설정 */
+    width: 60px;
+    height: 60px;
+    background-color: #4c3f5e;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  .chatbot-button {
-    bottom: 32vh;
-    z-index: 1001;
+  modal-overlay.mobile-modal ~ .chatbot-button,
+  .modal-overlay.mobile-fullscreen ~ .chatbot-button {
+    bottom: 5vh;  /* 모달이 열려도 같은 위치 유지 */
   }
 
   .news-container {
