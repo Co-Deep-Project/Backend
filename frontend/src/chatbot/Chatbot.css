@@ -128,8 +128,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #9b9be8;
-  color: white;
+  background-color: #cfc2e9;
+  color: black;
+  font-weight: bold;
   padding: 10px 15px;
   border-radius: 10px 10px 0 0;
   cursor: grab;
@@ -178,10 +179,11 @@
 }
 
 .chatbot-message.user {
-  background-color: #9b9be8;
-  color: white;
+  background-color: #cfc2e9;
+  color: black;
   border: 1px solid #e0e0e0;
   align-self: flex-end;
+  font-weight: 500;
 }
 
 .chatbot-message.bot {
@@ -214,8 +216,8 @@
 }
 
 .send-button {
-  background-color: #9b9be8;
-  color: white;
+  background-color: #cfc2e9;
+  color:black;
   border: 1px solid #e0e0e0;
   padding: 10px 15px;
   margin-left: 10px;
