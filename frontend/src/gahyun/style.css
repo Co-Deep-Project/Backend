@@ -241,6 +241,7 @@
 @media (max-width: 767px) {
   .label-3{
     word-break: keep-all;
+    margin-bottom: 30px;
   }
   .heading-subheading .div {
     word-break: keep-all;
