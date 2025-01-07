@@ -237,16 +237,21 @@
     transform: translateY(0);
   }
 }
-
 @media (max-width: 767px) {
-  .label-3{
-    word-break: keep-all;
-  }
-  .heading-subheading .div {
-    word-break: keep-all;
+  .overlap-2 {
+    flex-direction: column; /* 세로로 카드 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    gap: 20px; /* 카드 사이 간격 */
   }
 
-.link {
-  margin-top: -10px;
+  .card, .card-2, .card-3 {
+    width: 80%; /* 카드의 너비를 화면의 80%로 조정 */
+    margin: 10px 0; /* 상하 마진 설정 */
+  }
+
+  .card .link, .card-2 .link, .card-3 .link {
+    width: 100%; /* 'Learn more' 링크 너비를 카드 너비에 맞게 조정 */
+    justify-content: center; /* 버튼을 카드 중앙에 위치 */
+  }
 }
-}
+
