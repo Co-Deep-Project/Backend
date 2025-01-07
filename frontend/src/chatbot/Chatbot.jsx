@@ -29,23 +29,22 @@ const Chatbot = () => {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const chatbotRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // 모바일 체크
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      if (!mobile) {
-        // 데스크톱 모드일 때 챗봇 위치 재설정
-        setPosition({ 
-          x: window.innerWidth - 420,
-          y: window.innerHeight - 590
-        });
-      }
+      setPosition({
+        x: mobile ? 0 : window.innerWidth - 420,
+        y: mobile ? window.innerHeight - 100 : window.innerHeight - 590
+      });
     };
     
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    handleResize(); // 초기 실행
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // 드래그 시작
@@ -250,7 +249,7 @@ const Chatbot = () => {
       {!isOpen && (
         <div 
           className="chatbot-button" 
-          onClick={() => setIsOpen(true)}
+          onClick={toggleChatbot}
           style={isMobile && isModalOpen ? { bottom: '32%' } : undefined}
         >
           💬
@@ -261,9 +260,11 @@ const Chatbot = () => {
         <div
           ref={chatbotRef}
           className={`chatbot-window ${isDragging ? 'dragging' : ''} ${isMobile && isModalOpen ? 'mobile-modal-open' : ''}`}
+          // 크롬에서 transform 쓰면 창 아예 안뜨는 에러남 -> position 이용
           style={isMobile && isModalOpen ? {} : {
-            transform: `translate(${position.x}px, ${position.y}px)`,
-            transition: isDragging ? 'none' : 'transform 0.3s ease'
+            top: `${position.y}px`,
+            left: `${position.x}px`,
+            transition: isDragging ? "none" : "top 0.3s ease, left 0.3s ease"
           }}
           onMouseDown={handleMouseDown}
         >
