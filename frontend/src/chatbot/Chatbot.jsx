@@ -31,6 +31,16 @@ const Chatbot = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   //const [showTooltip, setShowTooltip] = useState(false);
   const [isFullscreenModal, setIsFullscreenModal] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  useEffect(() => {
+    scrollToBottom(); // 메시지 배열이 변경될 때마다 스크롤 이동
+  }, [messages]);
 
   // 모바일 체크
   useEffect(() => {
@@ -306,6 +316,7 @@ const Chatbot = () => {
                 )}
               </div>
             ))}
+                   <div ref={messagesEndRef} />
           </div>
           <div className="chatbot-input-container">
             <input
