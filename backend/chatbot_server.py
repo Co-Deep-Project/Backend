@@ -259,3 +259,4 @@ async def chatbot_endpoint(request: QueryRequest):
 
     # 5) 뉴스 키워드가 없으면 일반 ChatGPT 응답
     return {"response": generate_response(user_query)}
+

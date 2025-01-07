@@ -1,14 +1,20 @@
 # Co-Deep Project Frontend
 
-`npm start`로 실행됨.
-
-실행 경로 : `cd frontend`
+- 실행 경로 : `cd frontend`
+- `npm start`로 실행됨.
 
 ## Co-Deep Project backend
 
-- python 가상환경 실행 `source myenv/bin/activate`
-- FastAPI 트래킹 서버 실행 명령: `uvicorn backend.server:app --host 0.0.0.0 --port 8000`
-- FastAPI 챗봇 서버 실행 명령: `uvicorn backend.chatbot_server:app --host 0.0.0.0 --port 8001`
+#### python 가상환경 실행
+- 루트에서 `source myenv/bin/activate`
+
+#### FastAPI 트래킹 서버 실행
+- 실행 경로 : `cd backend/tracking-server`
+- `uvicorn server:app --host 0.0.0.0 --port 8000`
+
+#### FastAPI 챗봇 서버 실행
+- 실행 경로 : `cd backend`
+- `uvicorn chatbot_server:app --host 0.0.0.0 --port 8001`
 
 ## home 브랜치 (가현)
 ### 변경사항
@@ -82,4 +88,6 @@
 ## 20250102 챗봇 서버 백엔드 구현 완 (서인)
 - "종로구 최신 뉴스에 대해서 알려줘" 도 잘 작동됨
 - "탄핵이 뭐야?"도 잘 작동됨
-- 
+
+## 20250106 트래킹 서버 백엔그 구현 완 (서인)
+- 로직이 완전 바뀜.. 정리는 노션에 해두겠음.
