@@ -158,34 +158,15 @@
 
 .link {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px; /* 아이콘과 텍스트 사이 간격 */
-  padding: 12px 24px; /* 내부 패딩 */
-  margin-top: auto; /* 하단에 맞춤 */
-  margin-bottom: 20px; /* 하단 여백 */
-  width: 100%; /* 링크 영역 너비를 카드에 맞춤 */
-  background-color: transparent; /* 배경색 없음 */
+  align-items: center; /* 세로 정렬을 중앙으로 맞춤 */
+  gap: 20px; /* 아이콘과 텍스트 사이의 간격 */
+  flex-direction: row;
+  margin-top: 3px;
+  margin-bottom: 30px;
+  margin-left: 3px;
 }
 
-.icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.arrow {
-  width: 30px; /* 화살표 크기 */
-  height: auto; /* 화면 비율에 따라 자동 조절 */
-}
-
-.label-4, .label-5, .label-6 {
-  font-size: 16px; /* 텍스트 크기 고정 */
-  color: #000; /* 텍스트 색상 */
-  font-weight: bold; /* 글씨 굵기 */
-}
-
-.arrow-wrapper {
+.icon, .arrow-wrapper {
   width: 2vw; /* 상대적인 단위로 아이콘 크기 설정 */
   height: 2vw; /* 상대적인 단위로 아이콘 크기 설정 */
   display: flex;
@@ -195,7 +176,9 @@
   border-radius: 50%;
   margin-bottom: 20px;
 }
-
+.arrow {
+  margin-bottom: 20px;
+}
 .label-4 {
   color: #ffffff;
   font-size: clamp(13px, 1.5vw, 16px);
@@ -256,16 +239,10 @@
 }
 
 @media (max-width: 767px) {
-  .link {
-    gap: 5px; /* 더 작은 화면에서 간격 감소 */
-    padding: 10px 20px; /* 더 작은 화면에서 패딩 감소 */
+  .label-3{
+    word-break: keep-all;
   }
-
-  .arrow {
-    width: 25px; /* 더 작은 화면에서 화살표 크기 감소 */
-  }
-
-  .label-4, .label-5, .label-6 {
-    font-size: 14px; /* 더 작은 화면에서 텍스트 크기 감소 */
+  .heading-subheading .div {
+    word-break: keep-all;
   }
 }
