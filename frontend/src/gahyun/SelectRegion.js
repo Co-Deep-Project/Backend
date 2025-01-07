@@ -113,7 +113,14 @@ const SelectRegion = () => {
                         infowindow.setMap(map);
 
                         // 버튼 클릭 이벤트 추가
-                        content.querySelector("#mayor-btn").addEventListener("click", () => navigate("/yunji"));
+                        content.querySelector("#mayor-btn").addEventListener("click", () => {
+                            const districtName = dong.properties.SIG_KOR_NM;
+                            if (districtName === "종로구") {
+                                navigate("/yunji");
+                            } else {
+                                alert("현재 지원되지 않는 페이지입니다.");
+                            }
+                        });
                         content.querySelector("#representative-btn").addEventListener("click", () => {
                             const districtName = dong.properties.SIG_KOR_NM; // 구 이름 가져오기
                             navigate("/politician", {
