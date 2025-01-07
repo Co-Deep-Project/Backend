@@ -180,9 +180,9 @@
   margin-bottom: 20px;
 }
 .label-4 {
-  color: #ffffff;
   font-size: clamp(13px, 1.5vw, 16px);
   font-weight: bold;
+  color: white;
   transition: color 0.2s ease; /* 부드러운 색상 전환 효과 */
   margin-bottom: 40px;
 }
@@ -245,14 +245,8 @@
   .heading-subheading .div {
     word-break: keep-all;
   }
-  .label-4{
-    margin-bottom: 5px;
-    margin-left: 5px;
-  }
-  .icon {
-    margin-left: 20px;
-  }
-  .arrow{
-    margin-bottom: 10px;
-  }
+
+.link {
+  margin-top: -10px;
+}
 }
