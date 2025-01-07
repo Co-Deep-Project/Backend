@@ -7,12 +7,10 @@ import {
   ArcElement,
   Tooltip,
   Legend,
-  LinearScale,
-  CategoryScale
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels, LinearScale, CategoryScale);
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const Seoin = () => {
   const navigate = useNavigate();
@@ -54,6 +52,8 @@ const Seoin = () => {
     fetchData();
   }, []);
 
+  
+
   // ✅ Votes 데이터 Fetch 함수
   const fetchVotesFromServer = async () => {
     setVotesLoading(true);
@@ -63,15 +63,21 @@ const Seoin = () => {
       );
       const data = await response.json();
       console.log("Received votes data:", data);
-      setVotes(data);
+      const filteredData = data.filter((vote) => vote.RESULT_VOTE_MOD !== "불참");
+      setVotes(filteredData);
+
+      // ✅ 초기 표시 데이터 설정 (최대 3개)
       if (activeTab === "votes") {
-        setDisplayData(data.slice(0, ITEMS_PER_PAGE));
+        setDisplayData(filteredData.slice(0, ITEMS_PER_PAGE));
       }
     } catch (error) {
       console.error("서버 요청 오류:", error);
     }
     setVotesLoading(false);
   };
+
+
+
 
   // ✅ Bills 데이터 Fetch 함수
   const fetchBillsFromServer = async () => {
@@ -147,15 +153,25 @@ const CommitteePieChart = ({ bills }) => {
   const committeeCount = useMemo(() => groupByCommittee(bills), [bills]);
   const chartData = useMemo(() => prepareChartData(committeeCount), [committeeCount]);
 
+  const [shouldAnimate, setShouldAnimate] = useState(true);
+
+  useEffect(() => {
+    setShouldAnimate(true);
+    return () => setShouldAnimate(false);
+  }, [bills]);
+
   const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: {
-      duration: 0 // 애니메이션 비활성화
-    },
     plugins: {
       legend: {
-        display: false, // 범례 표시 안함
+        display: false, // 범례 표시
+        position: "top", // 범례 위치 (top, bottom, left, right)
+        labels: {
+          boxWidth: 20, // 범례 아이콘 크기
+          padding: 10, // 텍스트와 박스 사이 여백
+          font: {
+            size: 12, // 글씨 크기
+          },
+        },
       },
       datalabels: {
         color: "#000", // 텍스트 색상
@@ -169,15 +185,19 @@ const CommitteePieChart = ({ bills }) => {
         },
         anchor: "end",
         align: "end",
-        offset: 20,
-        clamp: true,
+        offset: 10,
       },
     },
     layout: {
-      padding: {  // 이거 조정해서 글자 잘리는거 조절
-        top: 60, // 위쪽 여백
-        bottom: 40, // 아래쪽 여백
+      padding: {
+        top: 20, // 위쪽 여백
+        bottom: -20, // 아래쪽 여백
       },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: shouldAnimate ? 800 : 0,
     },
   };  
 
@@ -192,7 +212,8 @@ const CommitteePieChart = ({ bills }) => {
     setActiveTab(tab);
     setExpanded({});
     if (tab === "votes") {
-      setDisplayData(votes.slice(0, ITEMS_PER_PAGE));
+      const filteredVotes = votes.filter((vote) => vote.RESULT_VOTE_MOD !== "불참");
+      setDisplayData(filteredVotes.slice(0, ITEMS_PER_PAGE));
     } else if (tab === "bills") {
       setDisplayData(bills.slice(0, ITEMS_PER_PAGE));
     }
@@ -214,6 +235,9 @@ const CommitteePieChart = ({ bills }) => {
   }, []);
 
   const isLoading = activeTab === "votes" ? votesLoading : billsLoading;
+  const filteredVotes = displayData.filter(
+    (vote) => vote.RESULT_VOTE_MOD !== "불참"
+  );
 
   return (
     <div className="desktop">
@@ -313,22 +337,24 @@ const CommitteePieChart = ({ bills }) => {
           )}
             {isLoading ? (
               <p>데이터를 불러오는 중...</p>  // 로딩 중일 때는 무조건 이 메시지 출력
-            ) : displayData.length === 0 && !isLoading ? (
+            ) : filteredVotes.length === 0 && !isLoading ? (
               <p>데이터가 없습니다.</p>  // 로딩이 끝났고 데이터가 없을 때만 이 메시지 출력
             ) : activeTab === "votes" ? (
-              displayData.map((vote, index) => {
-                        const displayNumber = votes.length - index;
-              return (
-                <div
-                  key={index}
-                  className={`vote-card ${
-                    vote.RESULT_VOTE_MOD === "찬성"
-                      ? "approve"
-                      : vote.RESULT_VOTE_MOD === "반대"
-                      ? "against"
-                      : "abstain"
-                  }`}
-                >
+              filteredVotes.map((vote, index) => {
+                const displayNumber = votes.length - index;
+                return (
+                  <div
+                    key={index}
+                    className={`vote-card ${
+                      vote.RESULT_VOTE_MOD === "찬성"
+                        ? "approve"
+                        : vote.RESULT_VOTE_MOD === "반대"
+                        ? "against"
+                        : vote.RESULT_VOTE_MOD === "기권"
+                        ? "abstain"
+                        : ""
+                    }`}
+                  >
                   <div className="vote-header">
                     <span>{displayNumber}</span>
                     <a 
