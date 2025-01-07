@@ -7,10 +7,12 @@ import {
   ArcElement,
   Tooltip,
   Legend,
+  LinearScale,
+  CategoryScale
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels, LinearScale, CategoryScale);
 
 const Seoin = () => {
   const navigate = useNavigate();
@@ -145,25 +147,15 @@ const CommitteePieChart = ({ bills }) => {
   const committeeCount = useMemo(() => groupByCommittee(bills), [bills]);
   const chartData = useMemo(() => prepareChartData(committeeCount), [committeeCount]);
 
-  const [shouldAnimate, setShouldAnimate] = useState(true);
-
-  useEffect(() => {
-    setShouldAnimate(true);
-    return () => setShouldAnimate(false);
-  }, [bills]);
-
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 0 // 애니메이션 비활성화
+    },
     plugins: {
       legend: {
-        display: false, // 범례 표시
-        position: "top", // 범례 위치 (top, bottom, left, right)
-        labels: {
-          boxWidth: 20, // 범례 아이콘 크기
-          padding: 10, // 텍스트와 박스 사이 여백
-          font: {
-            size: 12, // 글씨 크기
-          },
-        },
+        display: false, // 범례 표시 안함
       },
       datalabels: {
         color: "#000", // 텍스트 색상
@@ -177,19 +169,15 @@ const CommitteePieChart = ({ bills }) => {
         },
         anchor: "end",
         align: "end",
-        offset: 10,
+        offset: 20,
+        clamp: true,
       },
     },
     layout: {
-      padding: {
+      padding: {  // 이거 조정해서 글자 잘리는거 조절
         top: 60, // 위쪽 여백
-        bottom: -20, // 아래쪽 여백
+        bottom: 40, // 아래쪽 여백
       },
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: {
-      duration: shouldAnimate ? 800 : 0,
     },
   };  
 
