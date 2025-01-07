@@ -140,7 +140,7 @@ console.log("Character Description:", description);
 
   return (
     <div>
-    <header id="tracking-header">
+    <header id="header">
         <img
           id="logo"
           src="/images/logo.png"
