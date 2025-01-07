@@ -149,45 +149,70 @@ const prepareChartData = (committeeCount) => {
 };
 
 const CommitteePieChart = ({ bills }) => {
-  // useMemo를 사용하여 bills가 변경될 때만 데이터를 다시 계산
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // ✅ 화면 크기 변경 시 isMobile 상태 업데이트
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // ✅ resize 이벤트 리스너 추가
+    window.addEventListener("resize", handleResize);
+
+    // ✅ 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const committeeCount = useMemo(() => groupByCommittee(bills), [bills]);
   const chartData = useMemo(() => prepareChartData(committeeCount), [committeeCount]);
-
-  const [shouldAnimate, setShouldAnimate] = useState(true);
-
-  useEffect(() => {
-    setShouldAnimate(true);
-    return () => setShouldAnimate(false);
-  }, [bills]);
 
   const options = {
     plugins: {
       legend: {
-        display: false,
+        display: isMobile, // 모바일에서는 legend 활성화
         position: "top",
         labels: {
-          boxWidth: 20,
+          boxWidth: 12,
           padding: 10,
           font: {
             size: 12,
           },
+          generateLabels: (chart) => {
+            const data = chart.data;
+            return data.labels
+              .map((label, index) => {
+                const value = data.datasets[0].data[index];
+                const total = data.datasets[0].data.reduce((sum, val) => sum + val, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+  
+                if (percentage > 5) {
+                  return {
+                    text: `${label} (${percentage}%)`.replace(/(.{20})/g, "$1\n"),
+                    fillStyle: data.datasets[0].backgroundColor[index],
+                  };
+                }
+                return null;
+              })
+              .filter(Boolean); // null 값 제거
+          },
         },
       },
       datalabels: {
-        color: "#000",
+        color: isMobile ? "transparent" : "#000", // 모바일에서는 투명하게 처리
         font: {
           size: 10,
         },
         formatter: (value, context) => {
           const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
           const percentage = ((value / total) * 100).toFixed(1);
-          return `${context.chart.data.labels[context.dataIndex]} (${percentage}%)`;
-        },
-        display: function(context) {
-          const value = context.dataset.data[context.dataIndex];
-          const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-          const percentage = (value / total) * 100;
-          return percentage > 2; // 2% 초과인 데이터만 표시
+  
+          if (percentage > 5) {
+            return `${context.chart.data.labels[context.dataIndex]} (${percentage}%)`;
+          }
+          return "";
         },
         anchor: "end",
         align: "end",
@@ -200,21 +225,28 @@ const CommitteePieChart = ({ bills }) => {
         clamp: true,
       },
     },
-    layout: {
-      padding: {
-        top: 40,
-        bottom: -20,
-      },
-    },
     responsive: true,
     maintainAspectRatio: false,
-    animation: {
-      duration: false,
-    },
-  };
+  };  
+
+  const chartWidth = isMobile ? "100%" : "800px";
+  const chartHeight = isMobile ? "250px" : "350px";
 
   return (
-    <div style={{ width: "700px", height: "300px", margin: "40px auto" }}>
+    <div
+      style={{
+        width: chartWidth,
+        height: chartHeight,
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        overflowX: "auto",
+        overflowY: "hidden",
+        whiteSpace: "nowrap",
+      }}
+    >
       <Pie data={chartData} options={options} />
     </div>
   );
