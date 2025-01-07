@@ -246,6 +246,13 @@
     word-break: keep-all;
   }
   .label-4{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
+  .icon {
+    margin-left: 20px;
+  }
+  .arrow{
+    margin-bottom: 10px;
   }
 }
