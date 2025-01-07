@@ -57,26 +57,40 @@ html, body {
   position: relative; /* 내부 요소에 영향을 주지 않음 */
   width: 700px;
 }
-
-.owl-image {
-  position: absolute; /* 부엉이를 이야기 위에 띄우기 */
-  top: 2%; /* 화면 상단에서 떨어진 위치 (적절히 조정 가능) */
-  left: 50%; /* 수평 중앙 정렬 */
-  transform: translateX(-50%); /* 정확히 중앙에 배치 */
-  width: 300px; /* 이미지 크기 */
-  height: auto; /* 비율 유지 */
-  z-index: 100; /* 가장 위에 표시되도록 설정 */
-  pointer-events: none; /* 클릭 방지 */
-  margin-top: 65px;
+.owl-story {
+  display: flex; /* Flexbox를 활성화 */
+  flex-direction: column; /* 자식 요소를 수직으로 정렬 */
+  align-items: center; /* 중앙 정렬 */
+  justify-content: center; /* 중앙 정렬 */
+  width: 100%; /* 부모 컨테이너의 전체 너비를 사용 */
+  height: auto; /* 내용에 따라 높이 자동 조정 */
 }
 
-  @media (max-width: 768px) {
-    /* 작은 화면에서 부엉이 위치 조정 */
-    .owl-image {
-      top: 10%; /* 더 위로 조정 */
-      width: 200px; /* 이미지 크기 조정 */
-    }
-  }
+.owl-image {
+  max-width: 100%; /* 이미지가 컨테이너 너비를 초과하지 않도록 */
+  height: auto; /* 이미지 비율 유지 */
+}
+
+.story-content-wrapper {
+  width: 100%; /* 부모 컨테이너의 전체 너비를 사용 */
+}
+
+.story-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; /* 적절한 패딩으로 내용 구분 */
+}
+
+.story-next-button {
+  padding: 10px 20px;
+  margin-top: 10px; /* 버튼과 텍스트 사이의 간격 */
+  cursor: pointer; /* 버튼에 마우스를 올렸을 때 커서 변경 */
+  background-color: #f5f5f5; /* 버튼 배경색 */
+  border: none; /* 테두리 제거 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 */
+}
+
   .story-text {
     font-size: 1.2rem;
     line-height: 1.5;
