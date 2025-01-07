@@ -163,43 +163,55 @@ const CommitteePieChart = ({ bills }) => {
   const options = {
     plugins: {
       legend: {
-        display: false, // 범례 표시
-        position: "top", // 범례 위치 (top, bottom, left, right)
+        display: false,
+        position: "top",
         labels: {
-          boxWidth: 20, // 범례 아이콘 크기
-          padding: 10, // 텍스트와 박스 사이 여백
+          boxWidth: 20,
+          padding: 10,
           font: {
-            size: 12, // 글씨 크기
+            size: 12,
           },
         },
       },
       datalabels: {
-        color: "#000", // 텍스트 색상
+        color: "#000",
         font: {
-          size: 12,
+          size: 10,
         },
         formatter: (value, context) => {
           const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
           const percentage = ((value / total) * 100).toFixed(1);
           return `${context.chart.data.labels[context.dataIndex]} (${percentage}%)`;
         },
+        display: function(context) {
+          const value = context.dataset.data[context.dataIndex];
+          const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+          const percentage = (value / total) * 100;
+          return percentage > 2; // 2% 초과인 데이터만 표시
+        },
         anchor: "end",
         align: "end",
         offset: 10,
+        padding: {
+          top: 12,
+          bottom: 12,
+        },
+        overlap: false,
+        clamp: true,
       },
     },
     layout: {
       padding: {
-        top: 20, // 위쪽 여백
-        bottom: -20, // 아래쪽 여백
+        top: 40,
+        bottom: -20,
       },
     },
     responsive: true,
     maintainAspectRatio: false,
     animation: {
-      duration: shouldAnimate ? 800 : 0,
+      duration: false,
     },
-  };  
+  };
 
   return (
     <div style={{ width: "700px", height: "300px", margin: "40px auto" }}>
