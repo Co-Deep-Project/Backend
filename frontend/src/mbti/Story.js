@@ -71,6 +71,7 @@ const Story = () => {
               <button id="home-button" onClick={handleHomeClick}>Home</button>
             </div>
           </div>
+          <div className = "owl-story">
           <img src="/images/character.jpg" alt="부엉이" className="owl-image" />
           <div className="story-content-wrapper">
             
@@ -83,6 +84,7 @@ const Story = () => {
               </button>
             </div>
           </div>
+        </div>
         </div>
       )}
     </div>
