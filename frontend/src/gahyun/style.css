@@ -229,3 +229,12 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 767px) {
+  .label-3{
+    word-break: keep-all;
+  }
+  .heading-subheading .div {
+    word-break: keep-all;
+  }
+}
