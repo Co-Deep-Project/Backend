@@ -118,7 +118,7 @@ const SelectRegion = () => {
                             if (districtName === "종로구") {
                                 navigate("/yunji");
                             } else {
-                                alert("현재 지원되지 않는 페이지입니다.");
+                                alert("현재 지원되지 않는 페이지입니다.\n(현재는 종로구만 지원)");
                             }
                         });
                         content.querySelector("#representative-btn").addEventListener("click", () => {
