@@ -94,7 +94,7 @@ const Desktop = () => {
             </div>
           </div>
         </div>
-        <div className="cards-section">
+    
           <div className="card-2">
             <div className="heading-and-link">
               <div className="heading">
@@ -115,7 +115,6 @@ const Desktop = () => {
               </div>
             </div>
           </div>
-        </div>
         <div className="card-3">
           <div className="heading-and-link">
             <div className="heading">
