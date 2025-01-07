@@ -86,7 +86,7 @@ a {
 .main-layout {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 90%;
   max-width: 800px;
   margin: 50px auto;
@@ -116,36 +116,32 @@ a {
 }
 
 #button-container {
-  display: flex; 
+  display: flex;
   gap: 10px;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
-#region-button{
-  border: 1px solid black; 
+#region-button {
+  border: 1px solid black;
   padding: 10px;
   background-color: white;
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s; 
-  position: fixed;
-  right: 8vw;
-  top: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
   height: 38px;
 }
 
 #home-button {
-  border: 1px solid black; 
-  padding: 10px; 
+  border: 1px solid black;
+  padding: 10px;
   color: black;
   background-color: white;
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s; 
-  position: fixed;
-  right: 3vw;
-  top: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  height: 38px;
 }
+
 
 #region-button:hover,
 #home-button:hover {
@@ -451,7 +447,6 @@ a {
   }
 
   .process-block {
-    width: 100%;
     margin: 0;
     padding: 10px;
   }

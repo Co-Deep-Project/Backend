@@ -73,3 +73,34 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 767px) {
+    .profile-list {
+        display: block; 
+    }
+
+    .politician-profile {
+        width: 85%; 
+        margin: 15px auto; 
+        padding: 10px;
+    }
+
+
+    .politician-profile h2 {
+        font-size: 20px; 
+    }
+
+    .politician-profile p {
+        font-size: 14px; 
+    }
+
+    .politician-profile ul {
+        padding-left: 15px; 
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+        border-radius: 8px;
+    }
+}

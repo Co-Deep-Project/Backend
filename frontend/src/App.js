@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Yunji from "./yunji/yunji";
-import SelectRegion from "./gahyun/SelectRegion"; 
+import SelectRegion from "./gahyun/SelectRegion";
 import Mbti from "./mbti/Mbti";
 import Seoin from "./seoin/Seoin";
 import Home from "./Home";
@@ -12,62 +12,109 @@ import QuestionScreen from "./mbti/QuestionScreen";
 import Story from "./mbti/Story";
 import ResultTransitionScreen from "./mbti/ResultTransitionScreen";
 import Politician from "./politician/Politician";
+import Layout from "./Layout"; // Layout 가져오기
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: "/yunji",
-    element: <Yunji />,
+    element: (
+      <Layout>
+        <Yunji />
+      </Layout>
+    ),
   },
   {
-    path: "seoin",
-    element: <Seoin />,
+    path: "/seoin",
+    element: (
+      <Layout>
+        <Seoin />
+      </Layout>
+    ),
   },
   {
     path: "/select-region",
-    element: <SelectRegion />, 
+    element: (
+      <Layout>
+        <SelectRegion />
+      </Layout>
+    ),
   },
   {
-    path: "/politician", 
-    element: <Politician />, 
+    path: "/politician",
+    element: (
+      <Layout>
+        <Politician />
+      </Layout>
+    ),
   },
   {
-    path: "/mbti", 
-    element: <Mbti />,
+    path: "/mbti",
+    element: (
+      <Layout>
+        <Mbti />
+      </Layout>
+    ),
   },
   {
     path: "/chatbot",
-    element: <Chatbot />,
+    element: (
+      <Layout>
+        <Chatbot />
+      </Layout>
+    ),
   },
   {
     path: "/result",
-    element: <ResultScreen />
+    element: (
+      <Layout>
+        <ResultScreen />
+      </Layout>
+    ),
   },
   {
     path: "/start",
-    element: <StartScreen />
+    element: (
+      <Layout>
+        <StartScreen />
+      </Layout>
+    ),
   },
   {
     path: "/question",
-    element: <QuestionScreen />
+    element: (
+      <Layout>
+        <QuestionScreen />
+      </Layout>
+    ),
   },
   {
     path: "/story",
-    element: <Story />
+    element: (
+      <Layout>
+        <Story />
+      </Layout>
+    ),
   },
   {
-  path: "/result-transition",
-  element: <ResultTransitionScreen /> }
-])
-
+    path: "/result-transition",
+    element: (
+      <Layout>
+        <ResultTransitionScreen />
+      </Layout>
+    ),
+  },
+]);
 
 function App() {
   return <RouterProvider router={router} />;
 }
 
 export default App;
-
-
