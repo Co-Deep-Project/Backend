@@ -61,6 +61,7 @@
 
 .home-button {
   height: auto;
+  color:black;
 }
 
 
@@ -202,17 +203,19 @@
 .answer-button {
   background: #cfc2e9;
   color: black; 
-  font-size: 1.2rem;
-  padding: 20px 30px;
+  padding: 12px 20px;  /* Consistent padding */
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
-  word-break: keep-all;
-  font-size: clamp(1rem, 1.5vw, 1.2rem); /* 유동적 크기 */
-  padding: 10px 20px;
-  margin: 10px 0; /* 위아래 간격 추가 */
+  width: 600px; /* Fixed width */
+  height: 80px; /* Fixed height */
+  display: flex;
   align-items: center;
+  justify-content: center; /* Center text and icon */
+  margin: 10px 0; /* Space between buttons */
+  font-size: clamp(14px, 1.5vw, 18px);  
+  word-break: keep-all;
 }
 
 .answer-button:hover {

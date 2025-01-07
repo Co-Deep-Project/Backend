@@ -29,6 +29,7 @@
   background: white;
   cursor: pointer;
   position: fixed;
+  color:black;
   right: 3vw;
   height: 40px;
 }
