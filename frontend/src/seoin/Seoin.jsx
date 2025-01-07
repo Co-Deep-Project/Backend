@@ -182,7 +182,7 @@ const CommitteePieChart = ({ bills }) => {
     },
     layout: {
       padding: {
-        top: 20, // 위쪽 여백
+        top: 60, // 위쪽 여백
         bottom: -20, // 아래쪽 여백
       },
     },
