@@ -182,7 +182,8 @@ const QuestionScreen = ({ onComplete }) => {
       updatedAnswers[currentQuestion] = selectedAnswer;
       return updatedAnswers;
     });
-
+    console.log(`선택된 답: ${currentQ.answers[selectedAnswer].text}`);
+    console.log(`업데이트된 점수: `, updatedScores);
     if (currentQuestion < totalQuestions - 1) {
       setAnimationState("flipping-out");
       setTimeout(() => {
@@ -190,7 +191,9 @@ const QuestionScreen = ({ onComplete }) => {
         setAnimationState("");  // 애니메이션 상태 초기화
       }, 800); // 애니메이션 지속 시간과 일치
     } else {
-      navigate("/result-transition"); // 모든 질문 완료
+      // 모든 질문이 완료되면 ResultTransitionScreen으로 이동하면서 점수 상태 전달
+navigate('/result-transition', { state: { scores: updatedScores } });
+
     }
     setSelectedAnswer(null);
   };
@@ -207,9 +210,8 @@ const QuestionScreen = ({ onComplete }) => {
   };
 
   const handleAnswerClick = (index) => {
-    setSelectedAnswer(index);
-  };
-
+    setSelectedAnswer(index);  // 사용자가 선택한 답변 인덱스를 상태에 저장
+};
   return (
     <div>
       <div className="question-header">

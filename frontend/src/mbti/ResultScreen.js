@@ -1,11 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/polilogo.png';
 import './ResultScreen.css'; // CSS 파일을 사용하여 스타일 추가
 
 const ResultScreen = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const results = location.state.scores;
   const onRestart = () => {
     navigate('/start'); // "/start" 경로로 네비게이트
   };
@@ -17,14 +18,6 @@ const ResultScreen = () => {
     // 사용자가 '취소'를 클릭하면 현재 페이지에 머무름
   };
 
-  const results = JSON.parse(localStorage.getItem('results')) || {
-    economicProgressive: 0,
-    economicConservative: 0,
-    diplomaticProgressive: 0,
-    diplomaticConservative: 0,
-    socialProgressive: 0,
-    socialConservative: 0,
-  };
   
   console.log("Retrieved Results:", results);
   const {

@@ -1,12 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './ResultTransitionScreen.css';
 
 const ResultTransitionScreen = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const scores = location.state.scores;
 
   const handleContinue = () => {
-    navigate('/result');
+    navigate('/result', { state: { scores } });
   };
 
   const backgroundStyle = {
