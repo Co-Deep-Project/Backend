@@ -159,6 +159,7 @@ const QuestionScreen = ({ onComplete }) => {
   const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
   const [isFlipping, setIsFlipping] = useState(false);
 
+  const [answerHistory, setAnswerHistory] = useState([]);
   const [animationState, setAnimationState] = useState("");
   const handleNext = () => {
     if (selectedAnswer === null) {
@@ -176,7 +177,10 @@ const QuestionScreen = ({ onComplete }) => {
       [selectedScoreType]: scores[selectedScoreType] + 1,
     };
 
-    setScores(updatedScores); // 점수 상태 업데이트
+    setScores(updatedScores);
+      setAnswerHistory([...answerHistory, selectedAnswer]);
+
+
     setAnswers((prevAnswers) => {
       const updatedAnswers = [...prevAnswers];
       updatedAnswers[currentQuestion] = selectedAnswer;
@@ -188,6 +192,7 @@ const QuestionScreen = ({ onComplete }) => {
       setAnimationState("flipping-out");
       setTimeout(() => {
         setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(answerHistory[currentQuestion + 1] || null);
         setAnimationState("");  // 애니메이션 상태 초기화
       }, 800); // 애니메이션 지속 시간과 일치
     } else {
@@ -202,12 +207,30 @@ navigate('/result-transition', { state: { scores: updatedScores } });
   const handlePrevious = () => {
     if (currentQuestion > 0) {
       setIsFlipping(true); // 애니메이션 시작
+  
+      const previousQuestionIndex = currentQuestion - 1;
+      const previousAnswerIndex = answers[previousQuestionIndex]; // 이전 답변 인덱스 사용
+      const previousScoreType = previousAnswerIndex !== null ? shuffledQuestions[previousQuestionIndex].answers[previousAnswerIndex].scoreType : null;
+  
+      // 점수 감소 및 콘솔 로그 출력
+      if (previousScoreType && scores[previousScoreType] > 0) {
+        const newScore = scores[previousScoreType] - 1;
+        setScores({
+          ...scores,
+          [previousScoreType]: newScore,
+        });
+        console.log(`점수 감소: ${previousScoreType} from ${scores[previousScoreType]} to ${newScore}`);
+      }
+  
       setTimeout(() => {
-        setCurrentQuestion(currentQuestion - 1);
+        setCurrentQuestion(previousQuestionIndex);
+        setSelectedAnswer(previousAnswerIndex); // 이전에 선택된 답변을 다시 선택 상태로 설정
         setIsFlipping(false); // 애니메이션 종료
+        console.log(`현재 질문: ${previousQuestionIndex}, 선택된 답변: ${previousAnswerIndex}`);
       }, 800); // 애니메이션 지속 시간
     }
   };
+  
 
   const handleAnswerClick = (index) => {
     setSelectedAnswer(index);  // 사용자가 선택한 답변 인덱스를 상태에 저장

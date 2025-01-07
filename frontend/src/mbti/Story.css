@@ -156,3 +156,23 @@ html, body {
   height: auto;
 }
 
+@media (max-width: 767px) {
+  .story-header p {
+    font-size: clamp(18px, 5vw, 24px); /* 모바일에서 폰트 크기 재조정 */
+  }
+
+  .story-content {
+    padding: 15px; /* 모바일에서 내부 패딩 조정 */
+    max-width: 90%; /* 더 넓은 최대 너비 */
+  }
+
+  .story-next-button, .story-menu button {
+    padding: 8px 16px; /* 모바일에서 버튼 패딩 조정 */
+    font-size: 0.9rem; /* 모바일에서 버튼 폰트 크기 조정 */
+  }
+
+  .owl-image {
+    top: 5%; /* 더 위로 조정 */
+    width: clamp(80px, 20vw, 200px); /* 모바일에서 이미지 크기 조정 */
+  }
+}

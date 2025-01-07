@@ -153,3 +153,28 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 이미지 그림자 */
   margin-bottom: 20px;
 }
+@media (max-width: 767px) {
+  .result-header h1 {
+    font-size: 1.5rem; /* 모바일에서 더 작은 폰트 크기 */
+  }
+
+  .result-image {
+    width: 90%; /* 모바일에서 이미지 너비를 화면에 맞춤 */
+    max-width: 250px; /* 최대 너비 설정 */
+  }
+
+  .description-container, .result-description {
+    font-size: 0.9rem; /* 모바일에서 더 작은 폰트 크기 */
+    padding: 15px; /* 내부 패딩 줄임 */
+    max-width: 90%; /* 화면에 맞게 조정 */
+  }
+
+  .restart-button, .finishBtn {
+    padding: 8px 16px; /* 모바일에서 버튼 크기 줄임 */
+    font-size: 0.9rem; /* 모바일에서 폰트 크기 줄임 */
+  }
+
+  .footer p {
+    font-size: 0.8rem; /* 모바일에서 푸터 폰트 크기 줄임 */
+  }
+}
