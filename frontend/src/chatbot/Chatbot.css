@@ -262,7 +262,9 @@
   color: #333;
   margin-bottom: 10px;
 }
-
+.district-dropdown{
+  color:black;
+}
 /* 챗봇 뉴스 링크 */
 .chatbot-news-link {
   color: #4c3f5e;
