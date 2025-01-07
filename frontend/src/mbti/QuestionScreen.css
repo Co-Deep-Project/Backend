@@ -65,10 +65,11 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .mbti-container, .question-box {
     width: 95%;        /* 화면이 작을 때는 너비를 조금 더 늘림 */
   }
+
 }
 
 
@@ -208,7 +209,8 @@
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
-  width: 600px; /* Fixed width */
+  width: 100%; /* Fixed width */
+  max-width: 600px;
   height: 80px; /* Fixed height */
   display: flex;
   align-items: center;
