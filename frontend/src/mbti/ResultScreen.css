@@ -163,7 +163,9 @@
 .result-header h1 {
   font-size: 1.5rem; /* 모바일에서의 폰트 사이즈 조정 */
 }
-
+.result-title {
+  margin-top: 40px;
+}
 .description-container, .result-description {
   padding: 15px; /* 모바일에서 내부 패딩 줄임 */
   font-size: 0.9rem; /* 모바일에서 글자 크기 줄임 */
