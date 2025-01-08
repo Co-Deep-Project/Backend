@@ -309,9 +309,9 @@ const CommitteePieChart = ({ bills }) => {
           <div className="left">
             <h1 className="profile-name">곽상언</h1>
             <div>
+              <p className="profile-details">- 소속: 더불어민주당</p>
               <p className="profile-details">- 출생: 1971. 11. 18 서울특별시</p>
               <p className="profile-details">- 학력: 서울대학교 법과대학 법학 석사</p>
-              <p className="profile-details">- 소속: 대한민국 국회의원</p>
               <p className="profile-details">
                 - 경력: <br />
                 2024.05~ 제22대 국회의원 (서울 종로구/더불어민주당)
