@@ -3,8 +3,6 @@ a {
   color: black;
 }
 
-
-
 .desktop {
   background-color: #ffffff;
   display: flex;
@@ -88,7 +86,7 @@ a {
 .main-layout {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 90%;
   max-width: 800px;
   margin: 50px auto;
@@ -118,36 +116,33 @@ a {
 }
 
 #button-container {
-  display: flex; 
+  display: flex;
   gap: 10px;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
-#region-button{
-  border: 1px solid black; 
+#region-button {
+  border: 1px solid black;
   padding: 10px;
+  color: black;
   background-color: white;
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s; 
-  position: fixed;
-  right: 8vw;
-  top: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
   height: 38px;
 }
 
 #home-button {
-  border: 1px solid black; 
-  padding: 10px; 
+  border: 1px solid black;
+  padding: 10px;
   color: black;
   background-color: white;
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s; 
-  position: fixed;
-  right: 3vw;
-  top: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  height: 38px;
 }
+
 
 #region-button:hover,
 #home-button:hover {
@@ -174,6 +169,7 @@ a {
   background-color: #d9d9d9;
   border-radius: 15px;
   cursor: pointer;
+  color: black;
   border: none; /* 테두리 제거 */
   transition: background-color 0.3s ease; /* 부드러운 색 변화 */
 }
@@ -365,27 +361,15 @@ a {
   font-size: 14px;
 }
 
-/*차트 관련*/
-.chart-container {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  margin: 20px auto;
-  margin-bottom: 60px;
-}
-
-.pie-chart {
-  position: relative;
-}
-
 .chartjs-render-monitor {
   padding-top: 20px; /* 차트 상단 여백 추가 */
 }
 
 .chart-container h2 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-size: 1.5em;
   color: #333;
+  text-align: center;
 }
 
 /* 반응형 - 모바일 (767px 이하) */
@@ -465,7 +449,6 @@ a {
   }
 
   .process-block {
-    width: 100%;
     margin: 0;
     padding: 10px;
   }

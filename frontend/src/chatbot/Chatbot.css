@@ -118,6 +118,10 @@
   user-select: none;
 }
 
+.chatbot-window.open {
+  top: 100px; /* 기본값 */
+}
+
 .chatbot-window.dragging {
   cursor: grabbing;
   opacity: 0.9;
@@ -353,25 +357,28 @@
   transition: opacity 0.3s ease;
 } */
 
-/* 모바일 스타일 수정 */
 @media screen and (max-width: 768px) {
   /* .tooltip {
     display: none;
   } */
 
+
   .chatbot-window {
     width: 100%;
-    height: 30vh;
+    height: 400px;
     border-radius: 20px 20px 0 0;
     position: fixed;
     bottom: 0;
-    left: 0;
-    transform: none !important;
-    background-color: white;
-    box-shadow: none; /* 그림자 제거 */
+    left: 50%; /* 화면 중앙 정렬을 위해 left 설정 */
+    transform: translateX(-50%); 
+    background-color: transparent;
+    box-shadow: none;
     z-index: 1002;
-    top: 250px !important;
+    border: none;
+    box-sizing: border-box; 
+    padding: 20px; 
   }
+  
 
   .chatbot-window.mobile-modal-open {
     bottom: 0;
@@ -492,8 +499,7 @@
     z-index: 1004; /* 가장 높은 z-index */
   }
 }
-/* 모바일 스타일 수정 */
-/* 모바일 스타일 수정 */
+
 @media screen and (max-width: 768px) {
   .chatbot-window {
     width: 100%;
@@ -518,3 +524,4 @@
     box-sizing: border-box;
   }
 }
+
