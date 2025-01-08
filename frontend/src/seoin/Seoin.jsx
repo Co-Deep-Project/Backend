@@ -149,60 +149,104 @@ const prepareChartData = (committeeCount) => {
 };
 
 const CommitteePieChart = ({ bills }) => {
-  // useMemo를 사용하여 bills가 변경될 때만 데이터를 다시 계산
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // ✅ 화면 크기 변경 시 isMobile 상태 업데이트
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // ✅ resize 이벤트 리스너 추가
+    window.addEventListener("resize", handleResize);
+
+    // ✅ 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const committeeCount = useMemo(() => groupByCommittee(bills), [bills]);
   const chartData = useMemo(() => prepareChartData(committeeCount), [committeeCount]);
-
-  const [shouldAnimate, setShouldAnimate] = useState(true);
-
-  useEffect(() => {
-    setShouldAnimate(true);
-    return () => setShouldAnimate(false);
-  }, [bills]);
 
   const options = {
     plugins: {
       legend: {
-        display: false, // 범례 표시
-        position: "top", // 범례 위치 (top, bottom, left, right)
+        display: isMobile, // 모바일에서는 legend 활성화
+        position: "top",
         labels: {
-          boxWidth: 20, // 범례 아이콘 크기
-          padding: 10, // 텍스트와 박스 사이 여백
+          boxWidth: 12,
+          padding: 10,
           font: {
-            size: 12, // 글씨 크기
+            size: 12,
+          },
+          generateLabels: (chart) => {
+            const data = chart.data;
+            return data.labels
+              .map((label, index) => {
+                const value = data.datasets[0].data[index];
+                const total = data.datasets[0].data.reduce((sum, val) => sum + val, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+  
+                if (percentage > 5) {
+                  return {
+                    text: `${label} (${percentage}%)`.replace(/(.{20})/g, "$1\n"),
+                    fillStyle: data.datasets[0].backgroundColor[index],
+                  };
+                }
+                return null;
+              })
+              .filter(Boolean); // null 값 제거
           },
         },
       },
       datalabels: {
-        color: "#000", // 텍스트 색상
+        color: isMobile ? "transparent" : "#000", // 모바일에서는 투명하게 처리
         font: {
-          size: 12,
+          size: 10,
         },
         formatter: (value, context) => {
           const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
           const percentage = ((value / total) * 100).toFixed(1);
-          return `${context.chart.data.labels[context.dataIndex]} (${percentage}%)`;
+  
+          if (percentage > 5) {
+            return `${context.chart.data.labels[context.dataIndex]} (${percentage}%)`;
+          }
+          return "";
         },
         anchor: "end",
         align: "end",
         offset: 10,
-      },
-    },
-    layout: {
-      padding: {
-        top: 20, // 위쪽 여백
-        bottom: -20, // 아래쪽 여백
+        padding: {
+          top: 12,
+          bottom: 12,
+        },
+        overlap: false,
+        clamp: true,
       },
     },
     responsive: true,
     maintainAspectRatio: false,
-    animation: {
-      duration: shouldAnimate ? 800 : 0,
-    },
   };  
 
+  const chartWidth = isMobile ? "100%" : "800px";
+  const chartHeight = isMobile ? "250px" : "350px";
+
   return (
-    <div style={{ width: "700px", height: "300px", margin: "40px auto" }}>
+    <div
+      style={{
+        width: chartWidth,
+        height: chartHeight,
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        overflowX: "auto",
+        overflowY: "hidden",
+        whiteSpace: "nowrap",
+      }}
+    >
       <Pie data={chartData} options={options} />
     </div>
   );

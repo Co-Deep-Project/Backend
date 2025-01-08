@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chatbot.css";
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Chatbot = () => {
   const navigate = useNavigate();
@@ -29,9 +30,46 @@ const Chatbot = () => {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const chatbotRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   //const [showTooltip, setShowTooltip] = useState(false);
   const [isFullscreenModal, setIsFullscreenModal] = useState(false);
   const messagesEndRef = useRef(null);
+
+
+  // ✅ 키보드 감지 및 bottom 위치 조정
+  const adjustChatbotPosition = () => {
+    if (window.visualViewport) {
+      const viewportHeight = window.visualViewport.height;
+      const fullHeight = window.innerHeight;
+      const keyboardHeight = fullHeight - viewportHeight;
+
+      if (keyboardHeight > 0) {
+        setKeyboardHeight(keyboardHeight);
+      } else {
+        setKeyboardHeight(0);
+      }
+    }
+  };
+
+  // ✅ 이벤트 리스너 추가
+  useEffect(() => {
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", adjustChatbotPosition);
+    }
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", adjustChatbotPosition);
+      }
+    };
+  }, []);
+
+  // ✅ 챗봇 창 열기/닫기
+  const toggleChatbot = () => {
+    setIsOpen(!isOpen);
+  };
+  
+
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -105,12 +143,15 @@ const Chatbot = () => {
     }
   }, [isDragging]);
 
-  const toggleChatbot = () => {
-    setIsOpen(!isOpen);
-    if (isOpen) {
-      setIsFullscreenModal(false); // 챗봇이 열릴 때 전체 모달 해제
-    }
-  };
+  // const toggleChatbot = () => {
+  //   setIsOpen(!isOpen);
+  //   if (isOpen) {
+  //     // 챗봇이 닫힐 때 초기 위치로 복원
+  //     if (chatbotRef.current) {
+  //       chatbotRef.current.style.top = "100px";
+  //     }
+  //   }
+  // };
 
   // 모달 열기
   const openModal = (url) => {
@@ -224,6 +265,9 @@ const Chatbot = () => {
   return (
     <div className="chatbot-container">
       <header id="tracking-header">
+        <Helmet>
+          <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
+        </Helmet>
         <img id="logo" src="/images/logo.png" alt="PoliTracker" onClick={() => navigate("/")} />
         <div id="button-container">
           <button id="home-button" onClick={() => navigate("/")}>Home</button>
@@ -274,17 +318,14 @@ const Chatbot = () => {
       )}
   
       {isOpen && (
-        <div
-          ref={chatbotRef}
-          className={`chatbot-window ${isDragging ? 'dragging' : ''} ${isMobile && isModalOpen ? 'mobile-modal-open' : ''}`}
-          // 크롬에서 transform 쓰면 창 아예 안뜨는 에러남 -> position 이용
-          style={isMobile && isModalOpen ? {} : {
-            top: `${position.y}px`,
-            left: `${position.x}px`,
-            transition: isDragging ? "none" : "top 0.3s ease, left 0.3s ease"
-          }}
-          onMouseDown={handleMouseDown}
-        >
+          <div
+            ref={chatbotRef}
+            className={`chatbot-window ${isMobile && isModalOpen ? 'mobile-modal-open' : ''}`}
+            style={{
+              bottom: `${keyboardHeight}px`, // 키보드 높이에 따라 bottom 조정
+              transition: "bottom 0.3s ease", // 부드러운 이동 효과
+            }}
+          >
           <div className="chatbot-header">
             <span>POLITRACKER Chatbot</span>
             <button className="close-button" onClick={() => setIsOpen(false)}>✖</button>
