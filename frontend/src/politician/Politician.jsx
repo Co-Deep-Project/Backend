@@ -73,7 +73,7 @@ const Politician = () => {
                     onClick={() => navigate("/")}
                 />
                 <div id="button-container">
-                    <button id="region-button" onClick={() => navigate("/select-region")}>구</button>
+                    <button id="region-button" onClick={() => navigate("/select-region")}>구 선택</button>
                     <button id="home-button" onClick={() => navigate("/")}>Home</button>
                 </div>
             </header>
