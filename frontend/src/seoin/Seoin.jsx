@@ -105,12 +105,13 @@ const Seoin = () => {
 // 그래프 추가
 const groupByCommittee = (bills) => {
   const committeeCount = {};
+
   bills.forEach((bill) => {
-    // 공동발의 법안만 처리
-    if (bill.type === "공동발의") {
-      const committee = bill.committee || "미분류";
-      committeeCount[committee] = (committeeCount[committee] || 0) + 1;
-    }
+    const committee = bill.committee || "미분류";
+    // `type` 정보를 사용하여 대표발의와 공동발의를 구분
+    const billType = bill.type || "기타";
+    const key = `${committee} (${billType})`;
+    committeeCount[key] = (committeeCount[key] || 0) + 1;
   });
   
   const sortedCommittees = Object.entries(committeeCount).sort(
@@ -128,7 +129,7 @@ const prepareChartData = (committeeCount) => {
     labels,
     datasets: [
       {
-        label: "소관위원회별 공동발의 법안 분포",
+        label: "소관위원회별 법안 분포",
         data,
         backgroundColor: [
           "#cfc2e9",
