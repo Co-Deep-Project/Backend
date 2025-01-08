@@ -147,8 +147,8 @@ console.log("Character Description:", description);
           alt="PoliTracker"
           onClick={() => navigate("/")}
         />
-        <div id="button-container">
-          <button id="home-button" onClick={() => navigate("/")}>
+        <div id="menu">
+          <button id="home-button" onClick={handleHomeClick}>
             Home
           </button>
         </div>

@@ -164,7 +164,7 @@
 .chatbot-messages {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
+  overflow-y: visible;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -471,11 +471,16 @@
   }
 
   .chatbot-messages {
-    background-color: white;
-    height: calc(30vh - 120px);
+    flex: 1; /* 부모 컨테이너에서 차지할 공간 */
+    padding: 20px;
     overflow-y: auto; /* 스크롤 활성화 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f9f9f9;
+    max-height: calc(100% - 120px); /* 적절한 높이 설정 */
   }
-
+  
 
   .chatbot-input-container {
     background-color: white;
@@ -494,3 +499,29 @@
     z-index: 1004; /* 가장 높은 z-index */
   }
 }
+
+@media screen and (max-width: 768px) {
+  .chatbot-window {
+    width: 100%;
+    height: 50vh; /* 챗봇 창이 화면의 절반을 차지하도록 */
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto; /* 넘치는 콘텐츠를 스크롤 가능하도록 */
+    box-shadow: none;
+  }
+
+
+
+  .chatbot-input-container {
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
