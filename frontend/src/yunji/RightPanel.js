@@ -58,16 +58,21 @@ const harmonyInclusionProgress = [
   return (
     <div className="right-panel">
       <h3>정책 이행률 평가</h3>
-      <p>
-        아래 데이터는 <a href="https://www.jongno.go.kr/Mayor.do?menuId=400790&menuNo=400790" target="_blank" rel="noopener noreferrer">종로 열린 구청장실</a>에서 가져온 내용을 바탕으로 작성되었습니다.
-      </p>
+      
       <select onChange={handleSelectChange} value={activeGroup} className="dropdown">
   <option value="인류문화의 본">인류문화의 본</option>
   <option value="세계문화의 본">세계문화의 본</option>
   <option value="미래혁신의 본">미래혁신의 본</option>
   <option value="화합포용의 본">화합포용의 본</option>
 </select>
-
+<a
+        href="https://www.jongno.go.kr/Mayor.do?menuId=400790&menuNo=400790"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="link-button"
+      >
+        더 자세한 정보 확인하기 ↗
+      </a>
       {/* 선택된 그룹에 따라 히스토그램 표시 */}
       {activeGroup && (
         <ResponsiveContainer width="100%" height={300}>
