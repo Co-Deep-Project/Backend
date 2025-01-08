@@ -113,9 +113,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 9998;
+  z-index: 9999; 
   border: 1px solid #e0e0e0;
   user-select: none;
+  pointer-events: auto; /* 챗봇 창만 클릭되게 설정 */
 }
 
 .chatbot-window.open {
@@ -170,6 +171,7 @@
   gap: 10px;
   background-color: #f9f9f9;
   user-select: text;
+  overflow-y: auto; 
 }
 
 /* 메시지 스타일 */
@@ -506,8 +508,7 @@
     height: 50vh; /* 챗봇 창이 화면의 절반을 차지하도록 */
     border-radius: 20px 20px 0 0;
     position: fixed;
-    bottom: 0;
-    left: 0;
+    /* bottom: 0; */
     overflow-y: auto; /* 넘치는 콘텐츠를 스크롤 가능하도록 */
     box-shadow: none;
   }
