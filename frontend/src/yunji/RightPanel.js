@@ -58,20 +58,45 @@ const harmonyInclusionProgress = [
   return (
     <div className="right-panel">
       <h3>정책 이행률 평가</h3>
+      
       <select onChange={handleSelectChange} value={activeGroup} className="dropdown">
   <option value="인류문화의 본">인류문화의 본</option>
   <option value="세계문화의 본">세계문화의 본</option>
   <option value="미래혁신의 본">미래혁신의 본</option>
   <option value="화합포용의 본">화합포용의 본</option>
 </select>
-
+<a
+        href="https://www.jongno.go.kr/Mayor.do?menuId=400790&menuNo=400790"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="link-button"
+      >
+        더 자세한 정보 확인하기 ↗
+      </a>
       {/* 선택된 그룹에 따라 히스토그램 표시 */}
       {activeGroup && (
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={getCurrentProgressData()} layout="horizontal" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <BarChart data={getCurrentProgressData()} layout="horizontal" margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="range" type="category" />
-          <YAxis type="number" domain={[0, 10]} />
+          <XAxis
+              dataKey="range"
+              type="category"
+              label={{
+                value: '이행률 (%)',
+                position: 'insideBottom',
+                offset: -10
+              }}
+            />
+          <YAxis
+              type="number"
+              domain={[0, 10]}
+              label={{
+                value: '정책 개수',
+                angle: -90,
+                position: 'insideLeft',
+                offset: 20
+              }}
+            />
           <Tooltip />
           <Bar dataKey="count" fill="#B19CD9" name="정책 개수" />
         </BarChart>
