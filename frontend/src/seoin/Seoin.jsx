@@ -228,6 +228,7 @@ const CommitteePieChart = ({ bills }) => {
     },
     responsive: true,
     maintainAspectRatio: false,
+    animation: false,
   };  
 
   const chartWidth = isMobile ? "100%" : "800px";
