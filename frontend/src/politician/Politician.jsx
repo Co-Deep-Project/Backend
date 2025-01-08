@@ -8,7 +8,8 @@ const Politician = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    const districtName = location.state?.district || "알 수 없음";
+    const district = location.state?.district || "알 수 없음";
+    const districtName = "서울 " + district;
 
     const [politicians, setPoliticians] = useState([]);
     const decodeHTMLEntities = (text) => {
