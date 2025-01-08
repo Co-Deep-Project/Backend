@@ -58,6 +58,9 @@ const harmonyInclusionProgress = [
   return (
     <div className="right-panel">
       <h3>정책 이행률 평가</h3>
+      <p>
+        아래 데이터는 <a href="https://www.jongno.go.kr/Mayor.do?menuId=400790&menuNo=400790" target="_blank" rel="noopener noreferrer">종로 열린 구청장실</a>에서 가져온 내용을 바탕으로 작성되었습니다.
+      </p>
       <select onChange={handleSelectChange} value={activeGroup} className="dropdown">
   <option value="인류문화의 본">인류문화의 본</option>
   <option value="세계문화의 본">세계문화의 본</option>
@@ -76,7 +79,7 @@ const harmonyInclusionProgress = [
               label={{
                 value: '이행률 (%)',
                 position: 'insideBottom',
-                offset: -5
+                offset: -10
               }}
             />
           <YAxis
