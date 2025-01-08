@@ -160,7 +160,7 @@
 .chatbot-messages {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
+  overflow-y: visible;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -464,11 +464,16 @@
   }
 
   .chatbot-messages {
-    background-color: white;
-    height: calc(30vh - 120px);
+    flex: 1; /* 부모 컨테이너에서 차지할 공간 */
+    padding: 20px;
     overflow-y: auto; /* 스크롤 활성화 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f9f9f9;
+    max-height: calc(100% - 120px); /* 적절한 높이 설정 */
   }
-
+  
 
   .chatbot-input-container {
     background-color: white;
@@ -501,10 +506,7 @@
     box-shadow: none;
   }
 
-  .chatbot-messages {
-    height: calc(50vh - 120px); /* 전체 높이에서 헤더와 입력창 제외 */
-    overflow-y: auto; /* 메시지가 많을 때 스크롤 가능 */
-  }
+
 
   .chatbot-input-container {
     background-color: white;
