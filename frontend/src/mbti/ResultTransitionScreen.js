@@ -29,7 +29,7 @@ const ResultTransitionScreen = () => {
           alt="PoliTracker"
           onClick={() => navigate("/")}
         />
-        <div id="button-container">
+        <div className="menu">
           <button id="home-button" onClick={() => navigate("/")}>
             Home
           </button>
