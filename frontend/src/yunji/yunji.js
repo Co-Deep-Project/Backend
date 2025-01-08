@@ -44,7 +44,7 @@ const Yunji = () => {
         />
         <div id="button-container">
           <button id="region-button" onClick={() => navigate("/select-region")}>
-            구
+            구 선택
           </button>
           <button id="home-button" onClick={() => navigate("/")}>
             Home
