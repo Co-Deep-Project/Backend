@@ -57,7 +57,7 @@ const Politician = () => {
 
 // 카드 클릭 핸들러
     const handleCardClick = () => {
-        if (districtName === "종로구") {
+        if (districtName === "서울 종로구") {
             navigate("/seoin");
         } else {
             alert("현재 지원하는 국회의원 정보가 아닙니다.\n구버튼을 클릭하여 다시 구를 선택하세요.\n(현재는 종로구만 지원중입니다.)");
