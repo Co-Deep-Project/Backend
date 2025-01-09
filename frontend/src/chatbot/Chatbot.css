@@ -371,12 +371,12 @@
     border-radius: 20px 20px 0 0;
     position: fixed;
     bottom: 0;
-    left: 50%; /* 화면 중앙 정렬을 위해 left 설정 */
+    left: 50%; 
     transform: translateX(-50%); 
     background-color: transparent;
-    box-shadow: none;
     z-index: 1002;
     border: none;
+    box-shadow: 8px 15px rgba(0, 0, 0, 0.3);
     box-sizing: border-box; 
     padding: 20px 20px 0 20px; 
   }
@@ -384,8 +384,8 @@
 
   .chatbot-window.mobile-modal-open {
     bottom: 0;
-    height: 30vh;
     border-radius: 20px 20px 0 0;
+    z-index : 1003;
   }
 
   .modal-overlay.mobile-modal {
@@ -468,8 +468,8 @@
   .chatbot-header {
     border-radius: 20px 20px 0 0;
     border-bottom: 1px solid #e0e0e0;
-    background-color: #9b9be8;
-    color: white;
+    background-color: #cfc2e9;
+    color: black;
   }
 
   .chatbot-messages {
@@ -486,11 +486,12 @@
 
   .chatbot-input-container {
     background-color: white;
-    border-top: 1px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
     padding: 10px 15px;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 100%;    
+    border-radius: 0 0 20px 20px;
     box-sizing: border-box;
   }
 
