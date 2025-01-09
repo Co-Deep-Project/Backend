@@ -140,7 +140,7 @@ const SelectRegion = () => {
                         strokeWeight: 2,
                         strokeColor: "#5C5B5C",
                         strokeOpacity: 0.8,
-                        fillColor: "#CACACB",
+                        fillColor: "#fff",
                         fillOpacity: 0.7,
                     });
 
