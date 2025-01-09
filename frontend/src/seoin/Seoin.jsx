@@ -107,13 +107,12 @@ const groupByCommittee = (bills) => {
   const committeeCount = {};
 
   bills.forEach((bill) => {
+    // 소관위원회별로 카운트 (대표발의/공동발의 구분 제거)
     const committee = bill.committee || "미분류";
-    // `type` 정보를 사용하여 대표발의와 공동발의를 구분
-    const billType = bill.type || "기타";
-    const key = `${committee} (${billType})`;
-    committeeCount[key] = (committeeCount[key] || 0) + 1;
+    committeeCount[committee] = (committeeCount[committee] || 0) + 1;
   });
-  
+
+  // 카운트를 기준으로 내림차순 정렬
   const sortedCommittees = Object.entries(committeeCount).sort(
     (a, b) => b[1] - a[1]
   );
@@ -365,7 +364,7 @@ const CommitteePieChart = ({ bills }) => {
         <div id="process-block" className="process-block">
           {activeTab === "bills" && (
             <div className="chart-container">
-              <h2>소관위원회별 공동발의 법안 분포</h2>
+              <h2>소관위원회별 법안 분포</h2>
               <CommitteePieChart bills={bills} />
             </div>
           )}
