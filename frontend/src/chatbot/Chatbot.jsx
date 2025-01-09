@@ -311,7 +311,7 @@ const Chatbot = () => {
         <div 
           className="chatbot-button" 
           onClick={toggleChatbot}
-          style={isMobile && isModalOpen ? { bottom: '32%' } : undefined}
+          style={isMobile ? { bottom: '5vh' } : undefined}
         >
           💬
         </div>
