@@ -138,9 +138,9 @@ const SelectRegion = () => {
                         map: map,
                         path: path,
                         strokeWeight: 2,
-                        strokeColor: "#004c80",
+                        strokeColor: "#5C5B5C",
                         strokeOpacity: 0.8,
-                        fillColor: "#fff",
+                        fillColor: "#CACACB",
                         fillOpacity: 0.7,
                     });
 
