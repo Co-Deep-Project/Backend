@@ -5,12 +5,27 @@ import './ResultTransitionScreen.css';
 const ResultTransitionScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const scores = location.state.scores;
 
-  const handleContinue = () => {
-    navigate('/test/result', { state: { scores } });
+  const searchParams = new URLSearchParams(location.search);
+  const key = searchParams.get("key");
+
+  const scores = {
+    economicProgressive: Number(searchParams.get("economicProgressive")) || 0,
+    economicConservative: Number(searchParams.get("economicConservative")) || 0,
+    diplomaticProgressive: Number(searchParams.get("diplomaticProgressive")) || 0,
+    diplomaticConservative: Number(searchParams.get("diplomaticConservative")) || 0,
+    socialProgressive: Number(searchParams.get("socialProgressive")) || 0,
+    socialConservative: Number(searchParams.get("socialConservative")) || 0,
   };
 
+  const handleContinue = () => {
+    if (scores) {
+      navigate(`/test/result${location.search}`);
+    } else {
+      alert("결과 데이터를 찾을 수 없습니다.");
+      navigate("/"); // 홈으로 리다이렉트
+    }
+  };
   const backgroundStyle = {
     backgroundImage: `url('/images/background1.jpg')`,
     backgroundSize: 'cover', // 배경 이미지를 화면에 꽉 채움

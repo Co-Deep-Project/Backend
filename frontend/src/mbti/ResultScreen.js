@@ -1,14 +1,45 @@
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from '../assets/polilogo.png';
 import './ResultScreen.css'; // CSS 파일을 사용하여 스타일 추가
 
 const ResultScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const results = location.state.scores;
+  const [results, setResults] = useState(null);
+
+
+  const [copySuccess, setCopySuccess] = useState(""); // 복사 성공 메시지 상태 추가
+  
+   // 먼저 searchParams를 초기화합니다.
+   const searchParams = new URLSearchParams(location.search);
+
+   // key를 searchParams에서 가져옵니다.
+   const key = searchParams.get("key");
+
   const onRestart = () => {
     navigate('/start'); // "/start" 경로로 네비게이트
+  };
+  useEffect(() => {
+    if (key) {
+      // localStorage에서 key를 사용해 점수 복구
+      const storedResults = localStorage.getItem(key);
+      if (storedResults) {
+        setResults(JSON.parse(storedResults));
+      } else {
+        alert("결과 데이터를 찾을 수 없습니다.");
+        navigate("/"); // 데이터가 없을 경우 홈으로 이동
+      }
+    }
+  }, [key, navigate]);
+
+  const handleResultShareClick = () => {
+    const queryParams = new URLSearchParams(scores).toString();
+    const shareLink = `http://localhost:3000/test/result?${queryParams}`;
+    navigator.clipboard
+      .writeText(shareLink)
+      .then(() => alert("나의 결과 링크가 복사되었습니다!"))
+      .catch(() => alert("링크 복사에 실패했습니다."));
   };
 
   const handleHomeClick = () => {
@@ -17,23 +48,46 @@ const ResultScreen = () => {
     }
     // 사용자가 '취소'를 클릭하면 현재 페이지에 머무름
   };
+  const handleTestShareClick = () => {
+    const shareLink = "https://politrackers.vercel.app/test";
+    navigator.clipboard.writeText(shareLink)
+      .then(() => {
+        setCopySuccess("링크가 복사되었습니다!"); // 복사 성공 메시지
+        setTimeout(() => setCopySuccess(""), 2000); // 2초 후 메시지 지우기
+      })
+      .catch(() => {
+        setCopySuccess("링크 복사에 실패했습니다."); // 복사 실패 메시지
+        setTimeout(() => setCopySuccess(""), 2000); // 2초 후 메시지 지우기
+      });
+  };
 
-  
-  console.log("Retrieved Results:", results);
-  const {
-    economicProgressive,
-    economicConservative,
-    diplomaticProgressive,
-    diplomaticConservative,
-    socialProgressive,
-    socialConservative
-  } = results;
 
-  const totalProgressive = results.economicProgressive + results.diplomaticProgressive + results.socialProgressive;
-  const totalConservative = results.economicConservative + results.diplomaticConservative + results.socialConservative;
-  const finalEconomic = economicProgressive > economicConservative ? "진보" : "보수";
-  const finalDiplomatic = diplomaticProgressive > diplomaticConservative ? "진보" : "보수";
-  const finalSocial = socialProgressive > socialConservative ? "진보" : "보수";
+  const scores = {
+    economicProgressive: Number(searchParams.get("economicProgressive")) || 0,
+    economicConservative: Number(searchParams.get("economicConservative")) || 0,
+    diplomaticProgressive: Number(searchParams.get("diplomaticProgressive")) || 0,
+    diplomaticConservative: Number(searchParams.get("diplomaticConservative")) || 0,
+    socialProgressive: Number(searchParams.get("socialProgressive")) || 0,
+    socialConservative: Number(searchParams.get("socialConservative")) || 0,
+  };
+  console.log("Retrieved Results:", scores);
+  if (
+    !Object.values(scores).some((val) => val > 0) &&
+    location.search === ""
+  ) {
+    alert("결과 데이터를 찾을 수 없습니다.");
+    navigate("/");
+    return null;
+  }
+
+  const totalProgressive = scores.economicProgressive + scores.diplomaticProgressive + scores.socialProgressive;
+  const totalConservative = scores.economicConservative + scores.diplomaticConservative + scores.socialConservative;
+
+  const finalEconomic = scores.economicProgressive > scores.economicConservative ? "진보" : "보수";
+  const finalDiplomatic = scores.diplomaticProgressive > scores.diplomaticConservative ? "진보" : "보수";
+  const finalSocial = scores.socialProgressive > scores.socialConservative ? "진보" : "보수";
+
+
   let character = "세종대왕";
   let image = "/images/세종대왕.jpg";
   let description = [
@@ -168,8 +222,25 @@ console.log("Character Description:", description);
           </ul>
         </div>
   
-    <button className="finishBtn" onClick={onRestart}>다시 테스트하기</button>
-  </div>
+   {/* 버튼 컨테이너 */}
+   <div className="button-container">
+          <button className="finishBtn" onClick={handleResultShareClick}>
+            나의 결과 공유하기
+          </button>
+          <button className="finishBtn" onClick={handleTestShareClick}>
+            테스트 링크 공유하기
+          </button>
+        </div>
+
+        <div className="restart-container">
+          <button className="finishBtn" onClick={onRestart}>
+            다시 테스트하기
+          </button>
+        </div>
+
+        {copySuccess && <p className="copy-success">{copySuccess}</p>}
+      </div>
+
   <footer className="footer">
         <p>성균관대학교 트래커스꾸<br />서울특별시 종로구 성균관로 25-2<br />trackerskku@g.skku.edu</p>
       </footer>
