@@ -182,10 +182,13 @@
 }
 
 @media (max-width: 767px) {
-  .result-header, .result-image, .description-container, .result-description, .restart-button, .finishBtn {
+  .result-header, .result-image, .description-container, .result-description, .restart-button  {
     max-width: 90%; /* 모든 주요 컨테이너를 화면의 90% 너비로 조정 */
   }
 
+  .finishBtn {
+    max-width: 100%;
+  }
   .result-header h1 {
     font-size: 1.2rem; /* 더 작은 화면에서 헤더 폰트 크기 조정 */
   }
@@ -240,4 +243,17 @@
   margin-top: 10px;
   color: #28a745;
   font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* 버튼 양옆 정렬 */
+  gap: 20px; /* 버튼 간 간격 */
+  margin: 20px 0;
+}
+
+.restart-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3px;
 }

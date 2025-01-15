@@ -224,16 +224,16 @@ console.log("Character Description:", description);
   
    {/* 버튼 컨테이너 */}
    <div className="button-container">
-          <button className="share-btn" onClick={handleResultShareClick}>
+          <button className="finishBtn" onClick={handleResultShareClick}>
             나의 결과 공유하기
           </button>
-          <button className="share-btn" onClick={handleTestShareClick}>
+          <button className="finishBtn" onClick={handleTestShareClick}>
             테스트 링크 공유하기
           </button>
         </div>
 
         <div className="restart-container">
-          <button className="restart-btn" onClick={onRestart}>
+          <button className="finishBtn" onClick={onRestart}>
             다시 테스트하기
           </button>
         </div>
