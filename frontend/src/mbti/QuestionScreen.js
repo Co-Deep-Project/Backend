@@ -158,9 +158,13 @@ const QuestionScreen = ({ onComplete }) => {
   });
   const [answers, setAnswers] = useState(Array(totalQuestions).fill(null)); // 각 질문의 선택값 기록
   const [isFlipping, setIsFlipping] = useState(false);
+  const generateRandomKey = () => Math.random().toString(36).substring(2, 10);
+
 
   const [answerHistory, setAnswerHistory] = useState([]);
   const [animationState, setAnimationState] = useState("");
+  const [randomKey] = useState(() => generateRandomKey());
+
   const handleNext = () => {
     if (selectedAnswer === null) {
       alert("선지를 선택해주세요!");
@@ -168,6 +172,7 @@ const QuestionScreen = ({ onComplete }) => {
     }
     setAnimationState("flipping-out"); // 애니메이션 상태 설정
 
+    
     const currentQ = shuffledQuestions[currentQuestion];
     const selectedScoreType = currentQ.answers[selectedAnswer].scoreType;
 
@@ -197,7 +202,9 @@ const QuestionScreen = ({ onComplete }) => {
       }, 800); // 애니메이션 지속 시간과 일치
     } else {
       // 모든 질문이 완료되면 ResultTransitionScreen으로 이동하면서 점수 상태 전달
-navigate('/test/result-transition', { state: { scores: updatedScores } });
+      const queryParams = new URLSearchParams(scores).toString();
+    navigate(`/test/result-transition?${queryParams}`);
+
 
     }
     setSelectedAnswer(null);

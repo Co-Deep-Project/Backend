@@ -6,9 +6,12 @@ const ResultTransitionScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const scores = location.state.scores;
+  const searchParams = new URLSearchParams(location.search);
+  const key = searchParams.get("key");
+
 
   const handleContinue = () => {
-    navigate('/test/result', { state: { scores } });
+    navigate(`/test/result${location.search}`);
   };
 
   const backgroundStyle = {
