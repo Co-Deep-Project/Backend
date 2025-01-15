@@ -34,7 +34,7 @@ const Desktop = () => {
   }, []);
 
   const navigateToMbti = () => {
-    navigate("/mbti"); // Navigate to the MBTI page
+    navigate("/test"); // Navigate to the MBTI page
   };
 
   const navigateToSelectRegion = () => {

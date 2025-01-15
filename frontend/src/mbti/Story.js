@@ -28,7 +28,7 @@ const Story = () => {
       setShowBookAnimation(true);
       // 애니메이션 종료 후 QuestionScreen으로 이동
       setTimeout(() => {
-        navigate("/question");
+        navigate("/test/question");
       }, 2000); // 애니메이션 지속 시간 (2초)
     }
   };

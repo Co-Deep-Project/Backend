@@ -56,7 +56,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/mbti",
+    path: "/test",
     element: (
       <Layout>
         <Mbti />
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/result",
+    path: "/test/result",
     element: (
       <Layout>
         <ResultScreen />
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/question",
+    path: "/test/question",
     element: (
       <Layout>
         <QuestionScreen />
@@ -96,7 +96,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/story",
+    path: "/test/story",
     element: (
       <Layout>
         <Story />
@@ -104,7 +104,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/result-transition",
+    path: "/test/result-transition",
     element: (
       <Layout>
         <ResultTransitionScreen />

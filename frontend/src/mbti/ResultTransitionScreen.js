@@ -8,7 +8,7 @@ const ResultTransitionScreen = () => {
   const scores = location.state.scores;
 
   const handleContinue = () => {
-    navigate('/result', { state: { scores } });
+    navigate('/test/result', { state: { scores } });
   };
 
   const backgroundStyle = {

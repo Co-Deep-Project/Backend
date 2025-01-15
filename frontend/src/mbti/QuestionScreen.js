@@ -197,7 +197,7 @@ const QuestionScreen = ({ onComplete }) => {
       }, 800); // 애니메이션 지속 시간과 일치
     } else {
       // 모든 질문이 완료되면 ResultTransitionScreen으로 이동하면서 점수 상태 전달
-navigate('/result-transition', { state: { scores: updatedScores } });
+navigate('/test/result-transition', { state: { scores: updatedScores } });
 
     }
     setSelectedAnswer(null);
