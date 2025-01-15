@@ -116,7 +116,7 @@ const SelectRegion = () => {
                         content.querySelector("#mayor-btn").addEventListener("click", () => {
                             const districtName = dong.properties.SIG_KOR_NM;
                             if (districtName === "종로구") {
-                                navigate("/yunji");
+                                navigate("/mayor");
                             } else {
                                 alert("현재 지원되지 않는 페이지입니다.\n(현재는 종로구만 지원)");
                             }
