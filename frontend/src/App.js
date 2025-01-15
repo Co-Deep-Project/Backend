@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/yunji",
+    path: "/mayor",
     element: (
       <Layout>
         <Yunji />
