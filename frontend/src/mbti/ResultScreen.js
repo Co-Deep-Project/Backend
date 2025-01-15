@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/polilogo.png';
 import './ResultScreen.css'; // CSS 파일을 사용하여 스타일 추가
@@ -7,6 +7,9 @@ const ResultScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const results = location.state.scores;
+  const [copySuccess, setCopySuccess] = useState(""); // 복사 성공 메시지 상태 추가
+ 
+
   const onRestart = () => {
     navigate('/start'); // "/start" 경로로 네비게이트
   };
@@ -17,7 +20,18 @@ const ResultScreen = () => {
     }
     // 사용자가 '취소'를 클릭하면 현재 페이지에 머무름
   };
-
+  const handleShareClick = () => {
+    const shareLink = "https://politrackers.vercel.app/test";
+    navigator.clipboard.writeText(shareLink)
+      .then(() => {
+        setCopySuccess("링크가 복사되었습니다!"); // 복사 성공 메시지
+        setTimeout(() => setCopySuccess(""), 2000); // 2초 후 메시지 지우기
+      })
+      .catch(() => {
+        setCopySuccess("링크 복사에 실패했습니다."); // 복사 실패 메시지
+        setTimeout(() => setCopySuccess(""), 2000); // 2초 후 메시지 지우기
+      });
+  };
   
   console.log("Retrieved Results:", results);
   const {
@@ -168,8 +182,16 @@ console.log("Character Description:", description);
           </ul>
         </div>
   
+  <div className = "button-container">
     <button className="finishBtn" onClick={onRestart}>다시 테스트하기</button>
+     {/* 링크 공유하기 버튼 */}
+     <button className="finishBtn" onClick={handleShareClick}>
+          테스트 링크 공유하기
+        </button>
+        </div>
+        {copySuccess && <p className="copy-success">{copySuccess}</p>}
   </div>
+
   <footer className="footer">
         <p>성균관대학교 트래커스꾸<br />서울특별시 종로구 성균관로 25-2<br />trackerskku@g.skku.edu</p>
       </footer>
