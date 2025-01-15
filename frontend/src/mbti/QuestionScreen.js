@@ -170,45 +170,47 @@ const QuestionScreen = ({ onComplete }) => {
       alert("선지를 선택해주세요!");
       return;
     }
+  
     setAnimationState("flipping-out"); // 애니메이션 상태 설정
-
-    
+  
     const currentQ = shuffledQuestions[currentQuestion];
     const selectedScoreType = currentQ.answers[selectedAnswer].scoreType;
-
-    // 선택값 반영
-    const updatedScores = {
-      ...scores,
-      [selectedScoreType]: scores[selectedScoreType] + 1,
-    };
-
-    setScores(updatedScores);
-      setAnswerHistory([...answerHistory, selectedAnswer]);
-
-
-    setAnswers((prevAnswers) => {
-      const updatedAnswers = [...prevAnswers];
-      updatedAnswers[currentQuestion] = selectedAnswer;
-      return updatedAnswers;
-    });
-    console.log(`선택된 답: ${currentQ.answers[selectedAnswer].text}`);
-    console.log(`업데이트된 점수: `, updatedScores);
+  
+    // 마지막 질문인지 확인
     if (currentQuestion < totalQuestions - 1) {
-      setAnimationState("flipping-out");
+      // 선택값 반영
+      const updatedScores = {
+        ...scores,
+        [selectedScoreType]: scores[selectedScoreType] + 1,
+      };
+  
+      setScores(updatedScores); // 상태 업데이트
+      console.log(`업데이트된 점수:`, updatedScores);
+
+      setAnswers((prevAnswers) => {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[currentQuestion] = selectedAnswer;
+        return updatedAnswers;
+      });
+  
       setTimeout(() => {
         setCurrentQuestion(currentQuestion + 1);
-        setSelectedAnswer(answerHistory[currentQuestion + 1] || null);
-        setAnimationState("");  // 애니메이션 상태 초기화
-      }, 800); // 애니메이션 지속 시간과 일치
+        setSelectedAnswer(null); // 선택 초기화
+        setAnimationState(""); // 애니메이션 상태 초기화
+      }, 800); // 애니메이션 지속 시간
     } else {
-      // 모든 질문이 완료되면 ResultTransitionScreen으로 이동하면서 점수 상태 전달
-      const queryParams = new URLSearchParams(scores).toString();
-    navigate(`/test/result-transition?${queryParams}`);
-
-
+      // 마지막 질문일 경우 결과로 이동 전에 선택값 반영
+      const finalScores = {
+        ...scores,
+        [selectedScoreType]: scores[selectedScoreType] + 1,
+      };
+      
+  console.log(`최종 점수:`, finalScores);
+      const queryParams = new URLSearchParams(finalScores).toString();
+      navigate(`/test/result-transition?${queryParams}`);
     }
-    setSelectedAnswer(null);
   };
+  
 
 
   const handlePrevious = () => {
