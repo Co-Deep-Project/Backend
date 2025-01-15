@@ -50,7 +50,7 @@ const ResultScreen = () => {
   };
   const handleTestShareClick = () => {
     const shareLink = "https://politrackers.vercel.app/test";
-    navigator.clipboard.writeText(shareLink)
+    navigator.clipboard
     .writeText(shareLink)
     .then(() => alert("테스트 링크가 복사되었습니다!"))
     .catch(() => alert("링크 복사에 실패했습니다."));
