@@ -35,7 +35,7 @@ const ResultScreen = () => {
 
   const handleResultShareClick = () => {
     const queryParams = new URLSearchParams(scores).toString();
-    const shareLink = `http://localhost:3000/test/result?${queryParams}`;
+    const shareLink = `https://politrackers.vercel.app/test/result?${queryParams}`;
     navigator.clipboard
       .writeText(shareLink)
       .then(() => alert("나의 결과 링크가 복사되었습니다!"))
