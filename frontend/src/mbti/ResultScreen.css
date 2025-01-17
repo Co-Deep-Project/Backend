@@ -7,7 +7,12 @@
   justify-content: center;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
   padding: 20px;
+}
+
+.character-name {
+  font-weight: bold; /* character 부분만 bold 처리 */
 }
 
 /* 결과 헤더 */
@@ -165,6 +170,8 @@
 }
 .result-title {
   margin-top: 60px;
+  font-weight: normal;
+  text-align: center;
 }
 .description-container, .result-description {
   padding: 15px; /* 모바일에서 내부 패딩 줄임 */
