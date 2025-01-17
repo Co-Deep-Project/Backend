@@ -1,0 +1,78 @@
+.vote-filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  justify-content: left;
+}
+
+.vote-filter-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+  font-weight: bold;
+  background-color: #c2a9fffc;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.vote-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vote-filter-btn.approve {
+  background-color: #cfc2e9;
+  color: #000;
+}
+
+.vote-filter-btn.against {
+  background-color: #d9d9d9;
+  color: #000;
+}
+
+.vote-filter-btn.abstain {
+  background-color: #afafaf;
+  color: #000;
+}
+
+
+.vote-filter-btn:hover {
+  font-weight: bold;
+  transform: translateY(-2px);
+  background-color: #c2a9ffab;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.vote-filter-btn.approve:hover {
+  background-color: #cfc2e9ab;
+  color: #000;
+}
+
+.vote-filter-btn.against:hover {
+  background-color: #d9d9d9ab;
+  color: #000;
+}
+
+.vote-filter-btn.abstain:hover {
+  background-color: #afafafab;
+  color: #000;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 767px) {
+  .vote-filter-container {
+    margin-top: 10px;
+    margin-left: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .vote-filter-btn {
+    padding: 6px 15px;
+    font-size: 12px;
+  }
+}

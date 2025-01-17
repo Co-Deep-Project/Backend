@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./seoin_style.css";
+import "./VoteFilter.css";
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -21,6 +22,8 @@ const Seoin = () => {
   const [activeTab, setActiveTab] = useState("votes");
   const [votesLoading, setVotesLoading] = useState(true);
   const [billsLoading, setBillsLoading] = useState(true);
+  const [voteFilter, setVoteFilter] = useState("all");
+  const [billFilter, setBillFilter] = useState("all");
 
   const ITEMS_PER_PAGE = 3;
   const memberName = "곽상언";
@@ -52,7 +55,33 @@ const Seoin = () => {
     fetchData();
   }, []);
 
+  const handleVoteFilter = (filterType) => {
+    setVoteFilter(filterType);
+    setExpanded({});
+    let filteredVotes;
+    
+    if (filterType === "all") {
+      filteredVotes = votes.filter(vote => vote.RESULT_VOTE_MOD !== "불참");
+    } else {
+      filteredVotes = votes.filter(vote => vote.RESULT_VOTE_MOD === filterType);
+    }
+    
+    setDisplayData(filteredVotes.slice(0, ITEMS_PER_PAGE));
+  };
   
+  const handleBillFilter = (filterType) => {
+    setBillFilter(filterType);
+    setExpanded({});
+    let filteredBills;
+    
+    if (filterType === "all") {
+      filteredBills = bills;
+    } else {
+      filteredBills = bills.filter(bill => bill.type === filterType);
+    }
+    
+    setDisplayData(filteredBills.slice(0, ITEMS_PER_PAGE));
+  };
 
   // ✅ Votes 데이터 Fetch 함수
   const fetchVotesFromServer = async () => {
@@ -265,9 +294,30 @@ const CommitteePieChart = ({ bills }) => {
   };
 
   const loadMore = () => {
-    const currentData = activeTab === "votes" ? votes : bills;
-    const newDisplayData = currentData.slice(0, displayData.length + ITEMS_PER_PAGE);
-    setDisplayData(newDisplayData);
+    if (activeTab === "votes") {
+      // 현재 필터에 맞는 데이터만 가져옵니다
+      let filteredVotes;
+      if (voteFilter === "all") {
+        filteredVotes = votes.filter(vote => vote.RESULT_VOTE_MOD !== "불참");
+      } else {
+        filteredVotes = votes.filter(vote => vote.RESULT_VOTE_MOD === voteFilter);
+      }
+      
+      // 필터링된 데이터에서 추가로 표시할 항목을 가져옵니다
+      const newDisplayData = filteredVotes.slice(0, displayData.length + ITEMS_PER_PAGE);
+      setDisplayData(newDisplayData);
+    } else {
+      // bills 탭의 경우 기존 로직 유지
+      let filteredBills;
+      if (billFilter === "all") {
+        filteredBills = bills;
+      } else {
+        filteredBills = bills.filter(bill => bill.type === billFilter);
+      }
+      
+      const newDisplayData = filteredBills.slice(0, displayData.length + ITEMS_PER_PAGE);
+      setDisplayData(newDisplayData);
+    }
   };
 
   const toggleExpand = (id) => {
@@ -369,15 +419,52 @@ const CommitteePieChart = ({ bills }) => {
             </div>
           )}
           {activeTab === "votes" && (
-              <div className="legend-container">
-                <span className="legend-item legend-approve">찬성</span>
-                <span className="legend-item legend-against">반대</span>
-                <span className="legend-item legend-abstain">기권</span>
-              </div>)
-          } {activeTab === "bills" && (
-            <div className="legend-container">
-              <span className="legend-item legend-approve">대표발의 의안</span>
-              <span className="legend-item legend-against">공동발의 의안</span>
+            <div className="vote-filter-container">
+              <button 
+                className={`vote-filter-btn ${voteFilter === "all" ? "active" : ""}`}
+                onClick={() => handleVoteFilter("all")}
+              >
+                전체
+              </button>
+              <button 
+                className={`vote-filter-btn approve ${voteFilter === "찬성" ? "active" : ""}`}
+                onClick={() => handleVoteFilter("찬성")}
+              >
+                찬성
+              </button>
+              <button 
+                className={`vote-filter-btn against ${voteFilter === "반대" ? "active" : ""}`}
+                onClick={() => handleVoteFilter("반대")}
+              >
+                반대
+              </button>
+              <button 
+                className={`vote-filter-btn abstain ${voteFilter === "기권" ? "active" : ""}`}
+                onClick={() => handleVoteFilter("기권")}
+              >
+                기권
+              </button>
+            </div>
+          )} {activeTab === "bills" && (
+            <div className="vote-filter-container">
+              <button 
+                className={`vote-filter-btn ${billFilter === "all" ? "active" : ""}`}
+                onClick={() => handleBillFilter("all")}
+              >
+                전체
+              </button>
+              <button 
+                className={`vote-filter-btn approve ${billFilter === "대표발의" ? "active" : ""}`}
+                onClick={() => handleBillFilter("대표발의")}
+              >
+                대표발의 의안
+              </button>
+              <button 
+                className={`vote-filter-btn against ${billFilter === "공동발의" ? "active" : ""}`}
+                onClick={() => handleBillFilter("공동발의")}
+              >
+                공동발의 의안
+              </button>
             </div>
           )}
             {isLoading ? (
@@ -386,7 +473,18 @@ const CommitteePieChart = ({ bills }) => {
               <p>데이터가 없습니다.</p>  // 로딩이 끝났고 데이터가 없을 때만 이 메시지 출력
             ) : activeTab === "votes" ? (
               filteredVotes.map((vote, index) => {
-                const displayNumber = votes.length - index;
+
+                const totalFilteredVotes = voteFilter === "all" 
+                ? votes.filter(v => v.RESULT_VOTE_MOD !== "불참")
+                : votes.filter(v => v.RESULT_VOTE_MOD === voteFilter);
+
+                let allFilteredVotes;
+                if (voteFilter === "all") {
+                  allFilteredVotes = votes.filter(v => v.RESULT_VOTE_MOD !== "불참");
+                } else {
+                  allFilteredVotes = votes.filter(v => v.RESULT_VOTE_MOD === voteFilter);
+                }
+                const displayNumber = totalFilteredVotes.length - index;
                 return (
                   <div
                     key={index}
@@ -439,7 +537,10 @@ const CommitteePieChart = ({ bills }) => {
             })
           ) : (
             displayData.map((bill, index) => {
-              const displayNumber = bills.length - index; 
+              const totalFilteredBills = billFilter === "all" 
+                ? bills
+                : bills.filter(b => b.type === billFilter);
+              const displayNumber = totalFilteredBills.length - index;
               return (
                 <div
                 key={index}
@@ -488,10 +589,26 @@ const CommitteePieChart = ({ bills }) => {
           )}
         </div>
 
-        {displayData.length < (activeTab === "votes" ? votes.length : bills.length) && (
-          <button className="load-more" onClick={loadMore}>
-            더보기
-          </button>
+        {activeTab === "votes" ? (
+          displayData.length < (
+            voteFilter === "all" 
+              ? votes.filter(v => v.RESULT_VOTE_MOD !== "불참").length
+              : votes.filter(v => v.RESULT_VOTE_MOD === voteFilter).length
+          ) && (
+            <button className="load-more" onClick={loadMore}>
+              더보기
+            </button>
+          )
+        ) : (
+          displayData.length < (
+            billFilter === "all" 
+              ? bills.length
+              : bills.filter(b => b.type === billFilter).length
+          ) && (
+            <button className="load-more" onClick={loadMore}>
+              더보기
+            </button>
+          )
         )}
       </main>
 
