@@ -1,20 +1,20 @@
 # Co-Deep Project Frontend
 
-- 실행 경로 : `cd frontend`
-- `npm start`로 실행됨.
+실행 경로 : `cd frontend`
+`npm start`로 실행됨.
+
+
 
 ## Co-Deep Project backend
 
-#### python 가상환경 실행
-- 루트에서 `source myenv/bin/activate`
+- python 가상환경 실행 : 루트에서 `source myenv/bin/activate`
 
-#### FastAPI 트래킹 서버 실행
-- 실행 경로 : `cd backend/tracking-server`
-- `uvicorn server:app --host 0.0.0.0 --port 8000`
+실행 경로 : `cd backend/tracking-server`<br>
+- FastAPI 트래킹 서버 실행 명령:`uvicorn server_local:app --host 0.0.0.0 --port 8000`
+- FastAPI 챗봇 서버 실행 명령: <br>
+실행 경로 : `cd backend`<br>
+`uvicorn chatbot_server:app --host 0.0.0.0 --port 8001`
 
-#### FastAPI 챗봇 서버 실행
-- 실행 경로 : `cd backend`
-- `uvicorn chatbot_server:app --host 0.0.0.0 --port 8001`
 
 ## home 브랜치 (가현)
 ### 변경사항
@@ -88,30 +88,4 @@
 ## 20250102 챗봇 서버 백엔드 구현 완 (서인)
 - "종로구 최신 뉴스에 대해서 알려줘" 도 잘 작동됨
 - "탄핵이 뭐야?"도 잘 작동됨
-
-## 20250102 테스트 싹 다 수정 (윤지)
-- 스토리 기반 판타지 컨셉 도입
-: 기존 역사 테마에서 동물 나라 배경으로 리디자인.
-부엉이 캐릭터가 사용자와 상호작용하며 동물 나라의 갈등 해결 스토리를 전달.
-화면 구성 변경
--Story.js: 동물 나라 이야기를 전달하는 스토리 진행 화면 추가.
--ResultTransitionScreen.js: 질문 화면과 결과 화면 사이에 전환 페이지를 도입하여 서사적 연결성 강화.
--ResultScreen.js: 사용자의 선택에 따라 적합한 역사적 인물을 추천.
--"시작하기" 버튼 클릭 시 책 애니메이션을 통해 자연스럽게 질문 화면으로 전환.
-동물 나라의 배경과 캐릭터 애니메이션을 활용해 몰입감을 높임.
-
-## 20250106 트래킹 서버 백엔그 구현 완 (서인)
-- 로직이 완전 바뀜.. 정리는 노션에 해두겠음.
-
-## 20250115 링크 공유하기 기능 추가 (윤지)
-1. 링크 공유 기능 추가:
-   - 기존 방식은 localStorage를 사용해 데이터를 관리.
-   - 테스트 링크 공유 뿐만 아니라, 본인의 결과도 공유할 수 있도록 하고 싶은데, 그러려면 새로운 방식으로 URL에 점수 데이터를 포함하여 상태를 전달하도록 수정해야하는 상황이 되었음.
-
-2. 결과 페이지에서 URL을 복원하여 점수를 다시 계산.
-   - searchParams를 사용해 URL에서 점수를 추출.
-   - 추출된 점수를 사용해 결과 화면을 구성하는 로직으로 로직 수정
-
-3. 사용자가 링크를 복사할 수 있도록 "공유하기" 버튼 추가.
-   - 버튼 클릭 시 URL을 클립보드에 복사.
-   - 성공/실패 메시지를 표시.
+- 

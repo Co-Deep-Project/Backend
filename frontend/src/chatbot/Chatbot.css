@@ -117,6 +117,7 @@
   border: 1px solid #e0e0e0;
   user-select: none;
   pointer-events: auto; /* 챗봇 창만 클릭되게 설정 */
+  margin-bottom: 20px;
 }
 
 .chatbot-window.open {
