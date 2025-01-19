@@ -206,7 +206,7 @@ console.log("Character Description:", description);
   
   <div className="result-screen">
   <h1 className = "result-title">
-    당신의 역사적 인물은 {character}입니다
+    당신의 역사적 인물은 <span className="character-name">{character}</span>입니다
   </h1>
     <img src={image} alt={`역사적 인물 ${character}`} className="character-image" />
   

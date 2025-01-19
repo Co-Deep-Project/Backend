@@ -198,7 +198,7 @@
   font-weight: 500;
   align-items: center;
   justify-content: center;
-  margin-left: 67px;
+  margin: 0 auto;
 }
 
 .answer-button {
@@ -365,7 +365,9 @@
   }
 
   .answerBox {
-    margin-left: 2px;
+    width: 95%; /* 모바일에서는 더 넓게 설정 */
+    padding: 0 10px; /* 좌우 패딩 추가 */
+    margin: 0 auto; /* 중앙 정렬 유지 */
   }
   .question-box {
     padding: 20px 10px; /* 모바일에서 패딩 조정 */
