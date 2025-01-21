@@ -13,7 +13,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-const Seoin = () => {
+const Congressman = () => {
   const navigate = useNavigate();
   const [votes, setVotes] = useState([]);
   const [bills, setBills] = useState([]);
@@ -465,6 +465,26 @@ const CommitteePieChart = ({ bills }) => {
               >
                 공동발의 의안
               </button>
+              <div className="bills-progress">
+                <div className="bills-progress-bar">
+                <div 
+                    className="bills-progress-fill"
+                    style={{ 
+                      width: `${(bills.filter(bill => bill.type === "대표발의").length / bills.length * 100)}%`
+                    }}
+                  />
+                </div>
+                <div className="bills-progress-stats">
+                  <span>
+                    대표발의 {bills.filter(bill => bill.type === "대표발의").length}건 
+                    ({(bills.filter(bill => bill.type === "대표발의").length / bills.length * 100).toFixed(2)}%)
+                  </span>
+                  <span>
+                    공동발의 {bills.filter(bill => bill.type === "공동발의").length}건
+                    ({(bills.filter(bill => bill.type === "공동발의").length / bills.length * 100).toFixed(2)}%)
+                  </span>
+                </div>
+              </div>
             </div>
           )}
             {isLoading ? (
@@ -621,4 +641,4 @@ const CommitteePieChart = ({ bills }) => {
   );
 };
 
-export default Seoin;
+export default Congressman;

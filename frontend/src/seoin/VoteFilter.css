@@ -1,8 +1,8 @@
 .vote-filter-container {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
-  justify-content: left;
+  margin-bottom: 10px;/* 오른쪽 정렬로 변경 */
+  align-items: center; /* 세로 중앙 정렬 추가 */
 }
 
 .vote-filter-btn {
@@ -19,11 +19,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.vote-filter-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .vote-filter-btn.approve {
   background-color: #cfc2e9;
   color: #000;
@@ -38,7 +33,6 @@
   background-color: #afafaf;
   color: #000;
 }
-
 
 .vote-filter-btn:hover {
   font-weight: bold;
@@ -62,17 +56,50 @@
   color: #000;
 }
 
+
+/* 프로그레스 바를 위한 새로운 스타일 */
+.bills-progress {
+  flex: 1; /* 남은 공간을 모두 차지 */
+  margin-right: 20px; /* 버튼과의 간격 */
+  margin-top: 10px;
+}
+
+.bills-progress-fill {
+  background-color: #cfc2e9;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.bills-progress-bar {
+  height: 15px;
+  background: #d9d9d9;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bills-progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
 /* 반응형 스타일 */
 @media (max-width: 767px) {
   .vote-filter-container {
-    margin-top: 10px;
-    margin-left: 10px;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;  
+    margin: 10px;
     justify-content: center;
   }
 
   .vote-filter-btn {
     padding: 6px 15px;
     font-size: 12px;
+  }
+  
+  .bills-progress{
+    margin: 10px 20px;
   }
 }
