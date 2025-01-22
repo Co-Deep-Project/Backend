@@ -16,9 +16,7 @@ const ResultScreen = () => {
     // 캡처 전 스타일 강제 설정
     resultElement.style.position = "relative"; // 캡처를 정확히 맞추기 위해 위치 지정
     resultElement.scrollIntoView({ behavior: "smooth", block: "start" }); // 맨 위로 스크롤
-    resultElement.style.width = "1000px"; // 원하는 너비
-    resultElement.style.height = "700px";  // 자동 높이
-    resultElement.style.padding = "20px"; // 캡처 내외부 여백 조정
+
   
     if (resultElement) {
       toPng(resultElement, { cacheBust: true, useCORS: true })
