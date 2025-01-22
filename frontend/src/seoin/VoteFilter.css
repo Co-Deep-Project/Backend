@@ -137,7 +137,7 @@
 @media (max-width: 767px) {
   .vote-filter-container {
     flex-direction: column-reverse;;
-    margin: 10px 60px;
+    margin: 10px;
     justify-content: center;
     gap: 2px;
   }
@@ -168,7 +168,7 @@
 
   .bills-progress{
     margin: 10px 20px;
-    width: 100%; 
+    width: 70%; 
     justify-content: center;
   }
 
@@ -178,7 +178,7 @@
 
   .vote-progress{
     margin: 7px 0;
-    width: 100%; 
+    width: 65%; 
     order: 2; 
   }
 

@@ -459,9 +459,9 @@ const CommitteePieChart = ({ bills }) => {
                 </div>
                 <div className="vote-progress-stats">
                   <span>
+                    본회의 출석률: 97.30%
                   </span>
                   <span>
-                    본회의 출석률: 97.30%
                   </span>
                 </div>
               </div>
