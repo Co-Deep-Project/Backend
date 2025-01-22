@@ -16,16 +16,23 @@ const ResultScreen = () => {
   
     // 캡처 전 스타일 강제 설정
     resultElement.style.position = "relative"; // 캡처를 정확히 맞추기 위해 위치 지정
+    resultElement.style.margin = "0";
+    resultElement.style.padding = "0";
+    resultElement.style.boxSizing = "border-box";
     resultElement.scrollIntoView({ behavior: "smooth", block: "start" }); // 맨 위로 스크롤
 
-  
-    if (resultElement) {
-      html2canvas(resultElement, { useCORS: true })
+   // 캡처 수행
+   setTimeout(() => {
+    html2canvas(resultElement, {
+      scrollX: 0,
+      scrollY: 0,
+      useCORS: true,
+    })
       .then((canvas) => {
-        const dataUrl = canvas.toDataURL("image/png"); // 캡처된 이미지를 PNG로 변환
+        const dataUrl = canvas.toDataURL("image/png");
         const link = document.createElement("a");
         link.href = dataUrl;
-        link.download = "result_capture.png"; // 저장될 파일 이름
+        link.download = "result_capture.png";
         link.click();
         alert("🎉 결과 화면이 저장되었습니다!");
       })
@@ -33,7 +40,7 @@ const ResultScreen = () => {
         console.error("화면 캡처 중 오류 발생:", error);
         alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
       });
-  }
+  }, 100); // 약간의 지연 추가
 };
   
 
