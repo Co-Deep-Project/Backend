@@ -190,7 +190,7 @@
   }
 
   #capture-target {
-    width: 90%; /* 너비를 90%로 줄이기 */
+    width: 95%; /* 너비를 90%로 줄이기 */
     padding: 0px; /* 내부 패딩 제거 */
     font-size: 0.9rem; /* 글자 크기 줄이기 */
     margin: 0 auto; /* 양쪽 여백을 자동으로 설정 */
