@@ -12,7 +12,11 @@ const ResultScreen = () => {
   const [results, setResults] = useState(null);
   const handleSaveToGallery = () => {
     const resultElement = document.getElementById("capture-target");
-  
+    // 기존 스타일 저장
+    const originalPaddingTop = resultElement.style.paddingTop;
+
+    // 캡처 전 스타일 적용
+    resultElement.style.paddingTop = "50px"; // 저장 시 상단 여백 추가
     // 캡처 전 스타일 적용 (글머리 기호 스타일 추가)
     const originalListStyle = resultElement.querySelectorAll("li");
     originalListStyle.forEach((li) => {
@@ -49,6 +53,7 @@ const ResultScreen = () => {
         })
         .finally(() => {
           // 캡처 후 스타일 복구
+          resultElement.style.paddingTop = originalPaddingTop;
           originalListStyle.forEach((li) => {
             li.style.listStyleType = ""; // 원래 글머리 기호로 복구
             li.style.color = ""; // 글머리 기호 색상 복구
