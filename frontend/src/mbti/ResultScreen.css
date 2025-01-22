@@ -253,14 +253,16 @@
 }
 
 .button-container {
-  display: flex;
-  justify-content: center; /* 버튼 양옆 정렬 */
-  gap: 20px; /* 버튼 간 간격 */
-  margin: 20px 0;
+  display: flex; /* 버튼들을 플렉스 컨테이너로 설정 */
+  justify-content: center; /* 버튼을 가운데 정렬 */
+  align-items: center; /* 버튼을 세로로 가운데 정렬 */
+  gap: 15px; /* 버튼 사이의 간격 */
+  flex-wrap: wrap; /* 버튼이 한 줄에 다 안 들어갈 경우 다음 줄로 넘김 */
+  margin: 30px 0; /* 버튼 컨테이너 상하 여백 추가 */
 }
 
 .restart-container {
   display: flex;
   justify-content: center;
-  margin-top: 3px;
+  margin-top: 10px; /* '다시 테스트하기' 버튼과 위 컨테이너 사이의 간격 */
 }
