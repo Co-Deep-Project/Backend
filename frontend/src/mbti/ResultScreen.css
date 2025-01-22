@@ -10,7 +10,12 @@
   font-weight: normal;
   padding: 20px;
 }
-
+.result-screen h2,
+.result-screen p {
+  text-align: center; /* 가운데 정렬 */
+  margin: 0 auto; /* 여백 자동 조정 */
+  word-break: keep-all;
+}
 .character-name {
   font-weight: bold; /* character 부분만 bold 처리 */
 }
@@ -146,6 +151,8 @@
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 250px; /* 버튼 고정 너비 */
+  height: 50px; /* 버튼 고정 높이 */
 }
 .finishBtn:hover {
   background-color: #b8a6d9; /* 보다 진한 보라색 */
@@ -172,6 +179,7 @@
   margin-top: 60px;
   font-weight: normal;
   text-align: center;
+  word-break: keep-all;
 }
 .description-container, .result-description {
   padding: 15px; /* 모바일에서 내부 패딩 줄임 */
@@ -253,14 +261,23 @@
 }
 
 .button-container {
-  display: flex;
-  justify-content: center; /* 버튼 양옆 정렬 */
-  gap: 20px; /* 버튼 간 간격 */
-  margin: 20px 0;
+  display: flex; /* 가로로 배치 */
+  flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈 */
+  justify-content: center; /* 가운데 정렬 */
+  gap: 16px; /* 버튼 간 간격 */
+  margin: 20px 0; /* 위아래 여백 */
 }
 
+#result-container {
+  width: 100%; /* 부모 요소 기준으로 꽉 채우기 */
+  max-width: 1200px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 화면 중앙 정렬 */
+  padding: 20px; /* 내부 여백 */
+  background-color: white; /* 캡처를 위한 배경 색상 명시 */
+  overflow: visible; /* 요소 내용이 잘리지 않도록 설정 */
+}
 .restart-container {
   display: flex;
   justify-content: center;
-  margin-top: 3px;
+  margin-top: 10px; /* '다시 테스트하기' 버튼과 위 컨테이너 사이의 간격 */
 }

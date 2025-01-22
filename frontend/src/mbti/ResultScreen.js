@@ -2,12 +2,44 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from '../assets/polilogo.png';
 import './ResultScreen.css'; // CSS 파일을 사용하여 스타일 추가
+import { toPng } from "html-to-image";
+
 
 const ResultScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [results, setResults] = useState(null);
+  
+  const handleSaveToGallery = () => {
+    const resultElement = document.getElementById("result-container");
+  
+    // 캡처 전 스타일 강제 설정
+    resultElement.style.position = "relative"; // 캡처를 정확히 맞추기 위해 위치 지정
+    resultElement.scrollIntoView({ behavior: "smooth", block: "start" }); // 맨 위로 스크롤
 
+  
+    if (resultElement) {
+      toPng(resultElement, { cacheBust: true, useCORS: true })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = `result_capture.png`; // 저장될 파일 이름
+          link.click();
+          alert("🎉 결과 화면이 저장되었습니다! 갤러리에서 확인하세요.");
+        })
+        .catch((error) => {
+          console.error("화면 캡처 중 오류 발생:", error);
+          alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
+        })
+        .finally(() => {
+          // 캡처 후 원래 스타일 복구
+          resultElement.style.width = "";
+          resultElement.style.height = "";
+          resultElement.style.padding = "";
+        }); // 체인 호출은 끊기지 않아야 합니다.
+    }
+  };
+  
 
   const [copySuccess, setCopySuccess] = useState(""); // 복사 성공 메시지 상태 추가
   
@@ -189,7 +221,7 @@ console.log("Character Description:", description);
     }
 
   return (
-    <div>
+    <div id="result-container" className="result-screen">
     <header id="header">
         <img
           id="logo"
@@ -218,29 +250,27 @@ console.log("Character Description:", description);
           </ul>
         </div>
   
-   {/* 버튼 컨테이너 */}
-   <div className="button-container">
-          <button className="finishBtn" onClick={handleResultShareClick}>
-            나의 결과 공유하기
-          </button>
-          <button className="finishBtn" onClick={handleTestShareClick}>
-            테스트 링크 공유하기
-          </button>
-        </div>
-
-        <div className="restart-container">
-          <button className="finishBtn" onClick={onRestart}>
-            다시 테스트하기
-          </button>
-        </div>
-
-        {copySuccess && <p className="copy-success">{copySuccess}</p>}
+        <div className="result-content">
+        <h2>결과 화면 공유</h2>
+        <p>화면을 저장하거나 공유해보세요!</p>
       </div>
 
-  <footer className="footer">
-        <p>성균관대학교 트래커스꾸<br />서울특별시 종로구 성균관로 25-2<br />trackerskku@g.skku.edu</p>
-      </footer>
-  </div>
+      <div className="button-container">
+        <button className="finishBtn" onClick={handleResultShareClick}>
+          📤 내 결과 공유하기
+        </button>
+        <button className="finishBtn" onClick={handleTestShareClick}>
+          🌐 테스트 링크 공유하기
+        </button>
+        <button className="finishBtn" onClick={handleSaveToGallery}>
+          📸 결과 화면 저장하기
+        </button>
+        <button className="finishBtn" onClick={onRestart}>
+          🔄 다시 테스트하기
+        </button>
+      </div>
+    </div>
+    </div>
   );
 };
 
