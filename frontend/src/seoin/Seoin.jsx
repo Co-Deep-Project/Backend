@@ -29,6 +29,21 @@ const Congressman = () => {
   const ITEMS_PER_PAGE = 3;
   const memberName = "곽상언";
 
+  // 날짜 포맷 변환 함수 추가
+  const formatVoteDate = (dateString) => {
+    if (!dateString) return "";
+    
+    // 공백을 기준으로 날짜 부분만 추출
+    const datePart = dateString.split(' ')[0];
+    
+    // YYYYMMDD 형식을 YYYY-MM-DD 형식으로 변환
+    const year = datePart.substring(0, 4);
+    const month = datePart.substring(4, 6);
+    const day = datePart.substring(6, 8);
+    
+    return `${year}-${month}-${day}`;
+  };
+
   // ✅ 서버에 한 번만 데이터를 요청하는 useEffect
   useEffect(() => {
     const fetchData = async () => {
@@ -130,8 +145,8 @@ const Congressman = () => {
       console.error("서버 요청 오류:", error);
     }
     setBillsLoading(false);
-  };
 
+  };
 
 // 그래프 추가
 const groupByCommittee = (bills) => {
@@ -559,7 +574,7 @@ const CommitteePieChart = ({ bills }) => {
                   {expanded[index] && (
                     <div className="vote-details">
                       <p><span className="bold">• 의안 번호 : </span> {vote.BILL_NO}</p>
-                      <p><span className="bold">• 의결일자 : </span> {vote.VOTE_DATE}</p>
+                      <p><span className="bold">• 의결일자 : </span> {formatVoteDate(vote.VOTE_DATE)}</p>
                       <p><span className="bold">• 소관위원회 : </span> {vote.CURR_COMMITTEE}</p>
                       <p><span className="bold">• 제안이유 및 주요내용 요약: </span></p>
                       <br />
