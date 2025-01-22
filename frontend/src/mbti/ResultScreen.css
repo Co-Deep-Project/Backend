@@ -9,6 +9,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   padding: 20px;
+
 }
 .result-screen h2,
 .result-screen p {
@@ -56,6 +57,7 @@
   max-width: 600px; /* 최대 너비 제한 */
   font-family: Arial, Helvetica, sans-serif; /* 고급스러운 폰트 사용 */
   word-break: keep-all; /* 단어가 깨지지 않도록 설정 */
+  display:flexbox;
 }
 
 /* 텍스트 강조 */
@@ -210,6 +212,23 @@
   .finishBtn {
     max-width: 100%;
   }
+  .result-screen {
+    padding: 10px; /* 모바일에서 내부 여백 줄이기 */
+    display: contents;
+  }
+
+  #capture-target {
+    width: 100%; /* 화면 너비에 맞게 조정 */
+    padding: 15px; /* 내부 패딩 조정 */
+    font-size: 0.9rem; /* 글자 크기 줄이기 */
+  }
+
+  .result-button-container {
+    flex-direction: column; /* 버튼을 세로로 나열 */
+    gap: 12px; /* 버튼 간 간격 */
+  }
+
+
   .result-header h1 {
     font-size: 1.2rem; /* 더 작은 화면에서 헤더 폰트 크기 조정 */
   }
@@ -272,6 +291,14 @@
   justify-content: center; /* 가운데 정렬 */
   gap: 16px; /* 버튼 간 간격 */
   margin: 20px 0; /* 위아래 여백 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-content {
+  margin-top: 20px;
 }
 
 #result-container {

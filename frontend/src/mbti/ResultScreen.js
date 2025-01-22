@@ -238,7 +238,7 @@ console.log("Character Description:", description);
     당신의 역사적 인물은 <span className="character-name">{character}</span>입니다
   </h1>
     <img src={image} alt={`역사적 인물 ${character}`} className="character-image" />
-  
+  <div className = "bigger-description-container">
     <div className="description-container">
           <ul>
             {description.map((line, index) => (
@@ -247,11 +247,12 @@ console.log("Character Description:", description);
           </ul>
         </div>
         </div>
+        </div>
   
         <div className="result-content">
         <h2>결과 화면 공유</h2>
         <p>화면을 저장하거나 공유해보세요!</p>
-      </div>
+      
 
       <div className="button-container">
         <button className="finishBtn" onClick={handleResultShareClick}>
@@ -266,6 +267,7 @@ console.log("Character Description:", description);
         <button className="finishBtn" onClick={onRestart}>
           🔄 다시 테스트하기
         </button>
+      </div>
       </div>
     </div>
     </div>
