@@ -11,7 +11,7 @@ const ResultScreen = () => {
   const [results, setResults] = useState(null);
   
   const handleSaveToGallery = () => {
-    const resultElement = document.getElementById("result-container");
+    const resultElement = document.getElementById("capture-target");
   
     // 캡처 전 스타일 강제 설정
     resultElement.style.position = "relative"; // 캡처를 정확히 맞추기 위해 위치 지정
@@ -237,6 +237,7 @@ console.log("Character Description:", description);
       </header>
   
   <div className="result-screen">
+  <div id="capture-target">
   <h1 className = "result-title">
     당신의 역사적 인물은 <span className="character-name">{character}</span>입니다
   </h1>
@@ -248,6 +249,7 @@ console.log("Character Description:", description);
               <li key={index}>{line}</li>
             ))}
           </ul>
+        </div>
         </div>
   
         <div className="result-content">
