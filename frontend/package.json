@@ -20,6 +20,7 @@
     "flipping-pages": "^3.1.0",
     "framer-motion": "^11.15.0",
     "html-to-image": "^1.11.11",
+    "html2canvas": "^1.4.1",
     "http-proxy-middleware": "^3.0.3",
     "http2": "^3.3.6",
     "node-fetch": "^3.3.2",
