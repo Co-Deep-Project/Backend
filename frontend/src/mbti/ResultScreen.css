@@ -10,7 +10,11 @@
   font-weight: normal;
   padding: 20px;
 }
-
+.result-screen h2,
+.result-screen p {
+  text-align: center; /* 가운데 정렬 */
+  margin: 0 auto; /* 여백 자동 조정 */
+}
 .character-name {
   font-weight: bold; /* character 부분만 bold 처리 */
 }
@@ -146,6 +150,8 @@
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 250px; /* 버튼 고정 너비 */
+  height: 50px; /* 버튼 고정 높이 */
 }
 .finishBtn:hover {
   background-color: #b8a6d9; /* 보다 진한 보라색 */
@@ -253,14 +259,21 @@
 }
 
 .button-container {
-  display: flex; /* 버튼들을 플렉스 컨테이너로 설정 */
-  justify-content: center; /* 버튼을 가운데 정렬 */
-  align-items: center; /* 버튼을 세로로 가운데 정렬 */
-  gap: 15px; /* 버튼 사이의 간격 */
-  flex-wrap: wrap; /* 버튼이 한 줄에 다 안 들어갈 경우 다음 줄로 넘김 */
-  margin: 30px 0; /* 버튼 컨테이너 상하 여백 추가 */
+  display: flex; /* 가로로 배치 */
+  flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈 */
+  justify-content: center; /* 가운데 정렬 */
+  gap: 16px; /* 버튼 간 간격 */
+  margin: 20px 0; /* 위아래 여백 */
 }
 
+#result-container {
+  width: 100%; /* 부모 요소 기준으로 꽉 채우기 */
+  max-width: 1200px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 화면 중앙 정렬 */
+  padding: 20px; /* 내부 여백 */
+  background-color: white; /* 캡처를 위한 배경 색상 명시 */
+  overflow: visible; /* 요소 내용이 잘리지 않도록 설정 */
+}
 .restart-container {
   display: flex;
   justify-content: center;

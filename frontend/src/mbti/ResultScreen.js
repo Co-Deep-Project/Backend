@@ -11,7 +11,13 @@ const ResultScreen = () => {
   const [results, setResults] = useState(null);
   
   const handleSaveToGallery = () => {
-    const resultElement = document.getElementById("result-container"); // 캡처할 요소
+    const resultElement = document.getElementById("result-container");
+  
+    // 캡처 전 스타일 강제 설정
+    resultElement.style.width = "1000px"; // 원하는 너비
+    resultElement.style.height = "auto";  // 자동 높이
+    resultElement.style.padding = "20px"; // 캡처 내외부 여백 조정
+  
     if (resultElement) {
       toPng(resultElement, { cacheBust: true, useCORS: true })
         .then((dataUrl) => {
@@ -24,9 +30,16 @@ const ResultScreen = () => {
         .catch((error) => {
           console.error("화면 캡처 중 오류 발생:", error);
           alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
-        });
+        })
+        .finally(() => {
+          // 캡처 후 원래 스타일 복구
+          resultElement.style.width = "";
+          resultElement.style.height = "";
+          resultElement.style.padding = "";
+        }); // 체인 호출은 끊기지 않아야 합니다.
     }
   };
+  
 
   const [copySuccess, setCopySuccess] = useState(""); // 복사 성공 메시지 상태 추가
   
@@ -238,7 +251,7 @@ console.log("Character Description:", description);
         </div>
   
         <div className="result-content">
-        <h2>결과 화면 캡처하기</h2>
+        <h2>결과 화면 공유</h2>
         <p>화면을 저장하거나 공유해보세요!</p>
       </div>
 
@@ -250,7 +263,7 @@ console.log("Character Description:", description);
           🌐 테스트 링크 공유하기
         </button>
         <button className="finishBtn" onClick={handleSaveToGallery}>
-          📸 결과 화면 캡처하기
+          📸 결과 화면 저장하기
         </button>
         <button className="finishBtn" onClick={onRestart}>
           🔄 다시 테스트하기
