@@ -10,9 +10,16 @@ const ResultScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [results, setResults] = useState(null);
-  
   const handleSaveToGallery = () => {
     const resultElement = document.getElementById("capture-target");
+  
+    // 캡처 전 스타일 적용 (글머리 기호 스타일 추가)
+    const originalListStyle = resultElement.querySelectorAll("li");
+    originalListStyle.forEach((li) => {
+      li.style.listStyleType = "circle"; // 캡처 시 글머리 기호를 동그라미로 변경
+      li.style.color = "#333"; // 글머리 기호 색상 변경
+      li.style.fontSize = "1.2rem"; // 캡처 시 글머리 기호 크기 조정
+    });
   
     // 캡처 전 스타일 강제 설정
     resultElement.style.position = "relative"; // 캡처를 정확히 맞추기 위해 위치 지정
@@ -20,28 +27,37 @@ const ResultScreen = () => {
     resultElement.style.padding = "0";
     resultElement.style.boxSizing = "border-box";
     resultElement.scrollIntoView({ behavior: "smooth", block: "start" }); // 맨 위로 스크롤
-
-   // 캡처 수행
-   setTimeout(() => {
-    html2canvas(resultElement, {
-      scrollX: 0,
-      scrollY: 0,
-      useCORS: true,
-    })
-      .then((canvas) => {
-        const dataUrl = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = dataUrl;
-        link.download = "result_capture.png";
-        link.click();
-        alert("🎉 결과 화면이 저장되었습니다!");
+  
+    // 캡처 수행
+    setTimeout(() => {
+      html2canvas(resultElement, {
+        scrollX: 0,
+        scrollY: 0,
+        useCORS: true,
       })
-      .catch((error) => {
-        console.error("화면 캡처 중 오류 발생:", error);
-        alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
-      });
-  }, 100); // 약간의 지연 추가
-};
+        .then((canvas) => {
+          const dataUrl = canvas.toDataURL("image/png");
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "result_capture.png";
+          link.click();
+          alert("🎉 결과 화면이 저장되었습니다!");
+        })
+        .catch((error) => {
+          console.error("화면 캡처 중 오류 발생:", error);
+          alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
+        })
+        .finally(() => {
+          // 캡처 후 스타일 복구
+          originalListStyle.forEach((li) => {
+            li.style.listStyleType = ""; // 원래 글머리 기호로 복구
+            li.style.color = ""; // 글머리 기호 색상 복구
+            li.style.fontSize = ""; // 글머리 기호 크기 복구
+          });
+        });
+    }, 100); // 약간의 지연 추가
+  };
+  
   
 
   const [copySuccess, setCopySuccess] = useState(""); // 복사 성공 메시지 상태 추가
