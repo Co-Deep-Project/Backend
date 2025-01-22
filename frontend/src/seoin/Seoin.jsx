@@ -16,6 +16,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 const Congressman = () => {
   const navigate = useNavigate();
   const [votes, setVotes] = useState([]);
+  const [allVotes, setAllVotes] = useState([]); // 추가
   const [bills, setBills] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [expanded, setExpanded] = useState({});
@@ -92,6 +93,7 @@ const Congressman = () => {
       );
       const data = await response.json();
       console.log("Received votes data:", data);
+      setAllVotes(data);
       const filteredData = data.filter((vote) => vote.RESULT_VOTE_MOD !== "불참");
       setVotes(filteredData);
 
@@ -420,51 +422,72 @@ const CommitteePieChart = ({ bills }) => {
           )}
           {activeTab === "votes" && (
             <div className="vote-filter-container">
-              <button 
-                className={`vote-filter-btn ${voteFilter === "all" ? "active" : ""}`}
-                onClick={() => handleVoteFilter("all")}
-              >
-                전체
-              </button>
-              <button 
-                className={`vote-filter-btn approve ${voteFilter === "찬성" ? "active" : ""}`}
-                onClick={() => handleVoteFilter("찬성")}
-              >
-                찬성
-              </button>
-              <button 
-                className={`vote-filter-btn against ${voteFilter === "반대" ? "active" : ""}`}
-                onClick={() => handleVoteFilter("반대")}
-              >
-                반대
-              </button>
-              <button 
-                className={`vote-filter-btn abstain ${voteFilter === "기권" ? "active" : ""}`}
-                onClick={() => handleVoteFilter("기권")}
-              >
-                기권
-              </button>
+              <div className="vote-filter-buttons">  {/* 버튼들을 감싸는 div 추가 */}
+                <button 
+                  className={`vote-filter-btn ${voteFilter === "all" ? "active" : ""}`}
+                  onClick={() => handleVoteFilter("all")}
+                >
+                  전체
+                </button>
+                <button 
+                  className={`vote-filter-btn approve ${voteFilter === "찬성" ? "active" : ""}`}
+                  onClick={() => handleVoteFilter("찬성")}
+                >
+                  찬성
+                </button>
+                <button 
+                  className={`vote-filter-btn against ${voteFilter === "반대" ? "active" : ""}`}
+                  onClick={() => handleVoteFilter("반대")}
+                >
+                  반대
+                </button>
+                <button 
+                  className={`vote-filter-btn abstain ${voteFilter === "기권" ? "active" : ""}`}
+                  onClick={() => handleVoteFilter("기권")}
+                >
+                  기권
+                </button>
+              </div>
+              <div className="vote-progress">
+                <div className="vote-progress-bar">
+                  <div 
+                    className="vote-progress-fill"
+                    style={{ 
+                      width: "97.3%"
+                    }}
+                  />
+                </div>
+                <div className="vote-progress-stats">
+                  <span>
+                    본회의 출석률: 97.30%
+                  </span>
+                  <span>
+                  </span>
+                </div>
+              </div>
             </div>
           )} {activeTab === "bills" && (
-            <div className="vote-filter-container">
-              <button 
-                className={`vote-filter-btn ${billFilter === "all" ? "active" : ""}`}
-                onClick={() => handleBillFilter("all")}
-              >
-                전체
-              </button>
-              <button 
-                className={`vote-filter-btn approve ${billFilter === "대표발의" ? "active" : ""}`}
-                onClick={() => handleBillFilter("대표발의")}
-              >
-                대표발의 의안
-              </button>
-              <button 
-                className={`vote-filter-btn against ${billFilter === "공동발의" ? "active" : ""}`}
-                onClick={() => handleBillFilter("공동발의")}
-              >
-                공동발의 의안
-              </button>
+            <div className="bills-filter-container">
+              <div className="bills-filter-buttons">
+                <button 
+                  className={`vote-filter-btn ${billFilter === "all" ? "active" : ""}`}
+                  onClick={() => handleBillFilter("all")}
+                >
+                  전체
+                </button>
+                <button 
+                  className={`vote-filter-btn approve ${billFilter === "대표발의" ? "active" : ""}`}
+                  onClick={() => handleBillFilter("대표발의")}
+                >
+                  대표발의 의안
+                </button>
+                <button 
+                  className={`vote-filter-btn against ${billFilter === "공동발의" ? "active" : ""}`}
+                  onClick={() => handleBillFilter("공동발의")}
+                >
+                  공동발의 의안
+                </button>
+              </div>
               <div className="bills-progress">
                 <div className="bills-progress-bar">
                 <div 
