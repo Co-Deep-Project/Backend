@@ -177,7 +177,9 @@
   .result-header, .result-image, .description-container, .result-description, .restart-button  {
     max-width: 90%; /* 모든 주요 컨테이너를 화면의 90% 너비로 조정 */
   }
-
+  .result-title {
+    margin-top: 70px;
+  }
   .finishBtn {
     max-width: 100%;
   }
