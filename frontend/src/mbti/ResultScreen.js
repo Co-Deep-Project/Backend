@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import logo from '../assets/polilogo.png';
 import './ResultScreen.css'; // CSS 파일을 사용하여 스타일 추가
 import { toPng } from "html-to-image";
+import html2canvas from "html2canvas";
 
 
 const ResultScreen = () => {
@@ -19,26 +20,21 @@ const ResultScreen = () => {
 
   
     if (resultElement) {
-      toPng(resultElement, { cacheBust: true, useCORS: true })
-        .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = `result_capture.png`; // 저장될 파일 이름
-          link.click();
-          alert("🎉 결과 화면이 저장되었습니다! 갤러리에서 확인하세요.");
-        })
-        .catch((error) => {
-          console.error("화면 캡처 중 오류 발생:", error);
-          alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
-        })
-        .finally(() => {
-          // 캡처 후 원래 스타일 복구
-          resultElement.style.width = "";
-          resultElement.style.height = "";
-          resultElement.style.padding = "";
-        }); // 체인 호출은 끊기지 않아야 합니다.
-    }
-  };
+      html2canvas(resultElement, { useCORS: true })
+      .then((canvas) => {
+        const dataUrl = canvas.toDataURL("image/png"); // 캡처된 이미지를 PNG로 변환
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = "result_capture.png"; // 저장될 파일 이름
+        link.click();
+        alert("🎉 결과 화면이 저장되었습니다!");
+      })
+      .catch((error) => {
+        console.error("화면 캡처 중 오류 발생:", error);
+        alert("화면 캡처에 실패했습니다. 다시 시도해주세요.");
+      });
+  }
+};
   
 
   const [copySuccess, setCopySuccess] = useState(""); // 복사 성공 메시지 상태 추가
