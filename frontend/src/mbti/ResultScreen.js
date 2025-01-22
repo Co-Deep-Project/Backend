@@ -14,8 +14,8 @@ const ResultScreen = () => {
     const resultElement = document.getElementById("result-container");
   
     // 캡처 전 스타일 강제 설정
-    resultElement.style.width = "1000px"; // 원하는 너비
-    resultElement.style.height = "auto";  // 자동 높이
+    resultElement.style.width = "700px"; // 원하는 너비
+    resultElement.style.height = "700px";  // 자동 높이
     resultElement.style.padding = "20px"; // 캡처 내외부 여백 조정
   
     if (resultElement) {
