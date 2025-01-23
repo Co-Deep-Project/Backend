@@ -129,7 +129,7 @@ const QuestionScreen = ({ onComplete }) => {
           ]
       },
       {
-          question: "15. 부엉이가 전통적인 혼인 규범을 벗어나 다른 동물과 결혼하는 것에 대해 어떻게 생각하시나요?",
+          question: "15. 성별에 관계없이 누구나 사랑하는 상대와 결혼할 권리를 가져야 한다고 생각하시나요? ",
           answers: [
               { text: "결혼은 사랑에 따라 자유롭게 이루어져야 해요.", scoreType: "socialProgressive" },
               { text: "전통적인 규범을 지키는 것이 중요한 것 같아요.", scoreType: "socialConservative" },
